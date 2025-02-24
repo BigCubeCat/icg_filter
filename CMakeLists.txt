@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(icg_paint LANGUAGES CXX)
+project(icg_filter LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -18,55 +18,41 @@ qt6_add_resources(RESOURCES resources.qrc)
 
 qt_standard_project_setup()
 
-qt_add_executable(icg_paint
+qt_add_executable(icg_filter
     WIN32 MACOSX_BUNDLE
-    main.cpp
+    src/main.cpp
     ${RESOURCES}
 )
 
-target_link_libraries(icg_paint
+target_link_libraries(icg_filter
     PRIVATE
         Qt6::Core
         Qt6::Widgets
         mainwindow
-        canvas
-        colorpicker
-        lineconfig
-        paramwidget
-        resizedialog
-        polygondialog
         help_lib
         about
         spinslider
     PUBLIC
         common_lib
-        tools_lib
 )
 
 include(GNUInstallDirs)
 
-install(TARGETS icg_paint
+install(TARGETS icg_filter
     BUNDLE  DESTINATION .
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
 qt_generate_deploy_app_script(
-    TARGET icg_paint
+    TARGET icg_filter
     OUTPUT_SCRIPT deploy_script
     NO_UNSUPPORTED_PLATFORM_ERROR
 )
 install(SCRIPT ${deploy_script})
 
-add_subdirectory(lib/canvas)
 add_subdirectory(lib/common)
-add_subdirectory(lib/color_picker_panel)
 add_subdirectory(lib/mainwindow)
-add_subdirectory(lib/tools)
-add_subdirectory(lib/lineconfig)
-add_subdirectory(lib/paramwidget)
-add_subdirectory(lib/resizedialog)
-add_subdirectory(lib/polygon)
 add_subdirectory(lib/about)
 add_subdirectory(lib/help)
 add_subdirectory(lib/spinslider)
