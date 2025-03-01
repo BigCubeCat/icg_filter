@@ -25,7 +25,25 @@
    </iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout"/>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>626</width>
+         <height>502</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -54,6 +72,8 @@
     <property name="title">
      <string>Filter</string>
     </property>
+    <addaction name="actionApply"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -282,6 +302,11 @@
    </property>
    <property name="text">
     <string>Config sidebar</string>
+   </property>
+  </action>
+  <action name="actionApply">
+   <property name="text">
+    <string>Apply Filter</string>
    </property>
   </action>
  </widget>

@@ -3,11 +3,13 @@
  */
 #pragma once
 
-#include "e_filter.hpp"
-#include <memory>
+#include <QJsonObject>
+#include <QObject>
 #include <mutex>
+#include <optional>
 #include <string>
 #include <unordered_map>
+#include "e_filter.hpp"
 
 /*!
  * \brief хранит состояние
@@ -15,33 +17,38 @@
  * Singleton. Thread-Safe
  */
 class StateSingleton {
-private:
-  StateSingleton() = default;
+   private:
+    StateSingleton() = default;
 
-  std::mutex m_mutex;
-  e_filter m_selected_filter;
+    std::mutex m_mutex;
+    e_filter m_selected_filter;
 
-  int m_width = 600;
-  int m_height = 400;
+    int m_width = 600;
+    int m_height = 400;
 
-  std::unordered_map<std::string, std::shared_ptr<void *>> m_variables;
+    std::unordered_map<std::string, QJsonObject> m_config;
 
-public:
-  StateSingleton(const StateSingleton &) = delete;
-  StateSingleton &operator=(const StateSingleton &) = delete;
+   public:
+    StateSingleton(const StateSingleton&) = delete;
+    StateSingleton& operator=(const StateSingleton&) = delete;
 
-  /// вернуть сущность объекта
-  static StateSingleton &instance();
+    /// вернуть сущность объекта
+    static StateSingleton& instance();
 
-  /// установить геометрию
-  void setGeometry(int w, int h);
-  /// ширина холста
-  int width() const;
-  /// высота холста
-  int height() const;
+    /// установить геометрию
+    void setGeometry(int w, int h);
+    /// ширина холста
+    int width() const;
+    /// высота холста
+    int height() const;
 
-  /// установаить инструмент
-  void selectFilter(e_filter filter);
-  /// возращает тэг текущего инструмента
-  e_filter currentFilter() const;
+    /// Задает конфиг
+    void setConfig(const std::string& name, const QJsonObject& value);
+    /// отдает значение конфига по имени переменной. в случае отсутствия std::nullopt
+    std::optional<QJsonObject> getConfig(const std::string& name);
+
+    /// установаить инструмент
+    void selectFilter(e_filter filter);
+    /// возращает тэг текущего инструмента
+    e_filter currentFilter() const;
 };
