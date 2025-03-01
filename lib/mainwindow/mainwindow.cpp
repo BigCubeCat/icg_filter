@@ -8,17 +8,23 @@
 #include <QSpinBox>
 
 #include "../about/about.hpp"
-#include "../common/state.hpp"
 #include "../help/help.hpp"
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent),
       m_ui(new Ui::MainWindow),
       m_config_widget(this),
+      m_view(this),
       m_tool_group(this) {
     m_ui->setupUi(this);
 
     m_ui->dockLayout->addWidget(&m_config_widget);
+    m_ui->scrollArea->viewport()->setStyleSheet(
+        "background-image: url(assets/background.png);"
+        "background-position: center;"
+        "background-repeat: no-repeat;");
+
+    m_ui->scrollArea->setWidget(&m_view);
 
     m_ui->toolBar->addActions(m_ui->menuFile->actions());
 
