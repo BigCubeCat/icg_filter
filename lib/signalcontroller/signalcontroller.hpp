@@ -1,3 +1,5 @@
+#pragma once
+
 #include <qtmetamacros.h>
 #include <QObject>
 
@@ -11,7 +13,15 @@ class SignalController : public QObject {
 
    signals:
     void applyFilterSignal();
+    void render();
 
    public slots:
     void applyFilterSlot();
+
+    /// открытие файла
+    void openFile();
+    /// Сохранить файл
+    void saveFile();
+    /// Сохранить как
+    void saveAsFile();
 };
