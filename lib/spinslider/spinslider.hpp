@@ -17,14 +17,16 @@ class SpinSlider : public QWidget {
     ~SpinSlider() override;
 
     void setValue(int value);
+    void setMinimum(int value);
+    void setMaximum(int value);
     int value() const { return m_value; }
 
    private slots:
-    void valueChanged(int value);
+    void onValueChanged(int value);
 
    public:
    signals:
-    void onValueChanged(int value);
+    void valueChanged(int value);
 
    private:
     Ui::SpinSlider* m_ui;

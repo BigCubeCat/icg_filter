@@ -23,10 +23,9 @@ SpinSlider::SpinSlider(QWidget* parent, int minimum, int maximum, int value)
     m_ui->spinBox->setValue(m_value);
 
     connect(m_ui->spinBox, &QSpinBox::valueChanged, this,
-            &SpinSlider::valueChanged);
-
+            &SpinSlider::onValueChanged);
     connect(m_ui->horizontalSlider, &QSlider::valueChanged, this,
-            &SpinSlider::valueChanged);
+            &SpinSlider::onValueChanged);
 }
 
 SpinSlider::~SpinSlider() {
@@ -46,4 +45,12 @@ void SpinSlider::setValue(int value) {
     m_value = value;
     m_value = std::min(m_value, m_max);
     m_value = std::max(m_value, m_min);
+}
+
+void SpinSlider::setMinimum(int value) {
+    m_min = value;
+}
+
+void SpinSlider::setMaximum(int value) {
+    m_max = value;
 }
