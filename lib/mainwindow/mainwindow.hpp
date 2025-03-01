@@ -3,6 +3,8 @@
 #include <QActionGroup>
 #include <QMainWindow>
 
+#include "../configwidget/configwidget.hpp"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -22,6 +24,7 @@ class MainWindow : public QMainWindow {
 
    private:
     Ui::MainWindow* m_ui;
+    ConfigWidget m_config_widget;
 
     QActionGroup m_tool_group;
 

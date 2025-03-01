@@ -12,8 +12,13 @@
 #include "../help/help.hpp"
 
 MainWindow::MainWindow(QWidget* parent)
-    : QMainWindow(parent), m_ui(new Ui::MainWindow), m_tool_group(this) {
+    : QMainWindow(parent),
+      m_ui(new Ui::MainWindow),
+      m_config_widget(this),
+      m_tool_group(this) {
     m_ui->setupUi(this);
+
+    m_ui->dockLayout->addWidget(&m_config_widget);
 
     m_ui->toolBar->addActions(m_ui->menuFile->actions());
 
