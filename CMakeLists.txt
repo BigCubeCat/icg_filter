@@ -32,6 +32,8 @@ target_link_libraries(icg_filter
         help_lib
         about
         spinslider
+        configwidget
+        signalcontroller
     PUBLIC
         common_lib
 )
@@ -56,4 +58,6 @@ add_subdirectory(lib/mainwindow)
 add_subdirectory(lib/about)
 add_subdirectory(lib/help)
 add_subdirectory(lib/spinslider)
+add_subdirectory(lib/configwidget)
+add_subdirectory(lib/signalcontroller)
 
