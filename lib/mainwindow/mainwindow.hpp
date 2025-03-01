@@ -14,6 +14,7 @@ class MainWindow : public QMainWindow {
    private slots:
     void aboutSlots();
     void helpSlots();
+    void toggleSideBar(bool visible);
 
    public:
     explicit MainWindow(QWidget* parent = nullptr);
