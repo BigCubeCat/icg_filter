@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "../configwidget/configwidget.hpp"
+#include "../imageview/imageview.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,6 +26,7 @@ class MainWindow : public QMainWindow {
    private:
     Ui::MainWindow* m_ui;
     ConfigWidget m_config_widget;
+    ImageView m_view;
 
     QActionGroup m_tool_group;
 

@@ -3,10 +3,6 @@ project(icg_filter LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug)
-endif()
-
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
@@ -19,7 +15,7 @@ qt6_add_resources(RESOURCES resources.qrc)
 qt_standard_project_setup()
 
 qt_add_executable(icg_filter
-    WIN32 MACOSX_BUNDLE
+    WIN32 MACOSX_BUNDLE 
     src/main.cpp
     ${RESOURCES}
 )
@@ -28,12 +24,13 @@ target_link_libraries(icg_filter
     PRIVATE
         Qt6::Core
         Qt6::Widgets
-        mainwindow
-        help_lib
         about
-        spinslider
         configwidget
+        help_lib
+        imageview
+        mainwindow
         signalcontroller
+        spinslider
     PUBLIC
         common_lib
 )
@@ -53,11 +50,12 @@ qt_generate_deploy_app_script(
 )
 install(SCRIPT ${deploy_script})
 
-add_subdirectory(lib/common)
-add_subdirectory(lib/mainwindow)
 add_subdirectory(lib/about)
-add_subdirectory(lib/help)
-add_subdirectory(lib/spinslider)
+add_subdirectory(lib/common)
 add_subdirectory(lib/configwidget)
+add_subdirectory(lib/help)
+add_subdirectory(lib/imageview)
+add_subdirectory(lib/mainwindow)
 add_subdirectory(lib/signalcontroller)
+add_subdirectory(lib/spinslider)
 
