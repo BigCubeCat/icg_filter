@@ -21,13 +21,18 @@ MainWindow::MainWindow(QWidget* parent)
     m_ui->toolBar->addActions(m_ui->menuTools->actions());
 
     m_ui->toolBar->addSeparator();
-    m_ui->toolBar->addActions(m_ui->menuView->actions());
 
     connect(m_ui->actionAbout, &QAction::triggered, this,
             &MainWindow::aboutSlots);
 
     connect(m_ui->actionHelp, &QAction::triggered, this,
             &MainWindow::helpSlots);
+
+    /// настройка SideBar
+    connect(m_ui->actionConfig, &QAction::triggered, this,
+            &MainWindow::toggleSideBar);
+    connect(m_ui->dockWidget, &QDockWidget::visibilityChanged,
+            m_ui->actionConfig, &QAction::setChecked);
 }
 
 MainWindow::~MainWindow() {
@@ -35,6 +40,14 @@ MainWindow::~MainWindow() {
 }
 
 /* СЛОТЫ */
+
+void MainWindow::toggleSideBar(bool visible) {
+    if (visible) {
+        m_ui->dockWidget->show();
+    } else {
+        m_ui->dockWidget->hide();
+    }
+}
 
 void MainWindow::askFilename() {
     QString selected_filter;
