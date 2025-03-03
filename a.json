@@ -1,0 +1,61 @@
+{
+	"int_example": {
+		"type": "int",
+		"min": 3,
+		"max": 11,
+		"default": 3,
+		"step": 2
+	},
+	"double_example": {
+		"type": "double",
+		"min": 3,
+		"max": 11,
+		"default": 3,
+		"step": 2
+	},
+	"matrix_example": {
+		"type": "matrix",
+		"element_type": "int" | "double",
+		"width:": {
+			"type": "int",
+			"min": 3,
+			"max": 11,
+			"default": 3,
+			"step": 2
+		},
+		"height:": {
+			"type": "int",
+			"min": 3,
+			"max": 11,
+			"default": 3,
+			"step": 2
+		},
+		"data": [[]]
+	},
+	"square_matrix_example": {
+		"type": "matrix",
+		"element_type": "int" | "double",
+		"size": {
+			"type": "int",
+			"min": 3,
+			"max": 11,
+			"default": 3,
+			"step": 2
+		},
+		"data": [[]]
+	},
+	"file": {
+		"type": "file",
+		"filename": "string"
+	},
+	"item": {
+		"type": "variant",
+		"index": int,
+		"variants": []
+	}, 
+	"bool": {
+		"type": "bool",
+		"checked": true,
+		"default": false,
+	}
+}
