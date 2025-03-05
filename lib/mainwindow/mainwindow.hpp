@@ -8,6 +8,7 @@
 #include "../signalcontroller/signalcontroller.hpp"
 #include "imageprocessor.hpp"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -29,6 +30,8 @@ class MainWindow : public QMainWindow {
 
    private:
     Ui::MainWindow* m_ui;
+    ConfigWidget m_config_widget;
+    ImageView m_view;
 
     SignalController* m_controller;
     ConfigWidget m_config_widget;

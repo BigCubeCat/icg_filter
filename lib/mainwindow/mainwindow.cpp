@@ -8,13 +8,13 @@
 #include <QSpinBox>
 
 #include "../about/about.hpp"
-#include "../common/state.hpp"
 #include "../help/help.hpp"
 
 MainWindow::MainWindow(QWidget* parent, SignalController* controller)
     : QMainWindow(parent),
       m_ui(new Ui::MainWindow),
       m_controller(controller),
+
       m_config_widget(this),
       m_view(this),
       m_tool_group(this) {
@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller)
             &MainWindow::aboutSlots);
     connect(m_ui->actionHelp, &QAction::triggered, this,
             &MainWindow::helpSlots);
+
     connect(m_ui->actionConfig, &QAction::triggered, this,
             &MainWindow::toggleSideBar);
     connect(m_ui->dockWidget, &QDockWidget::visibilityChanged,

@@ -59,3 +59,4 @@ void SignalController::saveAsFile() {
 void SignalController::newImage() {
     emit newImageSignal();
 }
+

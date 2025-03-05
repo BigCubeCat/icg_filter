@@ -64,5 +64,8 @@
 		"type": "bool",
 		"checked": true,
 		"default": false
+		"type": "variant",
+		"index": int,
+		"variants": []
 	}
 }

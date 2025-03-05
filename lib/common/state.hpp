@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include "../signalcontroller/signalcontroller.hpp"
 #include "e_filter.hpp"
+
 #include "fileprocessor.hpp"
 #include "imageprocessor.hpp"
 

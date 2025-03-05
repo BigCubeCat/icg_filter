@@ -3,6 +3,7 @@
 #include "../lib/signalcontroller/signalcontroller.hpp"
 #include "imageprocessor.hpp"
 
+
 #include <QApplication>
 #include <QWidget>
 
@@ -19,6 +20,7 @@ int main(int argc, char* argv[]) {
     state.setFileProcessor(&file_processor);
 
     MainWindow view(nullptr, &controller);
+
     view.show();
     return QApplication::exec();
 }

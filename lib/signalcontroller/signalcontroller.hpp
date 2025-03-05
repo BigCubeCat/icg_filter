@@ -28,4 +28,5 @@ class SignalController : public QObject {
     void saveAsFile();
 
     void newImage();
+
 };
