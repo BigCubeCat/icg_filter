@@ -8,6 +8,7 @@
 #include <QSpinBox>
 
 #include "../about/about.hpp"
+#include "../common/state.hpp"
 #include "../help/help.hpp"
 
 MainWindow::MainWindow(QWidget* parent, SignalController* controller)
@@ -55,7 +56,7 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller)
 
     auto& state = StateSingleton::instance();
     m_im = state.imageProcessor();
-    m_fp = state.imageProcessor();
+    m_fp = state.fileProcessor();
     connect(m_im, &ImageProcessor::rerender, &m_view, &ImageView::updateImage);
 }
 
@@ -84,8 +85,7 @@ void MainWindow::helpSlots() {
 }
 
 void MainWindow::updateFilename() {
-    auto& state = StateSingleton::instance();
-    setWindowTitle("ICG_Filter [" + m_fp->name() + "]");
+    setWindowTitle("ICG_Filter [" + QString::fromStdString(m_fp->name()) + "]");
 }
 
 void MainWindow::toggleSaved(bool saved) {

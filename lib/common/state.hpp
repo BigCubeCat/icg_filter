@@ -12,7 +12,6 @@
 #include <string>
 #include <unordered_map>
 #include "../signalcontroller/signalcontroller.hpp"
-#include "e_filter.hpp"
 
 #include "fileprocessor.hpp"
 #include "imageprocessor.hpp"
@@ -29,6 +28,7 @@ class StateSingleton {
 
     SignalController* m_controller_ptr;
     ImageProcessor* m_processor;
+    FileProcessor* m_file_processor;
 
     std::unordered_map<std::string, QJsonObject> m_config;
 
