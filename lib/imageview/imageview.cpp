@@ -4,6 +4,8 @@
 #include <qpainter.h>
 #include <qwidget.h>
 
+#include "../common/state.hpp"
+
 #include "ui_imageview.h"
 
 ImageView::ImageView(QWidget* parent)
@@ -12,12 +14,13 @@ ImageView::ImageView(QWidget* parent)
     m_loading =
         QImage("assets/loading.png").scaled(64, 64, Qt::KeepAspectRatio);
     m_no_image = QImage("assets/no.png").scaled(64, 64, Qt::KeepAspectRatio);
-    updateImage(m_no_image);
+    m_view = m_no_image;
 }
 
 void ImageView::paintEvent([[maybe_unused]] QPaintEvent* event) {
     Q_UNUSED(event);
     QPainter painter(this);
+    setFixedSize(m_view.size() + QSize(10, 10));
     painter.drawImage(0, 0, m_view);
 }
 
@@ -25,12 +28,12 @@ ImageView::~ImageView() {
     delete m_ui;
 }
 
-void ImageView::updateImage(const QImage& image) {
-    m_view = image;
-    setFixedSize(m_view.size());
+void ImageView::updateImage() {
+    m_view = StateSingleton::instance().imageProcessor()->image();
     update();
 }
 
 void ImageView::loading() {
-    updateImage(m_loading);
+    m_view = m_loading;
+    update();
 }

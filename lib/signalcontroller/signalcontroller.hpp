@@ -13,7 +13,9 @@ class SignalController : public QObject {
 
    signals:
     void applyFilterSignal();
-    void render();
+    void saveFileSignal();
+    void openFileSignal();
+    void newImageSignal();
 
    public slots:
     void applyFilterSlot();
@@ -24,4 +26,7 @@ class SignalController : public QObject {
     void saveFile();
     /// Сохранить как
     void saveAsFile();
+
+    void newImage();
+
 };

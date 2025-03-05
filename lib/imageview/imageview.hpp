@@ -26,6 +26,6 @@ class ImageView : public QWidget {
     QJsonObject m_current;
 
    public slots:
-    void updateImage(const QImage& image);
+    void updateImage();
     void loading();
 };

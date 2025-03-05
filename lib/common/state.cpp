@@ -16,42 +16,15 @@ SignalController* StateSingleton::controller() {
     return m_controller_ptr;
 }
 
-void StateSingleton::selectFilter(e_filter filter) {
-    // тут нужно поставить переменные по умолчанию
+void StateSingleton::setConfig(const std::string& name,
+                               const QJsonObject& value) {
+    m_config[name] = value;
 }
 
-e_filter StateSingleton::currentFilter() const {
-    return m_selected_filter;
-}
-
-void StateSingleton::setFilename(std::string filename) {
-    m_filename = std::move(filename);
-
-    QFileInfo file_info(QString::fromStdString(m_filename));
-    m_folder = file_info.absolutePath().toStdString();
-    m_file_format = file_info.completeSuffix().toStdString();
-}
-
-std::string StateSingleton::filename() const {
-    return m_filename;
-}
-
-void StateSingleton::setFileFormat(std::string format) {
-    m_file_format = std::move(format);
-}
-
-std::string StateSingleton::fileFormat() const {
-    return m_file_format;
-}
-
-std::string StateSingleton::folder() const {
-    return m_folder;
-}
-
-void StateSingleton::setImage(QImage new_image) {
-    m_image = std::move(new_image);
-}
-
-QImage& StateSingleton::image() {
-    return m_image;
+std::optional<QJsonObject> StateSingleton::getConfig(const std::string& name) {
+    auto value = m_config.find(name);
+    if (value == m_config.end()) {
+        return std::nullopt;
+    }
+    return value->second;
 }
