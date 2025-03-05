@@ -11,9 +11,9 @@
 class IFilter {
    public:
     /// возращает уникальное имя фильтра
-    virtual std::string name() const;
+    virtual std::string name() const = 0;
     /// применение фильтра
-    void apply(QImage& image);
+    virtual void apply(QImage& image) = 0;
     /// возращает конфиг по умолчанию
-    virtual QJsonObject config() const;
+    virtual QJsonObject json() const = 0;
 };

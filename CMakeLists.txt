@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets Gui)
 message(STATUS "Using Qt version: ${Qt6_VERSION}")
 
 qt6_add_resources(RESOURCES resources.qrc)
@@ -24,6 +24,7 @@ target_link_libraries(icg_filter
     PRIVATE
         Qt6::Core
         Qt6::Widgets
+        Qt6::Gui
         about
         configwidget
         help_lib
@@ -31,6 +32,7 @@ target_link_libraries(icg_filter
         mainwindow
         signalcontroller
         spinslider
+        filters
     PUBLIC
         common_lib
 )
@@ -58,4 +60,5 @@ add_subdirectory(lib/imageview)
 add_subdirectory(lib/mainwindow)
 add_subdirectory(lib/signalcontroller)
 add_subdirectory(lib/spinslider)
+add_subdirectory(lib/filters)
 

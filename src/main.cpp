@@ -3,7 +3,6 @@
 #include "../lib/signalcontroller/signalcontroller.hpp"
 #include "imageprocessor.hpp"
 
-
 #include <QApplication>
 #include <QWidget>
 

@@ -19,6 +19,7 @@ target_link_libraries(common_lib
 PUBLIC
     Qt6::Core
     Qt6::Widgets
+    Qt6::Gui
     PRIVATE
     signalcontroller
 )
