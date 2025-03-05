@@ -1,7 +1,17 @@
 qt_add_library(common_lib STATIC
   e_filter.hpp
+  i_filter.hpp
+  i_factory.hpp
+
   state.hpp
   state.cpp
+
+  fileprocessor.hpp
+  fileprocessor.cpp
+
+  imageprocessor.hpp
+  imageprocessor.cpp
+
   utils.hpp
 )
 

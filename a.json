@@ -1,5 +1,6 @@
 {
 	"int_example": {
+		"name": "name of procedure",
 		"type": "int",
 		"min": 3,
 		"max": 11,
@@ -7,6 +8,7 @@
 		"step": 2
 	},
 	"double_example": {
+		"name": "name of procedure",
 		"type": "double",
 		"min": 3,
 		"max": 11,
@@ -14,8 +16,9 @@
 		"step": 2
 	},
 	"matrix_example": {
+		"name": "name of procedure",
 		"type": "matrix",
-		"element_type": "int" | "double",
+		"element_type": "int",
 		"width:": {
 			"type": "int",
 			"min": 3,
@@ -33,8 +36,9 @@
 		"data": [[]]
 	},
 	"square_matrix_example": {
+		"name": "name of procedure",
 		"type": "matrix",
-		"element_type": "int" | "double",
+		"element_type": "int",
 		"size": {
 			"type": "int",
 			"min": 3,
@@ -45,17 +49,20 @@
 		"data": [[]]
 	},
 	"file": {
+		"name": "name of procedure",
 		"type": "file",
 		"filename": "string"
 	},
 	"item": {
+		"name": "name of procedure",
 		"type": "variant",
-		"index": int,
+		"index": "int",
 		"variants": []
-	}, 
+	},
 	"bool": {
+		"name": "name of procedure",
 		"type": "bool",
 		"checked": true,
-		"default": false,
+		"default": false
 	}
 }
