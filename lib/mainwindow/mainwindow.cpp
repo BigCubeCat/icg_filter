@@ -60,12 +60,13 @@ void MainWindow::connectSlots() {
             &ImageProcessor::zoomOut);
     connect(m_ui->actionResetZoom, &QAction::triggered, m_im,
             &ImageProcessor::zoomReset);
-    connect(m_im, &ImageProcessor::zoom, this, &QMainWindow::adjustSize);
 
     connect(m_controller, &SignalController::saveFileSignal, this,
             &MainWindow::updateFilename);
     connect(m_controller, &SignalController::openFileSignal, this,
             &MainWindow::updateFilename);
+    connect(m_controller, &SignalController::openFileSignal, &m_view,
+            &ImageView::updateImage);
 
     connect(m_controller, &SignalController::newImageSignal, &m_view,
             &ImageView::updateImage);

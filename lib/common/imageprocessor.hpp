@@ -4,7 +4,7 @@
 #include <qtmetamacros.h>
 #include "i_factory.hpp"
 
-const float kZoomStep = 0.1F;
+const float kZoomStep = 0.02F;
 
 /*!
  * Объект, отвечающий за работу над изобржением
