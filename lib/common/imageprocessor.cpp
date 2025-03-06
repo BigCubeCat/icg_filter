@@ -1,4 +1,7 @@
 #include "imageprocessor.hpp"
+#include <qlogging.h>
+
+#include <algorithm>
 
 ImageProcessor::ImageProcessor(IFactory* factory) : m_factory(factory) {}
 
@@ -31,4 +34,32 @@ void ImageProcessor::setImage(QImage new_image) {
     m_original = std::move(new_image);
     m_saved = true;
     m_has_edited = false;
+}
+
+void ImageProcessor::zoomHandler(int old_zoom) {
+    emit zoom(old_zoom, m_current_zoom);
+    emit rerender();
+}
+
+void ImageProcessor::zoomIn() {
+    int old_zoom = m_current_zoom;
+    qDebug() << "zoomIn(): " << old_zoom << m_current_zoom;
+    m_current_zoom += kZoomStep;
+    m_current_zoom = std::min<double>(m_current_zoom, 3.0F);
+    zoomHandler(old_zoom);
+}
+
+void ImageProcessor::zoomOut() {
+    int old_zoom = m_current_zoom;
+    qDebug() << "zoomOut(): " << old_zoom << m_current_zoom;
+    m_current_zoom -= kZoomStep;
+    m_current_zoom = std::max<double>(m_current_zoom, 0.1F);
+    zoomHandler(old_zoom);
+}
+
+void ImageProcessor::zoomReset() {
+    qDebug() << "zoomReset()";
+    m_current_zoom = 1;
+    zoomHandler(1);
+    emit rerender();
 }

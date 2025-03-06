@@ -29,7 +29,12 @@ ImageView::~ImageView() {
 }
 
 void ImageView::updateImage() {
-    m_view = StateSingleton::instance().imageProcessor()->image();
+    auto* imp = StateSingleton::instance().imageProcessor();
+    m_view = imp->image();
+    auto zoom_factor = imp->zoomFacor();
+    QSize new_size = m_view.size() * zoom_factor;
+    qDebug() << new_size << "->" << zoom_factor;
+    m_view = m_view.scaled(new_size, Qt::KeepAspectRatio);
     update();
 }
 

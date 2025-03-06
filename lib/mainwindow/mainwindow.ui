@@ -20,9 +20,8 @@
    <string>ICG Paint</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normalon>:/assets/assets/icons/icon.png</normalon>
-   </iconset>
+   <iconset theme="QIcon::ThemeIcon::EditCopy" resource="../../resources.qrc">
+    <normaloff>:/assets/assets/no.png</normaloff>:/assets/assets/no.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -98,8 +97,9 @@
     <property name="title">
      <string>Zoom</string>
     </property>
-    <addaction name="actionResize"/>
-    <addaction name="actionReset"/>
+    <addaction name="actionZoomIn"/>
+    <addaction name="actionZoomOut"/>
+    <addaction name="actionResetZoom"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -284,7 +284,7 @@
     <string>Documentation</string>
    </property>
   </action>
-  <action name="actionResize">
+  <action name="actionZoomIn">
    <property name="icon">
     <iconset>
      <normalon>:/assets/assets/icons/resize.png</normalon>
@@ -297,10 +297,10 @@
     <string>Resize canvas</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+R</string>
+    <string>Ctrl+Shift+=</string>
    </property>
   </action>
-  <action name="actionReset">
+  <action name="actionZoomOut">
    <property name="icon">
     <iconset>
      <normalon>:/assets/assets/icons/reset.png</normalon>
@@ -308,6 +308,9 @@
    </property>
    <property name="text">
     <string>Zoom out</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
    </property>
   </action>
   <action name="actionOpen_Folder">
@@ -329,6 +332,11 @@
   <action name="actionApply">
    <property name="text">
     <string>Apply Filter</string>
+   </property>
+  </action>
+  <action name="actionResetZoom">
+   <property name="text">
+    <string>Reset zoom</string>
    </property>
   </action>
  </widget>

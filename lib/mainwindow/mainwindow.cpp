@@ -33,30 +33,42 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller)
     m_ui->toolBar->addActions(m_ui->menuZoom->actions());
     m_ui->toolBar->addSeparator();
 
+    auto& state = StateSingleton::instance();
+    m_im = state.imageProcessor();
+    m_fp = state.fileProcessor();
+    connectSlots();
+}
+
+void MainWindow::connectSlots() {
     /* SETUP UI */
     connect(m_ui->actionAbout, &QAction::triggered, this,
             &MainWindow::aboutSlots);
     connect(m_ui->actionHelp, &QAction::triggered, this,
             &MainWindow::helpSlots);
-
     connect(m_ui->actionConfig, &QAction::triggered, this,
             &MainWindow::toggleSideBar);
     connect(m_ui->dockWidget, &QDockWidget::visibilityChanged,
             m_ui->actionConfig, &QAction::setChecked);
-
-    // connect IO actions
-    connect(m_ui->actionOpen, &QAction::triggered, controller,
+    connect(m_ui->actionOpen, &QAction::triggered, m_controller,
             &SignalController::openFile);
-    connect(m_ui->actionSave, &QAction::triggered, controller,
+    connect(m_ui->actionSave, &QAction::triggered, m_controller,
             &SignalController::saveFile);
-    connect(controller, &SignalController::saveFileSignal, this,
+
+    connect(m_ui->actionZoomIn, &QAction::triggered, m_im,
+            &ImageProcessor::zoomIn);
+    connect(m_ui->actionZoomOut, &QAction::triggered, m_im,
+            &ImageProcessor::zoomOut);
+    connect(m_ui->actionResetZoom, &QAction::triggered, m_im,
+            &ImageProcessor::zoomReset);
+    connect(m_im, &ImageProcessor::zoom, this, &QMainWindow::adjustSize);
+
+    connect(m_controller, &SignalController::saveFileSignal, this,
             &MainWindow::updateFilename);
-    connect(controller, &SignalController::openFileSignal, this,
+    connect(m_controller, &SignalController::openFileSignal, this,
             &MainWindow::updateFilename);
 
-    auto& state = StateSingleton::instance();
-    m_im = state.imageProcessor();
-    m_fp = state.fileProcessor();
+    connect(m_controller, &SignalController::newImageSignal, &m_view,
+            &ImageView::updateImage);
     connect(m_im, &ImageProcessor::rerender, &m_view, &ImageView::updateImage);
 }
 

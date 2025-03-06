@@ -42,5 +42,5 @@ class MainWindow : public QMainWindow {
     std::string m_filename;
     std::string m_format = "PNG";
 
-    void askFilename();
+    void connectSlots();
 };
