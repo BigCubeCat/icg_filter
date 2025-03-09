@@ -1,10 +1,10 @@
 <RCC>
-  <qresource prefix="assets">
+  <qresource prefix="">
     <file>assets/background.png</file>
     <file>assets/loading.png</file>
     <file>assets/no.png</file>
-  </qresource>
-  <qresource prefix="qml">
+    <file>qml/components/qmldir</file>
+    <file>qml/components/SliderSpinBox.qml</file>
     <file>qml/brightness.qml</file>
     <file>qml/contrast.qml</file>
   </qresource>

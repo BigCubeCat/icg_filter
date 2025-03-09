@@ -4,10 +4,13 @@
 #include "imageprocessor.hpp"
 
 #include <QApplication>
+#include <QQmlApplicationEngine>
 #include <QWidget>
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
+    QQmlApplicationEngine engine;
+    engine.addImportPath("qrc:qml/components");
 
     SignalController controller;
     ImageProcessor image_processor(nullptr);

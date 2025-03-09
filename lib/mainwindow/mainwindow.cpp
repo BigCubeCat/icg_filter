@@ -1,5 +1,6 @@
 #include "mainwindow.hpp"
 #include <qlogging.h>
+#include <qqmlengine.h>
 #include <QQmlContext>
 #include <QtQuickWidgets/QQuickWidget>
 #include "ui_mainwindow.h"
@@ -8,6 +9,7 @@
 #include <QFormLayout>
 #include <QMessageBox>
 #include <QSpinBox>
+#include <QWidget>
 
 #include "../about/about.hpp"
 #include "../common/state.hpp"
@@ -26,6 +28,11 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller)
         "background-image: url(assets/background.png);"
         "background-position: center;"
         "background-repeat: no-repeat;");
+
+    m_ui->quickWidget->engine()->addImportPath(
+        "/home/bigcubecat/Projects/NSU/SEM_6/graphica/icg_filter/qml/");
+
+    qDebug() << m_ui->quickWidget->engine()->importPathList();
 
     m_ui->quickWidget->rootContext()->setContextProperty(
         "settings", QVariant::fromValue(&m_filter_settings));

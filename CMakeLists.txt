@@ -18,7 +18,9 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
 
 message(STATUS "Using Qt version: ${Qt6_VERSION}")
 
-qt6_add_resources(RESOURCES resources.qrc)
+qt6_add_resources(RESOURCES 
+resources.qrc
+)
 
 qt_standard_project_setup()
 

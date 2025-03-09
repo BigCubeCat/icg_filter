@@ -20,7 +20,7 @@
    <string>ICG Paint</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="QIcon::ThemeIcon::EditCopy" resource="../../resources.qrc">
+   <iconset theme="QIcon::ThemeIcon::EditCopy">
     <normaloff>:/assets/assets/no.png</normaloff>:/assets/assets/no.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -47,7 +47,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>454</width>
+         <width>620</width>
          <height>501</height>
         </rect>
        </property>
@@ -162,7 +162,7 @@
          </property>
          <property name="source">
           <url>
-           <string>qrc:/qml/qml/brightness.qml</string>
+           <string>qrc:/assets/qml/brightness.qml</string>
           </url>
          </property>
         </widget>
