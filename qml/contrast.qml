@@ -9,8 +9,8 @@ Column {
         id: contrastSlider
         from: 0.0
         to: 3.0
-        value: filterSettings.contrast
-        onValueChanged: filterSettings.contrast = value
+        value: settings.contrast
+        onValueChanged: settings.contrast = value
     }
     
     Label {

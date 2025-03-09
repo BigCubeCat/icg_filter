@@ -1,5 +1,6 @@
 #include "mainwindow.hpp"
 #include <qlogging.h>
+#include <QQmlContext>
 #include <QtQuickWidgets/QQuickWidget>
 #include "ui_mainwindow.h"
 
@@ -25,6 +26,9 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller)
         "background-image: url(assets/background.png);"
         "background-position: center;"
         "background-repeat: no-repeat;");
+
+    m_ui->quickWidget->rootContext()->setContextProperty(
+        "settings", QVariant::fromValue(&m_filter_settings));
     m_ui->quickWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
 
     m_ui->scrollArea->setWidget(&m_view);
@@ -75,11 +79,11 @@ void MainWindow::connectSlots() {
 
     // Подключение QAction
     connect(m_ui->actionBrightness, &QAction::triggered, [this]() {
-        m_ui->quickWidget->setSource(QUrl("qrc:/qml/brightness.qml"));
+        m_ui->quickWidget->setSource(QUrl("qml/brightness.qml"));
     });
 
     connect(m_ui->actionContrast, &QAction::triggered, [this]() {
-        m_ui->quickWidget->setSource(QUrl("qrc:/qml/contrast.qml"));
+        m_ui->quickWidget->setSource(QUrl("qml/contrast.qml"));
     });
 }
 
