@@ -29,8 +29,7 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller)
         "background-position: center;"
         "background-repeat: no-repeat;");
 
-    m_ui->quickWidget->engine()->addImportPath(
-        "/home/bigcubecat/Projects/NSU/SEM_6/graphica/icg_filter/qml/");
+    m_ui->quickWidget->engine()->addImportPath("qml");
 
     qDebug() << m_ui->quickWidget->engine()->importPathList();
 
