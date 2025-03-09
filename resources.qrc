@@ -4,4 +4,8 @@
     <file>assets/loading.png</file>
     <file>assets/no.png</file>
   </qresource>
+  <qresource prefix="qml">
+    <file>qml/brightness.qml</file>
+    <file>qml/contrast.qml</file>
+  </qresource>
 </RCC>

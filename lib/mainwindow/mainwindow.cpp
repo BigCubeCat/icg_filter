@@ -1,5 +1,6 @@
 #include "mainwindow.hpp"
 #include <qlogging.h>
+#include <QtQuickWidgets/QQuickWidget>
 #include "ui_mainwindow.h"
 
 #include <QFileDialog>
@@ -15,23 +16,23 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller)
     : QMainWindow(parent),
       m_ui(new Ui::MainWindow),
       m_controller(controller),
-
-      m_config_widget(this),
+      m_filter_settings(this),
       m_view(this),
       m_tool_group(this) {
     m_ui->setupUi(this);
 
-    m_ui->dockLayout->addWidget(&m_config_widget);
     m_ui->scrollArea->viewport()->setStyleSheet(
         "background-image: url(assets/background.png);"
         "background-position: center;"
         "background-repeat: no-repeat;");
+    m_ui->quickWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
 
     m_ui->scrollArea->setWidget(&m_view);
     m_ui->toolBar->addActions(m_ui->menuFile->actions());
     m_ui->toolBar->addSeparator();
     m_ui->toolBar->addActions(m_ui->menuZoom->actions());
     m_ui->toolBar->addSeparator();
+    m_ui->toolBar->addActions(m_ui->menuImage->actions());
 
     auto& state = StateSingleton::instance();
     m_im = state.imageProcessor();
@@ -71,6 +72,15 @@ void MainWindow::connectSlots() {
     connect(m_controller, &SignalController::newImageSignal, &m_view,
             &ImageView::updateImage);
     connect(m_im, &ImageProcessor::rerender, &m_view, &ImageView::updateImage);
+
+    // Подключение QAction
+    connect(m_ui->actionBrightness, &QAction::triggered, [this]() {
+        m_ui->quickWidget->setSource(QUrl("qrc:/qml/brightness.qml"));
+    });
+
+    connect(m_ui->actionContrast, &QAction::triggered, [this]() {
+        m_ui->quickWidget->setSource(QUrl("qrc:/qml/contrast.qml"));
+    });
 }
 
 MainWindow::~MainWindow() {
@@ -111,3 +121,12 @@ void MainWindow::toggleSaved(bool saved) {
     }
     setWindowTitle("ICG_Filter [" + filename + "]");
 }
+
+void MainWindow::applyFilter() {
+    // Реализация применения фильтра с текущими параметрами
+    double brightness = m_filter_settings.brightness();
+    double contrast = m_filter_settings.contrast();
+    // ... обработка изображения ...
+}
+
+void MainWindow::handleFilterAction() {}

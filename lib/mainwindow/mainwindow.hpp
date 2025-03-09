@@ -3,8 +3,8 @@
 #include <QActionGroup>
 #include <QMainWindow>
 
-#include "../configwidget/configwidget.hpp"
 #include "../imageview/imageview.hpp"
+#include "../signalcontroller/filtersettings.hpp"
 #include "../signalcontroller/signalcontroller.hpp"
 #include "fileprocessor.hpp"
 #include "imageprocessor.hpp"
@@ -24,6 +24,9 @@ class MainWindow : public QMainWindow {
     void updateFilename();
     void toggleSaved(bool saved);
 
+    void handleFilterAction();
+    void applyFilter();
+
    public:
     explicit MainWindow(QWidget* parent, SignalController* controller);
     ~MainWindow() override;
@@ -31,7 +34,7 @@ class MainWindow : public QMainWindow {
    private:
     Ui::MainWindow* m_ui;
     SignalController* m_controller;
-    ConfigWidget m_config_widget;
+    FilterSettings m_filter_settings;
     ImageView m_view;
 
     ImageProcessor* m_im;

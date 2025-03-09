@@ -1,6 +1,7 @@
 qt_add_library(signalcontroller STATIC
     signalcontroller.cpp
     signalcontroller.hpp
+    filtersettings.hpp
 )
 
 target_link_libraries(signalcontroller

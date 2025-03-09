@@ -7,7 +7,15 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets Gui)
+find_package(Qt6 6.5 REQUIRED COMPONENTS
+    Core
+    Widgets
+    Gui
+    Qml
+    Quick
+    QuickWidgets
+)
+
 message(STATUS "Using Qt version: ${Qt6_VERSION}")
 
 qt6_add_resources(RESOURCES resources.qrc)
@@ -25,8 +33,11 @@ target_link_libraries(icg_filter
         Qt6::Core
         Qt6::Widgets
         Qt6::Gui
+        Qt6::Qml
+        Qt6::Quick
+        Qt6::QuickWidgets
+
         about
-        configwidget
         help_lib
         imageview
         mainwindow
@@ -54,7 +65,6 @@ install(SCRIPT ${deploy_script})
 
 add_subdirectory(lib/about)
 add_subdirectory(lib/common)
-add_subdirectory(lib/configwidget)
 add_subdirectory(lib/help)
 add_subdirectory(lib/imageview)
 add_subdirectory(lib/mainwindow)
