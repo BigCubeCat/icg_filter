@@ -1,0 +1,20 @@
+[
+    {
+        "classes": [
+            {
+                "className": "HelpDialog",
+                "lineNumber": 11,
+                "object": true,
+                "qualifiedClassName": "HelpDialog",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QDialog"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "help.hpp",
+        "outputRevision": 68
+    }
+]

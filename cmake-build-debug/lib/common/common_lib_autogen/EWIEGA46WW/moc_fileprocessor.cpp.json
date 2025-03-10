@@ -1,0 +1,38 @@
+{
+    "classes": [
+        {
+            "className": "FileProcessor",
+            "lineNumber": 10,
+            "object": true,
+            "qualifiedClassName": "FileProcessor",
+            "slots": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "filename",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 0,
+                    "name": "setFilename",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 1,
+                    "name": "nextImageInFolder",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "fileprocessor.hpp",
+    "outputRevision": 68
+}

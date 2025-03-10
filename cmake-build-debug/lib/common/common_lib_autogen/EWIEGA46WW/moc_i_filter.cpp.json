@@ -1,0 +1,26 @@
+{
+    "classes": [
+        {
+            "className": "IFilter",
+            "lineNumber": 16,
+            "object": true,
+            "qualifiedClassName": "IFilter",
+            "signals": [
+                {
+                    "access": "public",
+                    "index": 0,
+                    "name": "done",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "i_filter.hpp",
+    "outputRevision": 68
+}
