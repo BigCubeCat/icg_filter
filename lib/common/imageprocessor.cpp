@@ -56,8 +56,8 @@ void ImageProcessor::zoomReset() {
 }
 
 void ImageProcessor::applyFilter(IFilter* filter) {
-    // auto* filter = qobject_cast<IFilter*>(sender());
-    filter->apply(m_original);
+    m_edited = m_original;
+    filter->apply(m_edited);
     m_saved = false;
     m_has_edited = true;
     emit rerender();
