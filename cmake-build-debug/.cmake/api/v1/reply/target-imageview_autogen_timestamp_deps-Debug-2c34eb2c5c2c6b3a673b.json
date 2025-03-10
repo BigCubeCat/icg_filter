@@ -1,0 +1,38 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"lib/imageview/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "common_lib::@9fc5b58572d5f236116a"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "QtInternalTargets"
+	},
+	"id" : "imageview_autogen_timestamp_deps::@0dc05582d77af936ccf9",
+	"isGeneratorProvided" : true,
+	"name" : "imageview_autogen_timestamp_deps",
+	"paths" : 
+	{
+		"build" : "lib/imageview",
+		"source" : "lib/imageview"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

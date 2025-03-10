@@ -30,11 +30,11 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller,
     m_ui->setupUi(this);
 
     m_ui->scrollArea->viewport()->setStyleSheet(
-        "background-image: url(assets/background.png);"
+        "background-image: url(../assets/background.png);"
         "background-position: center;"
         "background-repeat: no-repeat;");
 
-    m_ui->quickWidget->engine()->addImportPath("qml");
+    m_ui->quickWidget->engine()->addImportPath("qrc:/qml");
 
     m_ui->scrollArea->setWidget(&m_view);
     m_ui->toolBar->addActions(m_ui->menuFile->actions());

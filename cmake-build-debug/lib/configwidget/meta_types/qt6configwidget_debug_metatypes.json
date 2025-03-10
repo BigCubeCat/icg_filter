@@ -1,0 +1,36 @@
+[
+    {
+        "classes": [
+            {
+                "className": "ConfigWidget",
+                "lineNumber": 12,
+                "object": true,
+                "qualifiedClassName": "ConfigWidget",
+                "signals": [
+                    {
+                        "access": "public",
+                        "index": 0,
+                        "name": "configChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "slots": [
+                    {
+                        "access": "private",
+                        "index": 1,
+                        "name": "updateView",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QWidget"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "configwidget.hpp",
+        "outputRevision": 68
+    }
+]
