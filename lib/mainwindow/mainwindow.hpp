@@ -26,6 +26,8 @@ class MainWindow : public QMainWindow {
 
     void applyFilter();
 
+    void hideToolbar();
+
    public:
     explicit MainWindow(QWidget* parent, SignalController* controller,
                         ImageProcessor* im, FileProcessor* fp,
