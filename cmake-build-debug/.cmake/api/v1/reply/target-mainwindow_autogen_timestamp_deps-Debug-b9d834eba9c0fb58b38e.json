@@ -5,7 +5,7 @@
 		"commands" : [],
 		"files" : 
 		[
-			"CMakeLists.txt"
+			"lib/mainwindow/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -16,10 +16,6 @@
 	},
 	"dependencies" : 
 	[
-		{
-			"backtrace" : 0,
-			"id" : "icg_filter_qmlimportscan::@6890427a1f51a3e7e1df"
-		},
 		{
 			"backtrace" : 0,
 			"id" : "about::@484be0dfba0514c18001"
@@ -38,24 +34,24 @@
 		},
 		{
 			"backtrace" : 0,
-			"id" : "mainwindow::@639616c713bcaafd3c38"
+			"id" : "filters::@51270ab24be7b662ebf6"
 		},
 		{
 			"backtrace" : 0,
-			"id" : "filters::@51270ab24be7b662ebf6"
+			"id" : "component_models::@3a1ed1b8bf6d2bd039f7"
 		}
 	],
 	"folder" : 
 	{
 		"name" : "QtInternalTargets"
 	},
-	"id" : "icg_filter_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+	"id" : "mainwindow_autogen_timestamp_deps::@639616c713bcaafd3c38",
 	"isGeneratorProvided" : true,
-	"name" : "icg_filter_autogen_timestamp_deps",
+	"name" : "mainwindow_autogen_timestamp_deps",
 	"paths" : 
 	{
-		"build" : ".",
-		"source" : "."
+		"build" : "lib/mainwindow",
+		"source" : "lib/mainwindow"
 	},
 	"sources" : [],
 	"type" : "UTILITY"

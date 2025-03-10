@@ -1244,6 +1244,7 @@
 		"/home/anton/Documents/graphics/icg_filter/lib/signalcontroller",
 		"/home/anton/Documents/graphics/icg_filter/lib/common",
 		"/home/anton/Documents/graphics/icg_filter/lib/filters",
+		"/home/anton/Documents/graphics/icg_filter/lib/components",
 		"/home/anton/Qt/6.8.1/gcc_64/include/QtCore",
 		"/home/anton/Qt/6.8.1/gcc_64/include",
 		"/home/anton/Qt/6.8.1/gcc_64/mkspecs/linux-g++",

@@ -5044,6 +5044,9 @@
 		},
 		{
 			"path" : "lib/filters/CMakeLists.txt"
+		},
+		{
+			"path" : "lib/components/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",

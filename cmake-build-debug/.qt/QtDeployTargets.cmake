@@ -12,5 +12,7 @@ set(__QT_DEPLOY_TARGET_signalcontroller_FILE /home/anton/Documents/graphics/icg_
 set(__QT_DEPLOY_TARGET_signalcontroller_TYPE STATIC_LIBRARY)
 set(__QT_DEPLOY_TARGET_filters_FILE /home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/filters/libfilters.a)
 set(__QT_DEPLOY_TARGET_filters_TYPE STATIC_LIBRARY)
+set(__QT_DEPLOY_TARGET_component_models_FILE /home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/components/libcomponent_models.a)
+set(__QT_DEPLOY_TARGET_component_models_TYPE STATIC_LIBRARY)
 set(__QT_DEPLOY_TARGET_icg_filter_FILE /home/anton/Documents/graphics/icg_filter/cmake-build-debug/icg_filter)
 set(__QT_DEPLOY_TARGET_icg_filter_TYPE EXECUTABLE)

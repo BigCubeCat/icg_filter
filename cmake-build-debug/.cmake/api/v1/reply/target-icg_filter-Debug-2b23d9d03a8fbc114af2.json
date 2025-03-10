@@ -85,7 +85,7 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 54,
+				"line" : 55,
 				"parent" : 0
 			},
 			{
@@ -448,6 +448,10 @@
 					"path" : "/home/anton/Documents/graphics/icg_filter/lib/filters"
 				},
 				{
+					"backtrace" : 6,
+					"path" : "/home/anton/Documents/graphics/icg_filter/lib/components"
+				},
+				{
 					"backtrace" : 46,
 					"isSystem" : true,
 					"path" : "/home/anton/Qt/6.8.1/gcc_64/include/QtCore"
@@ -558,6 +562,10 @@
 			"id" : "filters::@51270ab24be7b662ebf6"
 		},
 		{
+			"backtrace" : 6,
+			"id" : "component_models::@3a1ed1b8bf6d2bd039f7"
+		},
+		{
 			"id" : "icg_filter_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		},
 		{
@@ -624,6 +632,11 @@
 			{
 				"backtrace" : 6,
 				"fragment" : "lib/filters/libfilters.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "lib/components/libcomponent_models.a",
 				"role" : "libraries"
 			},
 			{

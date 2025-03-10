@@ -6,6 +6,7 @@
 
     <file>qml/components/qmldir</file>
     <file>qml/components/SliderSpinBox.qml</file>
+    <file>qml/components/WeightMatrix.qml</file>
 
     <file>qml/brightness.qml</file>
     <file>qml/contrast.qml</file>

@@ -14,10 +14,11 @@
 						4,
 						5,
 						6,
-						7
+						7,
+						8
 					],
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-268b1964dfbc1a8956f6.json",
+					"jsonFile" : "directory-.-Debug-b5ee3820a3e108ac4f9e.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -26,10 +27,10 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						12,
-						13,
-						14,
-						15
+						15,
+						16,
+						17,
+						18
 					]
 				},
 				{
@@ -78,9 +79,9 @@
 					"source" : "lib/help",
 					"targetIndexes" : 
 					[
-						9,
-						10,
-						11
+						12,
+						13,
+						14
 					]
 				},
 				{
@@ -95,9 +96,9 @@
 					"source" : "lib/imageview",
 					"targetIndexes" : 
 					[
-						16,
-						17,
-						18
+						19,
+						20,
+						21
 					]
 				},
 				{
@@ -112,9 +113,9 @@
 					"source" : "lib/mainwindow",
 					"targetIndexes" : 
 					[
-						19,
-						20,
-						21
+						22,
+						23,
+						24
 					]
 				},
 				{
@@ -129,9 +130,9 @@
 					"source" : "lib/signalcontroller",
 					"targetIndexes" : 
 					[
-						22,
-						23,
-						24
+						25,
+						26,
+						27
 					]
 				},
 				{
@@ -144,6 +145,23 @@
 					"parentIndex" : 0,
 					"projectIndex" : 0,
 					"source" : "lib/filters",
+					"targetIndexes" : 
+					[
+						9,
+						10,
+						11
+					]
+				},
+				{
+					"build" : "lib/components",
+					"jsonFile" : "directory-lib.components-Debug-62dc466b23da59b2fce8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "lib/components",
 					"targetIndexes" : 
 					[
 						6,
@@ -165,7 +183,8 @@
 						4,
 						5,
 						6,
-						7
+						7,
+						8
 					],
 					"name" : "icg_filter",
 					"targetIndexes" : 
@@ -194,7 +213,10 @@
 						21,
 						22,
 						23,
-						24
+						24,
+						25,
+						26,
+						27
 					]
 				}
 			],
@@ -243,6 +265,27 @@
 					"projectIndex" : 0
 				},
 				{
+					"directoryIndex" : 8,
+					"id" : "component_models::@3a1ed1b8bf6d2bd039f7",
+					"jsonFile" : "target-component_models-Debug-a6d4eb6f8a9d6d4c2ac2.json",
+					"name" : "component_models",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "component_models_autogen::@3a1ed1b8bf6d2bd039f7",
+					"jsonFile" : "target-component_models_autogen-Debug-e7379ff4e3d51922d35f.json",
+					"name" : "component_models_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "component_models_autogen_timestamp_deps::@3a1ed1b8bf6d2bd039f7",
+					"jsonFile" : "target-component_models_autogen_timestamp_deps-Debug-431eb82a71eb3740f0ec.json",
+					"name" : "component_models_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
 					"directoryIndex" : 7,
 					"id" : "filters::@51270ab24be7b662ebf6",
 					"jsonFile" : "target-filters-Debug-e2582a0c52dd20c51c55.json",
@@ -287,7 +330,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "icg_filter::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-icg_filter-Debug-c8fa48b97391a7b46334.json",
+					"jsonFile" : "target-icg_filter-Debug-2b23d9d03a8fbc114af2.json",
 					"name" : "icg_filter",
 					"projectIndex" : 0
 				},
@@ -301,7 +344,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "icg_filter_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-icg_filter_autogen_timestamp_deps-Debug-e7095d1cb51674fd17fc.json",
+					"jsonFile" : "target-icg_filter_autogen_timestamp_deps-Debug-7e02ba5e7e6fc9b83bc4.json",
 					"name" : "icg_filter_autogen_timestamp_deps",
 					"projectIndex" : 0
 				},
@@ -336,7 +379,7 @@
 				{
 					"directoryIndex" : 5,
 					"id" : "mainwindow::@639616c713bcaafd3c38",
-					"jsonFile" : "target-mainwindow-Debug-695c5e76b905349e1a14.json",
+					"jsonFile" : "target-mainwindow-Debug-5025ca063a55fa9f16f4.json",
 					"name" : "mainwindow",
 					"projectIndex" : 0
 				},
@@ -350,7 +393,7 @@
 				{
 					"directoryIndex" : 5,
 					"id" : "mainwindow_autogen_timestamp_deps::@639616c713bcaafd3c38",
-					"jsonFile" : "target-mainwindow_autogen_timestamp_deps-Debug-c4a98e6aae75e24dd995.json",
+					"jsonFile" : "target-mainwindow_autogen_timestamp_deps-Debug-b9d834eba9c0fb58b38e.json",
 					"name" : "mainwindow_autogen_timestamp_deps",
 					"projectIndex" : 0
 				},

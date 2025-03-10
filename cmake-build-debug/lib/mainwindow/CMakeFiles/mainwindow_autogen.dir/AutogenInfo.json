@@ -49,6 +49,7 @@
 	"MOC_INCLUDES" : 
 	[
 		"/home/anton/Documents/graphics/icg_filter/lib/mainwindow",
+		"/home/anton/Documents/graphics/icg_filter/lib/components",
 		"/home/anton/Documents/graphics/icg_filter/lib/filters",
 		"/home/anton/Documents/graphics/icg_filter/lib/imageview",
 		"/home/anton/Documents/graphics/icg_filter/lib/common",
