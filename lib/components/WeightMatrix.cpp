@@ -55,7 +55,8 @@ void WeightMatrix::setColumnCount(int newValue) {
 QVariant WeightMatrix::data(const QModelIndex& index, int role) const {
     switch (role) {
         case kTableDataRole: {
-            return table.at(index.row()).at(index.column());
+            int val = table.at(index.row()).at(index.column());
+            return QString(std::to_string(val).c_str());
         }
         default:
             break;
@@ -83,8 +84,15 @@ bool WeightMatrix::setData(const QModelIndex& index, const QVariant& value,
             return false;
     }
 }
-void WeightMatrix::setData(const QModelIndex& index, const QVariant& value) {
-    setData(index, value, kTableDataRole);
+void WeightMatrix::setData(const QVariant& index, const QVariant& value) {
+    int r = index.toInt() % cnt_rows;
+    int c = index.toInt() / cnt_rows;
+    table[r][c] = value.toString().toInt();
+    qDebug() << r;
+    qDebug() << c;
+    qDebug() << table[r][c];
+    emit dataChanged(this->index(r, c), this->index(r, c));
+    emit updated(cnt_rows, index, value);
 }
 QVariant WeightMatrix::get_display_data(const QModelIndex& index) {
     return data(index, kTableDataRole);
