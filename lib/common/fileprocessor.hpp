@@ -1,5 +1,6 @@
 #pragma once
 
+#include <qdir.h>
 #include <qobject.h>
 #include <qtmetamacros.h>
 #include "imageprocessor.hpp"
@@ -23,9 +24,16 @@ class FileProcessor : public QObject {
     std::string m_file_format;
     std::string m_folder;
 
+    QDir m_current_dir;
+    QList<QFileInfo> m_images;
+    int m_cursor = 0;
+
     ImageProcessor& m_processor;
+
+    void open_dir(const std::string& dir);
 
    public slots:
     void setFilename(const QString& filename);
     void nextImageInFolder();
+    void prevImageInFolder();
 };
