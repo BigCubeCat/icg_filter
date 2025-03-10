@@ -120,7 +120,13 @@ void MainWindow::toggleSaved(bool saved) {
     setWindowTitle("ICG_Filter [" + filename + "]");
 }
 
-void MainWindow::applyFilter() {}
+void MainWindow::applyFilter() {
+    if (!m_current_filter) {
+        // TODO: show error
+        return;
+    }
+    m_im->applyFilter(m_current_filter);
+}
 
 void MainWindow::handleFilterAction() {}
 
@@ -147,6 +153,6 @@ void MainWindow::filterApplyed() {
     auto* filter = qobject_cast<IFilter*>(filter_action->parent());
     qDebug() << filter->name();
     m_ui->quickWidget->setSource(QUrl(filter->qml_path()));
-    toggleSaved(false);
-    m_im->applyFilter(filter);
+    m_current_filter = filter;
+    // m_im->applyFilter(filter);
 }

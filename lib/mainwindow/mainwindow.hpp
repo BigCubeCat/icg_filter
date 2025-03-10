@@ -42,6 +42,8 @@ class MainWindow : public QMainWindow {
     ImageProcessor* m_im;
     FileProcessor* m_fp;
 
+    IFilter* m_current_filter = nullptr;
+
     QActionGroup m_tool_group;
     std::vector<QAction> m_filter_actions;
 

@@ -14,6 +14,9 @@ void SepiaFilter::apply([[maybe_unused]] QImage& image) {
 
     double t = static_cast<double>(m_percent) / 100.0F;
 
+    qDebug() << "sepia apply";
+    QImage im = QImage(width, height, QImage::Format_RGB32);
+
     for (int y = 0; y < height; ++y) {
         QRgb* scan_line = reinterpret_cast<QRgb*>(image.scanLine(y));
         for (int x = 0; x < width; ++x) {
@@ -27,7 +30,12 @@ void SepiaFilter::apply([[maybe_unused]] QImage& image) {
             scan_line[x] =
                 qRgba(apply_percent(new_red, t), apply_percent(new_green, t),
                       apply_percent(new_blue, t), qAlpha(pixel));
+            im.setPixelColor(x, y, QColor(pixel));
         }
     }
+
+    qDebug() << "end sepia";
+    image = im;
+
     emit done();
 }
