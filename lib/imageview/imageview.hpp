@@ -2,6 +2,7 @@
 
 #include <QJsonObject>
 #include <QWidget>
+#include "imageprocessor.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -12,7 +13,7 @@ QT_END_NAMESPACE
 class ImageView : public QWidget {
     Q_OBJECT
    public:
-    explicit ImageView(QWidget* parent = nullptr);
+    explicit ImageView(ImageProcessor* im, QWidget* parent = nullptr);
     ~ImageView() override;
 
    protected:
@@ -20,6 +21,7 @@ class ImageView : public QWidget {
 
    private:
     Ui::ImageView* m_ui;
+    ImageProcessor* m_im;
     QImage m_view;
     QImage m_loading;
     QImage m_no_image;

@@ -2,6 +2,8 @@
 
 #include <qtmetamacros.h>
 #include <QObject>
+#include "../common/fileprocessor.hpp"
+#include "../common/imageprocessor.hpp"
 
 /*!
  * \brief перенаправляет сигналы на нужные слоты. позволяет соеденить model и view
@@ -9,7 +11,8 @@
 class SignalController : public QObject {
     Q_OBJECT
    public:
-    explicit SignalController() = default;
+    explicit SignalController(FileProcessor* fp, ImageProcessor* im)
+        : m_fp(fp), m_im(im) {}
 
    signals:
     void applyFilterSignal();
@@ -29,4 +32,7 @@ class SignalController : public QObject {
 
     void newImage();
 
+   private:
+    FileProcessor* m_fp;
+    ImageProcessor* m_im;
 };

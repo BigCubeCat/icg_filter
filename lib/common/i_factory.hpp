@@ -1,9 +1,15 @@
 #pragma once
 
+#include <memory>
 #include "i_filter.hpp"
 
 class IFactory {
    public:
-    virtual IFilter* filter(const std::string& name,
-                            const QJsonObject& args) = 0;
+    /// Возращает указатель на фильтр по имени
+    virtual IFilter* filter(const std::string& name) = 0;
+    /// Возращает Вектор всех фильтров
+    virtual std::vector<IFilter*> all_filters() = 0;
+    /// Добавляет фильтр в коллекцию
+    virtual void register_filter(const std::string& name,
+                                 std::shared_ptr<IFilter> filter_ptr) = 0;
 };
