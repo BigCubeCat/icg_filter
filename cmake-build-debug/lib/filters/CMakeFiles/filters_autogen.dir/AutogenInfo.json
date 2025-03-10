@@ -27,9 +27,21 @@
 			null
 		],
 		[
+			"/home/anton/Documents/graphics/icg_filter/lib/filters/procs/blur/blur.hpp",
+			"MU",
+			"W43OBVD7PF/moc_blur.cpp",
+			null
+		],
+		[
 			"/home/anton/Documents/graphics/icg_filter/lib/filters/procs/idlefilter.hpp",
 			"MU",
 			"YZTMGUCPCC/moc_idlefilter.cpp",
+			null
+		],
+		[
+			"/home/anton/Documents/graphics/icg_filter/lib/filters/procs/inversion/inversion.hpp",
+			"MU",
+			"6OIHHVOHKH/moc_inversion.cpp",
 			null
 		],
 		[
@@ -106,6 +118,16 @@
 		],
 		[
 			"/home/anton/Documents/graphics/icg_filter/lib/filters/procs/black_white/black_white_filter.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/anton/Documents/graphics/icg_filter/lib/filters/procs/blur/blur.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/anton/Documents/graphics/icg_filter/lib/filters/procs/inversion/inversion.cpp",
 			"MU",
 			null
 		],

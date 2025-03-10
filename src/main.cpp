@@ -10,7 +10,7 @@
 #include <memory>
 
 #include "WeightMatrix.hpp"
-
+#include "procs/inversion/inversion.hpp"
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
@@ -23,6 +23,8 @@ int main(int argc, char* argv[]) {
     factory.register_filter(sepia_ptr->name().toStdString(), sepia_ptr );
     auto bw_ptr = std::make_shared<BlackWhiteFilter>();
     factory.register_filter(bw_ptr->name().toStdString(), bw_ptr);
+    auto inv_ptr = std::make_shared<InversionFilter>();
+    factory.register_filter(inv_ptr->name().toStdString(), inv_ptr);
 
     ImageProcessor image_processor{};
     FileProcessor file_processor(image_processor);
