@@ -1,2 +1,3 @@
 module filters
-SliderSpinBox 1.0 SliderSpinBox.qml
+sepia 1.0 sepia.qml
+black_white 1.0 black_white.qml

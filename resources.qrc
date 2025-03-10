@@ -13,6 +13,7 @@
 
     <file>qml/filters/qmldir</file>
     <file>qml/filters/sepia.qml</file>
+    <file>qml/filters/black_white.qml</file>
 
   </qresource>
 </RCC>

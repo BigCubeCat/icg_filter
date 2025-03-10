@@ -21,6 +21,12 @@
 			null
 		],
 		[
+			"/home/anton/Documents/graphics/icg_filter/lib/filters/procs/black_white/black_white_filter.hpp",
+			"MU",
+			"FYO6RCRUMV/moc_black_white_filter.cpp",
+			null
+		],
+		[
 			"/home/anton/Documents/graphics/icg_filter/lib/filters/procs/idlefilter.hpp",
 			"MU",
 			"YZTMGUCPCC/moc_idlefilter.cpp",
@@ -95,6 +101,11 @@
 	[
 		[
 			"/home/anton/Documents/graphics/icg_filter/lib/filters/filters.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/anton/Documents/graphics/icg_filter/lib/filters/procs/black_white/black_white_filter.cpp",
 			"MU",
 			null
 		],

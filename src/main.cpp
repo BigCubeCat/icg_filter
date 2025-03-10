@@ -3,13 +3,14 @@
 #include "filters.hpp"
 #include "imageprocessor.hpp"
 #include "procs/sepia/sepia_filter.hpp"
-
+#include "procs/black_white/black_white_filter.hpp"
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QWidget>
 #include <memory>
 
 #include "WeightMatrix.hpp"
+
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
@@ -18,7 +19,10 @@ int main(int argc, char* argv[]) {
     qmlRegisterType<WeightMatrix>("weightMatrixModel", 1, 0,"WeightMatrixModel");
     FiltersFactory factory{};
 
-    factory.register_filter("sepia", std::make_shared<SepiaFilter>());
+    auto sepia_ptr = std::make_shared<SepiaFilter>();
+    factory.register_filter(sepia_ptr->name().toStdString(), sepia_ptr );
+    auto bw_ptr = std::make_shared<BlackWhiteFilter>();
+    factory.register_filter(bw_ptr->name().toStdString(), bw_ptr);
 
     ImageProcessor image_processor{};
     FileProcessor file_processor(image_processor);
