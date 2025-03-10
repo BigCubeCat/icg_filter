@@ -7,6 +7,7 @@ Item {
     // Основное свойство для хранения значения
     property int value: 0
     property string title: ""
+    property int step: 1
     
     // Минимальное и максимальное значения диапазона
     property int minValue: 0
@@ -32,7 +33,7 @@ Item {
             
             from: root.minValue
             to: root.maxValue
-            stepSize: 1
+            stepSize: step
             value: root.value
             
             // Обновляем корневое значение при изменении слайдера

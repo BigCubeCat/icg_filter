@@ -44,7 +44,6 @@ target_link_libraries(icg_filter
         imageview
         mainwindow
         signalcontroller
-        spinslider
         filters
     PUBLIC
         common_lib
@@ -71,6 +70,5 @@ add_subdirectory(lib/help)
 add_subdirectory(lib/imageview)
 add_subdirectory(lib/mainwindow)
 add_subdirectory(lib/signalcontroller)
-add_subdirectory(lib/spinslider)
 add_subdirectory(lib/filters)
 
