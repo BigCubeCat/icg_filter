@@ -41,6 +41,13 @@ static constexpr auto qt_meta_stringdata_ZN11SepiaFilterE = QtMocHelpers::string
     "percentChanged",
     "",
     "value",
+    "setValue",
+    "index",
+    "onTest",
+    "QVariant",
+    "r",
+    "i",
+    "v",
     "percent"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
@@ -53,21 +60,29 @@ Q_CONSTINIT static const uint qt_meta_data_ZN11SepiaFilterE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
-       1,   23, // properties
+       3,   14, // methods
+       1,   47, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   20,    2, 0x06,    2 /* Public */,
+       1,    1,   32,    2, 0x06,    2 /* Public */,
+       4,    2,   35,    2, 0x06,    4 /* Public */,
+
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       6,    3,   40,    2, 0x0a,    7 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Double,    3,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    5,    3,
+
+ // slots: parameters
+    QMetaType::Void, 0x80000000 | 7, 0x80000000 | 7, 0x80000000 | 7,    8,    9,   10,
 
  // properties: name, type, flags, notifyId, revision
-       4, QMetaType::Int, 0x00015103, uint(0), 0,
+      11, QMetaType::Int, 0x00015103, uint(0), 0,
 
        0        // eod
 };
@@ -85,7 +100,16 @@ Q_CONSTINIT const QMetaObject SepiaFilter::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<SepiaFilter, std::true_type>,
         // method 'percentChanged'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<double, std::false_type>
+        QtPrivate::TypeAndForceComplete<double, std::false_type>,
+        // method 'setValue'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'onTest'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QVariant, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QVariant, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QVariant, std::false_type>
     >,
     nullptr
 } };
@@ -96,6 +120,8 @@ void SepiaFilter::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->percentChanged((*reinterpret_cast< std::add_pointer_t<double>>(_a[1]))); break;
+        case 1: _t->setValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 2: _t->onTest((*reinterpret_cast< std::add_pointer_t<QVariant>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QVariant>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QVariant>>(_a[3]))); break;
         default: ;
         }
     }
@@ -105,6 +131,13 @@ void SepiaFilter::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             using _q_method_type = void (SepiaFilter::*)(double );
             if (_q_method_type _q_method = &SepiaFilter::percentChanged; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 0;
+                return;
+            }
+        }
+        {
+            using _q_method_type = void (SepiaFilter::*)(int , int );
+            if (_q_method_type _q_method = &SepiaFilter::setValue; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 1;
                 return;
             }
         }
@@ -144,14 +177,14 @@ int SepiaFilter::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 3;
     }
     if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::BindableProperty
@@ -167,5 +200,12 @@ void SepiaFilter::percentChanged(double _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void SepiaFilter::setValue(int _t1, int _t2)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP

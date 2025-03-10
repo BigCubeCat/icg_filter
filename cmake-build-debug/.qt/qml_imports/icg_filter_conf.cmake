@@ -27,5 +27,5 @@ set(qml_import_scanner_import_24 "CLASSNAME;QtQuickLayoutsPlugin;LINKTARGET;Qt6:
 set(qml_import_scanner_import_25 "CLASSNAME;QmlShapesPlugin;LINKTARGET;Qt6::qmlshapesplugin;NAME;QtQuick.Shapes;PATH;/home/anton/Qt/6.8.1/gcc_64/qml/QtQuick/Shapes;PLUGIN;qmlshapesplugin;PREFER;:/qt-project.org/imports/QtQuick/Shapes/;RELATIVEPATH;QtQuick/Shapes;TYPE;module;")
 set(qml_import_scanner_import_26 "CLASSNAME;QtQuickControls2BasicStyleImplPlugin;LINKTARGET;Qt6::qtquickcontrols2basicstyleimplplugin;NAME;QtQuick.Controls.Basic.impl;PATH;/home/anton/Qt/6.8.1/gcc_64/qml/QtQuick/Controls/Basic/impl;PLUGIN;qtquickcontrols2basicstyleimplplugin;PLUGINISOPTIONAL;;PREFER;:/qt-project.org/imports/QtQuick/Controls/Basic/impl/;RELATIVEPATH;QtQuick/Controls/Basic/impl;TYPE;module;")
 set(qml_import_scanner_import_27 "NAME;components;TYPE;module;")
-set(qml_import_scanner_import_28 "NAME;TableModel;TYPE;module;")
+set(qml_import_scanner_import_28 "NAME;weightMatrixModel;TYPE;module;")
 

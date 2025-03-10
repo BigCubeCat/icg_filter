@@ -42,13 +42,14 @@ static constexpr auto qt_meta_stringdata_ZN12WeightMatrixE = QtMocHelpers::strin
     "auto",
     "sizeChanged",
     "",
-    "setData",
-    "QModelIndex",
-    "index",
+    "updated",
     "QVariant",
-    "value",
-    "get_display_data",
     "rows",
+    "index",
+    "value",
+    "setData",
+    "get_display_data",
+    "QModelIndex",
     "columns"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
@@ -61,33 +62,35 @@ Q_CONSTINIT static const uint qt_meta_data_ZN12WeightMatrixE[] = {
       12,       // revision
        0,       // classname
        1,   14, // classinfo
-       3,   16, // methods
-       2,   43, // properties
+       4,   16, // methods
+       2,   56, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       2,       // signalCount
 
  // classinfo: key, value
        1,    2,
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    0,   34,    4, 0x06,    3 /* Public */,
+       3,    0,   40,    4, 0x06,    3 /* Public */,
+       5,    3,   41,    4, 0x06,    4 /* Public */,
 
  // methods: name, argc, parameters, tag, flags, initial metatype offsets
-       5,    2,   35,    4, 0x02,    4 /* Public */,
-      10,    1,   40,    4, 0x02,    7 /* Public */,
+      10,    2,   48,    4, 0x02,    8 /* Public */,
+      11,    1,   53,    4, 0x02,   11 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 6, 0x80000000 | 6, 0x80000000 | 6,    7,    8,    9,
 
  // methods: parameters
-    QMetaType::Void, 0x80000000 | 6, 0x80000000 | 8,    7,    9,
-    0x80000000 | 8, 0x80000000 | 6,    7,
+    QMetaType::Void, 0x80000000 | 6, 0x80000000 | 6,    8,    9,
+    0x80000000 | 6, 0x80000000 | 12,    8,
 
  // properties: name, type, flags, notifyId, revision
-      11, QMetaType::Int, 0x00015003, uint(0), 0,
-      12, QMetaType::Int, 0x00015003, uint(0), 0,
+       7, QMetaType::Int, 0x00015003, uint(0), 0,
+      13, QMetaType::Int, 0x00015003, uint(0), 0,
 
        0        // eod
 };
@@ -107,9 +110,14 @@ Q_CONSTINIT const QMetaObject WeightMatrix::staticMetaObject = { {
         WeightMatrix,
         // method 'sizeChanged'
         void,
+        // method 'updated'
+        void,
+        const QVariant &,
+        const QVariant &,
+        const QVariant &,
         // method 'setData'
         void,
-        const QModelIndex &,
+        const QVariant &,
         const QVariant &,
         // method 'get_display_data'
         QVariant,
@@ -124,8 +132,9 @@ void WeightMatrix::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->sizeChanged(); break;
-        case 1: _t->setData((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QVariant>>(_a[2]))); break;
-        case 2: { QVariant _r = _t->get_display_data((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1])));
+        case 1: _t->updated((*reinterpret_cast< std::add_pointer_t<QVariant>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QVariant>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QVariant>>(_a[3]))); break;
+        case 2: _t->setData((*reinterpret_cast< std::add_pointer_t<QVariant>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QVariant>>(_a[2]))); break;
+        case 3: { QVariant _r = _t->get_display_data((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1])));
             if (_a[0]) *reinterpret_cast< QVariant*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -136,6 +145,13 @@ void WeightMatrix::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             using _q_method_type = void (WeightMatrix::*)();
             if (_q_method_type _q_method = &WeightMatrix::sizeChanged; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 0;
+                return;
+            }
+        }
+        {
+            using _q_method_type = void (WeightMatrix::*)(const QVariant & , const QVariant & , const QVariant & );
+            if (_q_method_type _q_method = &WeightMatrix::updated; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 1;
                 return;
             }
         }
@@ -177,14 +193,14 @@ int WeightMatrix::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 4;
     }
     if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::BindableProperty
@@ -199,5 +215,12 @@ int WeightMatrix::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 void WeightMatrix::sizeChanged()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+}
+
+// SIGNAL 1
+void WeightMatrix::updated(const QVariant & _t1, const QVariant & _t2, const QVariant & _t3)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP

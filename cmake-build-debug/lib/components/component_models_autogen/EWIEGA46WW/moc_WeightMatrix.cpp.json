@@ -15,14 +15,14 @@
                     "arguments": [
                         {
                             "name": "index",
-                            "type": "QModelIndex"
+                            "type": "QVariant"
                         },
                         {
                             "name": "value",
                             "type": "QVariant"
                         }
                     ],
-                    "index": 1,
+                    "index": 2,
                     "name": "setData",
                     "returnType": "void"
                 },
@@ -34,7 +34,7 @@
                             "type": "QModelIndex"
                         }
                     ],
-                    "index": 2,
+                    "index": 3,
                     "name": "get_display_data",
                     "returnType": "QVariant"
                 }
@@ -78,6 +78,26 @@
                     "access": "public",
                     "index": 0,
                     "name": "sizeChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "rows",
+                            "type": "QVariant"
+                        },
+                        {
+                            "name": "index",
+                            "type": "QVariant"
+                        },
+                        {
+                            "name": "value",
+                            "type": "QVariant"
+                        }
+                    ],
+                    "index": 1,
+                    "name": "updated",
                     "returnType": "void"
                 }
             ],
