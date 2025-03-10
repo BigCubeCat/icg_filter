@@ -1,0 +1,74 @@
+{
+    "classes": [
+        {
+            "className": "MainWindow",
+            "lineNumber": 18,
+            "object": true,
+            "qualifiedClassName": "MainWindow",
+            "slots": [
+                {
+                    "access": "private",
+                    "index": 0,
+                    "name": "aboutSlots",
+                    "returnType": "void"
+                },
+                {
+                    "access": "private",
+                    "index": 1,
+                    "name": "helpSlots",
+                    "returnType": "void"
+                },
+                {
+                    "access": "private",
+                    "arguments": [
+                        {
+                            "name": "visible",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 2,
+                    "name": "toggleSideBar",
+                    "returnType": "void"
+                },
+                {
+                    "access": "private",
+                    "index": 3,
+                    "name": "updateFilename",
+                    "returnType": "void"
+                },
+                {
+                    "access": "private",
+                    "arguments": [
+                        {
+                            "name": "saved",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 4,
+                    "name": "toggleSaved",
+                    "returnType": "void"
+                },
+                {
+                    "access": "private",
+                    "index": 5,
+                    "name": "handleFilterAction",
+                    "returnType": "void"
+                },
+                {
+                    "access": "private",
+                    "index": 6,
+                    "name": "applyFilter",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QMainWindow"
+                }
+            ]
+        }
+    ],
+    "inputFile": "mainwindow.hpp",
+    "outputRevision": 68
+}

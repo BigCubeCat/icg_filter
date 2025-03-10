@@ -10,8 +10,8 @@ ImageView::ImageView(ImageProcessor* im, QWidget* parent)
     : QWidget(parent), m_ui(new Ui::ImageView), m_im(im) {
     m_ui->setupUi(this);
     m_loading =
-        QImage("assets/loading.png").scaled(64, 64, Qt::KeepAspectRatio);
-    m_no_image = QImage("assets/no.png").scaled(64, 64, Qt::KeepAspectRatio);
+        QImage(":/assets/loading.png").scaled(64, 64, Qt::KeepAspectRatio);
+    m_no_image = QImage(":/assets/no.png").scaled(64, 64, Qt::KeepAspectRatio);
     m_view = m_no_image;
 }
 

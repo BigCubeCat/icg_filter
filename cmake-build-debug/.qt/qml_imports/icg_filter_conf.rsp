@@ -1,0 +1,9 @@
+-rootPath
+/home/anton/Documents/graphics/icg_filter
+-cmake-output
+-output-file
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug/.qt/qml_imports/icg_filter_conf.cmake
+-importPath
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug
+-importPath
+/home/anton/Qt/6.8.1/gcc_64/qml
