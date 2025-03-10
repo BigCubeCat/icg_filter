@@ -5,12 +5,10 @@ import components 1.0
 
 Column {
     spacing: 10
-    Label {
-        text: "brightness: " + brightnessSlider.value.toFixed(1)
-    }
     SliderSpinBox {
         minValue: -50
         maxValue: 150
+        title: "brightness"
         value: settings.brightness
         onValueChanged: settings.brightness = value
     }

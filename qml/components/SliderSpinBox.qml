@@ -6,18 +6,25 @@ Item {
     id: root
     // Основное свойство для хранения значения
     property int value: 0
+    property string title: ""
     
     // Минимальное и максимальное значения диапазона
     property int minValue: 0
     property int maxValue: 100
 
     // Размеры виджета по умолчанию
-    implicitWidth: 300
-    implicitHeight: 40
+    implicitWidth: 150
+    implicitHeight: 100
 
-    RowLayout {
+    ColumnLayout {
         anchors.fill: parent
         spacing: 10
+
+        Text {
+            text: title
+            font.family: "Helvetica"
+            font.pointSize: 14
+        }
 
         Slider {
             id: slider
@@ -33,6 +40,7 @@ Item {
         }
 
         SpinBox {
+            Layout.fillWidth: true
             id: spinBox
             editable: true
             

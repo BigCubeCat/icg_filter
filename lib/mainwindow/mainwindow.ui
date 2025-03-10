@@ -47,7 +47,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>620</width>
+         <width>554</width>
          <height>501</height>
         </rect>
        </property>
@@ -157,12 +157,18 @@
        </property>
        <item>
         <widget class="QQuickWidget" name="quickWidget">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="resizeMode">
           <enum>QQuickWidget::ResizeMode::SizeRootObjectToView</enum>
          </property>
          <property name="source">
           <url>
-           <string>qrc:/assets/qml/brightness.qml</string>
+           <string/>
           </url>
          </property>
         </widget>
