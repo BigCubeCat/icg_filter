@@ -3,6 +3,8 @@
 #include <qqmlengine.h>
 #include <QQmlContext>
 #include <QtQuickWidgets/QQuickWidget>
+#include "i_factory.hpp"
+#include "i_filter.hpp"
 #include "ui_mainwindow.h"
 
 #include <QFileDialog>
@@ -10,17 +12,20 @@
 #include <QMessageBox>
 #include <QSpinBox>
 #include <QWidget>
+#include <map>
 
 #include "../about/about.hpp"
-#include "../common/state.hpp"
 #include "../help/help.hpp"
 
-MainWindow::MainWindow(QWidget* parent, SignalController* controller)
+MainWindow::MainWindow(QWidget* parent, SignalController* controller,
+                       ImageProcessor* im, FileProcessor* fp, IFactory* factory)
     : QMainWindow(parent),
       m_ui(new Ui::MainWindow),
+      m_factory(factory),
       m_controller(controller),
-      m_filter_settings(this),
-      m_view(this),
+      m_view(im, this),
+      m_im(im),
+      m_fp(fp),
       m_tool_group(this) {
     m_ui->setupUi(this);
 
@@ -31,12 +36,6 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller)
 
     m_ui->quickWidget->engine()->addImportPath("qml");
 
-    qDebug() << m_ui->quickWidget->engine()->importPathList();
-
-    m_ui->quickWidget->rootContext()->setContextProperty(
-        "settings", QVariant::fromValue(&m_filter_settings));
-    m_ui->quickWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
-
     m_ui->scrollArea->setWidget(&m_view);
     m_ui->toolBar->addActions(m_ui->menuFile->actions());
     m_ui->toolBar->addSeparator();
@@ -44,14 +43,14 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller)
     m_ui->toolBar->addSeparator();
     m_ui->toolBar->addActions(m_ui->menuImage->actions());
 
-    auto& state = StateSingleton::instance();
-    m_im = state.imageProcessor();
-    m_fp = state.fileProcessor();
     connectSlots();
+    registerFilters();
 }
 
 void MainWindow::connectSlots() {
     /* SETUP UI */
+    connect(m_ui->applyButton, &QPushButton::clicked, this,
+            &MainWindow::applyFilter);
     connect(m_ui->actionAbout, &QAction::triggered, this,
             &MainWindow::aboutSlots);
     connect(m_ui->actionHelp, &QAction::triggered, this,
@@ -82,15 +81,6 @@ void MainWindow::connectSlots() {
     connect(m_controller, &SignalController::newImageSignal, &m_view,
             &ImageView::updateImage);
     connect(m_im, &ImageProcessor::rerender, &m_view, &ImageView::updateImage);
-
-    // Подключение QAction
-    connect(m_ui->actionBrightness, &QAction::triggered, [this]() {
-        m_ui->quickWidget->setSource(QUrl("qml/brightness.qml"));
-    });
-
-    connect(m_ui->actionContrast, &QAction::triggered, [this]() {
-        m_ui->quickWidget->setSource(QUrl("qml/contrast.qml"));
-    });
 }
 
 MainWindow::~MainWindow() {
@@ -122,9 +112,7 @@ void MainWindow::updateFilename() {
 }
 
 void MainWindow::toggleSaved(bool saved) {
-    auto& state = StateSingleton::instance();
-    auto filename_list =
-        QString::fromStdString(state.fileProcessor()->filename()).split("/");
+    auto filename_list = QString::fromStdString(m_fp->filename()).split("/");
     auto filename = filename_list.at(filename_list.size() - 1);
     if (saved) {
         filename += " *";
@@ -132,11 +120,33 @@ void MainWindow::toggleSaved(bool saved) {
     setWindowTitle("ICG_Filter [" + filename + "]");
 }
 
-void MainWindow::applyFilter() {
-    // Реализация применения фильтра с текущими параметрами
-    double brightness = m_filter_settings.brightness();
-    double contrast = m_filter_settings.contrast();
-    // ... обработка изображения ...
-}
+void MainWindow::applyFilter() {}
 
 void MainWindow::handleFilterAction() {}
+
+void MainWindow::registerFilters() {
+    static std::map<EFilterType, QMenu*> menus = {
+        {kPixel, m_ui->menuPixel},
+        {kBasic, m_ui->menuBasics},
+        {kMatrix, m_ui->menuMatrix},
+    };
+    auto all_filters = m_factory->all_filters();
+    for (auto& filter : all_filters) {
+        connect(filter, &IFilter::done, &m_view, &ImageView::updateImage);
+        auto* action = new QAction(filter);
+        action->setText(filter->name());
+        connect(action, &QAction::triggered, this, &MainWindow::filterApplyed);
+        menus[filter->type()]->addAction(action);
+        m_ui->quickWidget->rootContext()->setContextProperty(
+            filter->name(), QVariant::fromValue(filter));
+    }
+}
+
+void MainWindow::filterApplyed() {
+    auto* filter_action = qobject_cast<QAction*>(sender());
+    auto* filter = qobject_cast<IFilter*>(filter_action->parent());
+    qDebug() << filter->name();
+    m_ui->quickWidget->setSource(QUrl(filter->qml_path()));
+    toggleSaved(false);
+    m_im->applyFilter(filter);
+}

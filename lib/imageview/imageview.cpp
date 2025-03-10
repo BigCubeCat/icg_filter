@@ -4,12 +4,10 @@
 #include <qpainter.h>
 #include <qwidget.h>
 
-#include "../common/state.hpp"
-
 #include "ui_imageview.h"
 
-ImageView::ImageView(QWidget* parent)
-    : QWidget(parent), m_ui(new Ui::ImageView) {
+ImageView::ImageView(ImageProcessor* im, QWidget* parent)
+    : QWidget(parent), m_ui(new Ui::ImageView), m_im(im) {
     m_ui->setupUi(this);
     m_loading =
         QImage("assets/loading.png").scaled(64, 64, Qt::KeepAspectRatio);
@@ -29,9 +27,8 @@ ImageView::~ImageView() {
 }
 
 void ImageView::updateImage() {
-    auto* imp = StateSingleton::instance().imageProcessor();
-    m_view = imp->image();
-    auto zoom_factor = imp->zoomFacor();
+    m_view = m_im->image();
+    auto zoom_factor = m_im->zoomFacor();
     QSize new_size = m_view.size() * zoom_factor;
     qDebug() << new_size << "->" << zoom_factor;
     m_view = m_view.scaled(new_size, Qt::KeepAspectRatio);

@@ -1,8 +1,9 @@
 #pragma once
 
+#include <qimage.h>
 #include <qobject.h>
 #include <qtmetamacros.h>
-#include "i_factory.hpp"
+#include "i_filter.hpp"
 
 const float kZoomStep = 0.02F;
 
@@ -12,9 +13,9 @@ const float kZoomStep = 0.02F;
 class ImageProcessor : public QObject {
     Q_OBJECT
    public:
-    explicit ImageProcessor(IFactory* factory);
+    explicit ImageProcessor();
 
-    void filter(const std::string& name, const QJsonObject& args);
+    void filter(const std::string& name);
 
     void setSaved(bool saved);
     bool is_saved() const;
@@ -30,7 +31,6 @@ class ImageProcessor : public QObject {
     void zoom(float old_factor, float new_factor);
 
    private:
-    IFactory* m_factory;
     QImage m_original;
     QImage m_edited;
 
@@ -42,6 +42,7 @@ class ImageProcessor : public QObject {
     void zoomHandler(int old_zoom);
 
    public slots:
+    void applyFilter(IFilter* filter);
     void zoomIn();
     void zoomOut();
     void zoomReset();

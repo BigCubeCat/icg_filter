@@ -1,21 +1,16 @@
 #include "imageprocessor.hpp"
+#include <qtmetamacros.h>
 
 #include <algorithm>
 
-ImageProcessor::ImageProcessor(IFactory* factory) : m_factory(factory) {}
-
-void ImageProcessor::filter(const std::string& name, const QJsonObject& args) {
-    if (!m_factory) {
-        // TODO(bigcubecat): show error
-        return;
-    }
-    m_factory->filter(name, args)->apply(m_original);
-    m_has_edited = true;
-    emit rerender();
-}
+ImageProcessor::ImageProcessor() = default;
 
 void ImageProcessor::setSaved(bool saved) {
     m_saved = saved;
+    if (m_has_edited) {
+        m_has_edited = false;
+        m_original = m_edited;
+    }
 }
 
 bool ImageProcessor::is_saved() const {
@@ -57,5 +52,13 @@ void ImageProcessor::zoomOut() {
 void ImageProcessor::zoomReset() {
     m_current_zoom = 1;
     zoomHandler(1);
+    emit rerender();
+}
+
+void ImageProcessor::applyFilter(IFilter* filter) {
+    // auto* filter = qobject_cast<IFilter*>(sender());
+    filter->apply(m_original);
+    m_saved = false;
+    m_has_edited = true;
     emit rerender();
 }

@@ -18,6 +18,8 @@ class SepiaFilter : public IFilter {
 
     QString name() const override { return "sepia"; }
 
+    EFilterType type() const override { return kPixel; }
+
     double percent() const { return m_percent; }
     void setPercent(int value) {
         if (m_percent != value) {

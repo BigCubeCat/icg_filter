@@ -3,9 +3,6 @@ qt_add_library(common_lib STATIC
   i_filter.hpp
   i_factory.hpp
 
-  state.hpp
-  state.cpp
-
   fileprocessor.hpp
   fileprocessor.cpp
 

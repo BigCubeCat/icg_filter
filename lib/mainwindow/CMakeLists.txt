@@ -13,6 +13,7 @@ target_link_libraries(mainwindow PUBLIC
     Qt6::Quick
     Qt6::QuickWidgets
     PRIVATE
+    filters
     imageview
     common_lib
     about
