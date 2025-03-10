@@ -24,7 +24,6 @@ class MainWindow : public QMainWindow {
     void updateFilename();
     void toggleSaved(bool saved);
 
-    void handleFilterAction();
     void applyFilter();
 
    public:

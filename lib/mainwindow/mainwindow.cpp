@@ -81,6 +81,11 @@ void MainWindow::connectSlots() {
     connect(m_controller, &SignalController::newImageSignal, &m_view,
             &ImageView::updateImage);
     connect(m_im, &ImageProcessor::rerender, &m_view, &ImageView::updateImage);
+
+    connect(m_ui->actionNext, &QAction::triggered, m_fp,
+            &FileProcessor::nextImageInFolder);
+    connect(m_ui->actionPrevious, &QAction::triggered, m_fp,
+            &FileProcessor::prevImageInFolder);
 }
 
 MainWindow::~MainWindow() {
@@ -128,8 +133,6 @@ void MainWindow::applyFilter() {
     m_im->applyFilter(m_current_filter);
 }
 
-void MainWindow::handleFilterAction() {}
-
 void MainWindow::registerFilters() {
     static std::map<EFilterType, QMenu*> menus = {
         {kPixel, m_ui->menuPixel},
@@ -154,5 +157,4 @@ void MainWindow::filterApplyed() {
     qDebug() << filter->name();
     m_ui->quickWidget->setSource(QUrl(filter->qml_path()));
     m_current_filter = filter;
-    // m_im->applyFilter(filter);
 }

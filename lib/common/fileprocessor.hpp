@@ -25,11 +25,12 @@ class FileProcessor : public QObject {
     std::string m_folder;
 
     QDir m_current_dir;
-    QList<QFileInfo> m_images;
+    std::vector<QString> m_image_files;
     int m_cursor = 0;
 
     ImageProcessor& m_processor;
 
+    void move_in_folder();
     void open_dir(const std::string& dir);
 
    public slots:

@@ -28,6 +28,7 @@ void ImageProcessor::setImage(QImage new_image) {
     m_original = std::move(new_image);
     m_saved = true;
     m_has_edited = false;
+    emit rerender();
 }
 
 void ImageProcessor::zoomHandler(int old_zoom) {
