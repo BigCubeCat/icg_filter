@@ -2,7 +2,11 @@
 #include "../lib/signalcontroller/signalcontroller.hpp"
 #include "filters.hpp"
 #include "imageprocessor.hpp"
+
+/// Фильтры
+#include "procs/mirror/mirror.hpp"
 #include "procs/sepia/sepia_filter.hpp"
+///
 
 #include <QApplication>
 #include <QQmlApplicationEngine>
@@ -17,6 +21,7 @@ int main(int argc, char* argv[]) {
     FiltersFactory factory{};
 
     factory.register_filter("sepia", std::make_shared<SepiaFilter>());
+    factory.register_filter("mirror", std::make_shared<MirrorFilter>());
 
     ImageProcessor image_processor{};
     FileProcessor file_processor(image_processor);
