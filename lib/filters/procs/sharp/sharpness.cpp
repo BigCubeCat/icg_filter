@@ -2,36 +2,38 @@
 // Created by anton on 3/11/25.
 //
 
-#include "blur.hpp"
-
+#include "sharpness.hpp"
 #include <QVariant>
-BlurFilter::BlurFilter(int cnt, int off) {
+SharpnessFilter::SharpnessFilter() {
     sum_weight = 0;
     for (int i = 0; i < cnt; i++) {
         m_weights.push_back(QVector<int>(cnt));
         for (int j = 0; j < cnt; j++) {
             int offi = std::min(i, cnt - 1 - i);
             int offj = std::min(j, cnt - 1 - j);
-            m_weights[i][j] = offi + offj + off;
+            m_weights[i][j] = -offi -offj;
+            if (i == 1 && j == 1) {
+                m_weights[i][j] = 5;
+            }
             sum_weight += m_weights[i][j];
+
             emit set_weight(QVariant(j * cnt + i), QVariant(m_weights[i][j]));
         }
     }
 }
-void BlurFilter::apply(QImage& image) {
+void SharpnessFilter::apply(QImage& image) {
     QImage save = image;
     for (int i = 0; i < image.height(); i++) {
         for (int j = 0; j < image.width(); j++) {
             int localr = 0, localg = 0, localb = 0; ;
-            QColor cc = save.pixelColor(j, i);
-            for (int k = 0; k < size; k++) {
-                for (int l = 0; l < size; l++) {
-                    int abs_y = i + k - (size / 2);
-                    int abs_x = j + l - (size / 2);
+            for (int k = 0; k < cnt; k++) {
+                for (int l = 0; l < cnt; l++) {
+                    int abs_y = i + k - (cnt / 2);
+                    int abs_x = j + l - (cnt / 2);
                     if (abs_y < 0 || abs_y >= image.height() || abs_x < 0 || abs_x >= image.width()) {
-                        localr += cc.red() * m_weights[k][l];
-                        localg += cc.green() * m_weights[k][l];
-                        localb += cc.blue() * m_weights[k][l];
+                        localr += 0;
+                        localg += 0;
+                        localb += 0;
                     } else {
                         localr += save.pixelColor(abs_x,abs_y).red() * m_weights[k][l];
                         localg += save.pixelColor(abs_x,abs_y).green() * m_weights[k][l];
@@ -39,33 +41,36 @@ void BlurFilter::apply(QImage& image) {
                     }
                 }
             }
-            image.setPixelColor(j, i, QColor(localr/sum_weight, localg/sum_weight, localb/sum_weight));
+            QColor color = QColor();
+            color.setRed(localr / sum_weight > 255 ? 255 : localr /sum_weight < 0 ? 0 : localr / sum_weight);
+            color.setGreen(localg / sum_weight > 255 ? 255 : localg /sum_weight < 0 ? 0 : localg / sum_weight);
+            color.setBlue(localb / sum_weight > 255 ? 255 : localb /sum_weight < 0 ? 0 : localb / sum_weight);
+            image.setPixelColor(j, i, color);
         }
     }
+
 }
-void BlurFilter::onChangedSize(const QVariant& size) {
-    int cnt = size.toInt();
-    int off = 0;
-    if (cnt == 5) {
-        off = 1;
-    }
-    m_weights.clear();
+
+void SharpnessFilter::onReset() {
     sum_weight = 0;
     for (int i = 0; i < cnt; i++) {
         m_weights.push_back(QVector<int>(cnt));
         for (int j = 0; j < cnt; j++) {
             int offi = std::min(i, cnt - 1 - i);
             int offj = std::min(j, cnt - 1 - j);
-            m_weights[i][j] = offi + offj + off;
+            m_weights[i][j] = -(offi + offj);
+            if (i == 1 && j == 1) {
+                m_weights[i][j] = 5;
+            }
             sum_weight += m_weights[i][j];
             emit set_weight(QVariant(j * cnt + i), QVariant(m_weights[i][j]));
         }
     }
 }
-void BlurFilter::onChangedWeight(const QVariant& rows, const QVariant& index,
-                           const QVariant& value) {
+void SharpnessFilter::onChangedWeight(const QVariant& rows,
+                                      const QVariant& index,
+                                      const QVariant& value) {
     sum_weight -= m_weights[index.toInt()%rows.toInt()][index.toInt()/rows.toInt()];
     m_weights[index.toInt()%rows.toInt()][index.toInt()/rows.toInt()] = value.toInt();
     sum_weight += value.toInt();
 }
-

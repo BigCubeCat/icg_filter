@@ -2,3 +2,6 @@ module filters
 sepia 1.0 sepia.qml
 black_white 1.0 black_white.qml
 inversion 1.0 inversion.qml
+sharp 1.0 sharp.qml
+blur 1.0 blur.qml
+

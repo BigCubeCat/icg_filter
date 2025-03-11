@@ -10,7 +10,9 @@
 #include <memory>
 
 #include "WeightMatrix.hpp"
+#include "procs/blur/blur.hpp"
 #include "procs/inversion/inversion.hpp"
+#include "procs/sharp/sharpness.hpp"
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
@@ -25,6 +27,10 @@ int main(int argc, char* argv[]) {
     factory.register_filter(bw_ptr->name().toStdString(), bw_ptr);
     auto inv_ptr = std::make_shared<InversionFilter>();
     factory.register_filter(inv_ptr->name().toStdString(), inv_ptr);
+    auto blur_ptr = std::make_shared<BlurFilter>();
+    factory.register_filter(blur_ptr->name().toStdString(), blur_ptr);
+    auto sharp_ptr = std::make_shared<SharpnessFilter>();
+    factory.register_filter(sharp_ptr->name().toStdString(), sharp_ptr);
 
     ImageProcessor image_processor{};
     FileProcessor file_processor(image_processor);

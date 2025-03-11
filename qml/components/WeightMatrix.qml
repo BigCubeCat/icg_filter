@@ -7,10 +7,17 @@ import weightMatrixModel
 Item {
     id: root
     signal weightChanged(rows: int, index: int, newval: string)
-
+    signal innerSetHeight(size: int)
+    signal innerSetWidth(size: int)
     signal innerSetWeight(index: int, value: int)
     function onSetWeight(index: int, value: int) {
         table.model.setData(index, value)
+    }
+    function onSetHeight(size: int) {
+        table.model.setRowCount(size)
+    }
+    function onSetWidth(size: int) {
+        table.model.setColumnCount(size)
     }
     // Характеристики матрицы
     implicitWidth: 200
@@ -69,6 +76,8 @@ Item {
     Component.onCompleted: {
         table.model.updated.connect(weightChanged)
         innerSetWeight.connect(onSetWeight)
+        innerSetHeight.connect(onSetHeight)
+        innerSetWidth.connect(onSetWidth)
     }
 }
 
