@@ -12,6 +12,7 @@ target_link_libraries(mainwindow PUBLIC
     Qt6::Qml
     Qt6::Quick
     Qt6::QuickWidgets
+    Qt6::QuickControls2
     PRIVATE
     filters
     imageview

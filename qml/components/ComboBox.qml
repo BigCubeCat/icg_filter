@@ -3,12 +3,11 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 ColumnLayout {
-    id: combo
+    id: root
     property int value: 0
     property string title: ""
     property alias model: comboBox.model
 
-    anchors.centerIn: parent
     spacing: 20
 
     Text {
@@ -18,28 +17,12 @@ ColumnLayout {
 
     ComboBox {
         id: comboBox
-        currentIndex: value
-        implicitWidth: 200
-        Layout.alignment: Qt.AlignHCenter
+        width: 120
+        currentIndex: root.value
 
-        // Стилизация выпадающего списка
-        delegate: ItemDelegate {
-            width: comboBox.width
-            contentItem: Text {
-                text: modelData
-                color: "black"
-                font: comboBox.font
-                elide: Text.ElideRight
-                verticalAlignment: Text.AlignVCenter
-                leftPadding: 5
-            }
-            highlighted: comboBox.highlightedIndex === index
-        }
-
-        // Обработчик выбора элемента
-        onActivated: {
-            console.log("Выбран элемент:", model[currentIndex])
-            combo.value = currentIndex
+        onActivated: (index) => {
+            console.log("Selected:", model[index])
+            root.value = index
         }
     }
 }

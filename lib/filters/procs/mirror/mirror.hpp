@@ -20,7 +20,7 @@ class MirrorFilter : public IFilter {
 
     EFilterType type() const override { return kBasic; }
 
-    double value() const { return m_value; }
+    int value() const { return m_value; }
 
     void setValue(int value) {
         if (m_value != value) {

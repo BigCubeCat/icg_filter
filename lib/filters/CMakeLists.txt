@@ -8,6 +8,7 @@ PUBLIC
     Qt6::Core
     Qt6::Widgets
     Qt6::Gui
+    Qt6::QuickControls2
 PRIVATE
     common_lib
 )
