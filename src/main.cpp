@@ -5,6 +5,7 @@
 
 /// Фильтры
 #include "procs/mirror/mirror.hpp"
+#include "procs/rotate/rotate.hpp"
 #include "procs/sepia/sepia_filter.hpp"
 ///
 
@@ -22,6 +23,7 @@ int main(int argc, char* argv[]) {
 
     factory.register_filter("sepia", std::make_shared<SepiaFilter>());
     factory.register_filter("mirror", std::make_shared<MirrorFilter>());
+    factory.register_filter("rotate", std::make_shared<RotateFilter>());
 
     ImageProcessor image_processor{};
     FileProcessor file_processor(image_processor);
