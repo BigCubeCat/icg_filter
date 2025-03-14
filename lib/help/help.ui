@@ -41,36 +41,21 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>64</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Select a color and a tool on the toolbar and start drawing with the mouse on the canvas.
-Use the File menu to open and save files.
-Use the Tools menu to select tools.
-Use the View menu to resize the image or clear the image.
-Use the Help menu to open additional information.</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+    <widget class="QQuickWidget" name="quickWidget">
+     <property name="resizeMode">
+      <enum>QQuickWidget::ResizeMode::SizeRootObjectToView</enum>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QQuickWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QtQuickWidgets/QQuickWidget</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>
