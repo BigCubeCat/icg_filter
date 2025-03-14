@@ -14,11 +14,11 @@ void MirrorFilter::apply([[maybe_unused]] QImage& image) {
             }
         }
     } else {
-        for (int col = 0; col <= width / 2; ++col) {
-            for (int row = 0; row < height; ++row) {
+        for (int row = 0; row < height; ++row) {
+            for (int col = 0; col <= width / 2; ++col) {
                 new_image.setPixelColor(col, row,
-                                        image.pixelColor(width - col, row));
-                new_image.setPixelColor(width - col, row,
+                                        image.pixelColor(width - col - 1, row));
+                new_image.setPixelColor(width - col - 1, row,
                                         image.pixelColor(col, row));
             }
         }
