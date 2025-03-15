@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>338</width>
-    <height>300</height>
+    <width>500</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,8 +21,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>338</width>
-    <height>300</height>
+    <width>500</width>
+    <height>600</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -41,9 +41,17 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QQuickWidget" name="quickWidget">
-     <property name="resizeMode">
-      <enum>QQuickWidget::ResizeMode::SizeRootObjectToView</enum>
+    <widget class="QWebEngineView" name="webEngineView">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="url">
+      <url>
+       <string>https://github.com/BigCubeCat/icg_filter/blob/main/README.md</string>
+      </url>
      </property>
     </widget>
    </item>
@@ -51,9 +59,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QQuickWidget</class>
+   <class>QWebEngineView</class>
    <extends>QWidget</extends>
-   <header location="global">QtQuickWidgets/QQuickWidget</header>
+   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
   </customwidget>
  </customwidgets>
  <resources>

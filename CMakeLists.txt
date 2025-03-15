@@ -15,6 +15,7 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
     Quick
     QuickWidgets
     QuickControls2
+    WebEngineWidgets
 )
 
 message(STATUS "Using Qt version: ${Qt6_VERSION}")

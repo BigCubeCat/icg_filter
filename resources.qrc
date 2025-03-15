@@ -14,6 +14,12 @@
     <file>qml/filters/rotate.qml</file>
     <file>qml/filters/alpha.qml</file>
   </qresource>
+  <qresource prefix="assets">
+    <file>assets/background.png</file>
+    <file>assets/loading.png</file>
+    <file>assets/tutorial.md</file>
+    <file>assets/no.png</file>
+  </qresource>
   <qresource prefix="icons">
     <file>assets/icons/next.png</file>
     <file>assets/icons/open-folder.png</file>

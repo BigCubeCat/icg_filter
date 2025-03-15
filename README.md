@@ -11,6 +11,7 @@
 - [ ] help
 - [x] about
 - [ ] дизеринг
+- [ ] zoom fit
 
 
 
