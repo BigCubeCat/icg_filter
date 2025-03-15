@@ -41,7 +41,6 @@ target_link_libraries(icg_filter
         Qt6::Quick
         Qt6::QuickWidgets
         Qt6::QuickControls2
-
         about
         help_lib
         imageview

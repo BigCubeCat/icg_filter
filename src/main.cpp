@@ -2,6 +2,7 @@
 #include "../lib/signalcontroller/signalcontroller.hpp"
 #include "filters.hpp"
 #include "imageprocessor.hpp"
+#include "procs/sepia/sepia_filter.hpp"
 
 /// Фильтры
 #include "procs/alpha/alpha.hpp"

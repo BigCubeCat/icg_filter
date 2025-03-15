@@ -63,3 +63,36 @@ void ImageProcessor::applyFilter(IFilter* filter) {
     m_has_edited = true;
     emit rerender();
 }
+
+void ImageProcessor::zoomHandler(int old_zoom) {
+    emit zoom(old_zoom, m_current_zoom);
+    emit rerender();
+}
+
+void ImageProcessor::zoomIn() {
+    int old_zoom = m_current_zoom;
+    m_current_zoom += kZoomStep;
+    m_current_zoom = std::min<double>(m_current_zoom, 3.0F);
+    zoomHandler(old_zoom);
+}
+
+void ImageProcessor::zoomOut() {
+    int old_zoom = m_current_zoom;
+    m_current_zoom -= kZoomStep;
+    m_current_zoom = std::max<double>(m_current_zoom, 0.1F);
+    zoomHandler(old_zoom);
+}
+
+void ImageProcessor::zoomReset() {
+    m_current_zoom = 1;
+    zoomHandler(1);
+    emit rerender();
+}
+
+void ImageProcessor::applyFilter(IFilter* filter) {
+    m_edited = m_original;
+    filter->apply(m_edited);
+    m_saved = false;
+    m_has_edited = true;
+    emit rerender();
+}

@@ -151,6 +151,7 @@ void MainWindow::registerFilters() {
         connect(filter, &IFilter::done, &m_view, &ImageView::updateImage);
         auto* action = new QAction(filter);
         action->setIcon(QIcon(icon_path[filter->type()]));
+
         action->setText(filter->name());
         connect(action, &QAction::triggered, this, &MainWindow::filterApplyed);
         menus[filter->type()]->addAction(action);
