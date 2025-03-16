@@ -24,8 +24,9 @@ class MainWindow : public QMainWindow {
     void updateFilename();
     void toggleSaved(bool saved);
 
-    void handleFilterAction();
     void applyFilter();
+
+    void hideToolbar();
 
    public:
     explicit MainWindow(QWidget* parent, SignalController* controller,

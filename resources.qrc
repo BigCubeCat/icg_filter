@@ -1,7 +1,23 @@
 <RCC>
-  <qresource prefix="/">
+  <qresource>
+    <file>qml/forms/about.qml</file>
     <file>assets/background.png</file>
     <file>assets/loading.png</file>
+    <file>assets/no.png</file>
+    <file>qml/components/qmldir</file>
+    <file>qml/components/SliderSpinBox.qml</file>
+    <file>qml/components/ComboBox.qml</file>
+    <file>qml/filters/qmldir</file>
+    <file>qml/filters/sepia.qml</file>
+    <file>qml/filters/empty.qml</file>
+    <file>qml/filters/mirror.qml</file>
+    <file>qml/filters/rotate.qml</file>
+    <file>qml/filters/alpha.qml</file>
+  </qresource>
+  <qresource prefix="assets">
+    <file>assets/background.png</file>
+    <file>assets/loading.png</file>
+    <file>assets/tutorial.md</file>
     <file>assets/no.png</file>
 
     <file>qml/components/qmldir</file>
@@ -14,5 +30,20 @@
     <file>qml/filters/qmldir</file>
     <file>qml/filters/sepia.qml</file>
 
+  </qresource>
+  <qresource prefix="icons">
+    <file>assets/icons/next.png</file>
+    <file>assets/icons/open-folder.png</file>
+    <file>assets/icons/pixel.png</file>
+    <file>assets/icons/pixel(1).png</file>
+    <file>assets/icons/arrowheads.png</file>
+    <file>assets/icons/add.png</file>
+    <file>assets/icons/ice-cube.png</file>
+    <file>assets/icons/verified.png</file>
+    <file>assets/icons/edit.png</file>
+    <file>assets/icons/dashboard-icons.png</file>
+    <file>assets/icons/prev.png</file>
+    <file>assets/icons/save.png</file>
+    <file>assets/icons/subtract.png</file>
   </qresource>
 </RCC>

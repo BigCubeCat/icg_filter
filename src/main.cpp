@@ -4,6 +4,13 @@
 #include "imageprocessor.hpp"
 #include "procs/sepia/sepia_filter.hpp"
 
+/// Фильтры
+#include "procs/alpha/alpha.hpp"
+#include "procs/mirror/mirror.hpp"
+#include "procs/rotate/rotate.hpp"
+#include "procs/sepia/sepia_filter.hpp"
+///
+
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QWidget>
@@ -19,6 +26,9 @@ int main(int argc, char* argv[]) {
     FiltersFactory factory{};
 
     factory.register_filter("sepia", std::make_shared<SepiaFilter>());
+    factory.register_filter("mirror", std::make_shared<MirrorFilter>());
+    factory.register_filter("rotate", std::make_shared<RotateFilter>());
+    factory.register_filter("alpha", std::make_shared<AlphaFilter>());
 
     ImageProcessor image_processor{};
     FileProcessor file_processor(image_processor);

@@ -6,19 +6,20 @@ qt_add_library(mainwindow STATIC
 )
 
 target_link_libraries(mainwindow PUBLIC
-        Qt6::Core
-        Qt6::Widgets
-        Qt6::Gui
-        Qt6::Qml
-        Qt6::Quick
-        Qt6::QuickWidgets
-        PRIVATE
-        component_models
-        filters
-        imageview
-        common_lib
-        about
-        help_lib
+    Qt6::Core
+    Qt6::Widgets
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickWidgets
+    Qt6::QuickControls2
+    PRIVATE
+    component_models
+    filters
+    imageview
+    common_lib
+    about
+    help_lib
 )
 
 target_include_directories(mainwindow PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
