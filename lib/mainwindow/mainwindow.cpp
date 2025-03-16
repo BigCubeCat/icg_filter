@@ -57,6 +57,8 @@ void MainWindow::connectSlots() {
             &MainWindow::helpSlots);
     connect(m_ui->actionConfig, &QAction::triggered, this,
             &MainWindow::toggleSideBar);
+    connect(m_ui->actionShowToolbar, &QAction::triggered, this,
+            &MainWindow::hideToolbar);
     connect(m_ui->dockWidget, &QDockWidget::visibilityChanged,
             m_ui->actionConfig, &QAction::setChecked);
     connect(m_ui->actionOpen, &QAction::triggered, m_controller,
@@ -81,6 +83,11 @@ void MainWindow::connectSlots() {
     connect(m_controller, &SignalController::newImageSignal, &m_view,
             &ImageView::updateImage);
     connect(m_im, &ImageProcessor::rerender, &m_view, &ImageView::updateImage);
+
+    connect(m_ui->actionNext, &QAction::triggered, m_fp,
+            &FileProcessor::nextImageInFolder);
+    connect(m_ui->actionPrevious, &QAction::triggered, m_fp,
+            &FileProcessor::prevImageInFolder);
 }
 
 MainWindow::~MainWindow() {
@@ -128,24 +135,32 @@ void MainWindow::applyFilter() {
     m_im->applyFilter(m_current_filter);
 }
 
-void MainWindow::handleFilterAction() {}
-
 void MainWindow::registerFilters() {
     static std::map<EFilterType, QMenu*> menus = {
         {kPixel, m_ui->menuPixel},
         {kBasic, m_ui->menuBasics},
         {kMatrix, m_ui->menuMatrix},
     };
+    static std::map<EFilterType, QString> icon_path = {
+        {kPixel, "assets/icons/pixel.png"},
+        {kBasic, "assets/icons/edit.png"},
+        {kMatrix, "assets/icons/ice-cube.png"},
+    };
     auto all_filters = m_factory->all_filters();
     for (auto& filter : all_filters) {
         connect(filter, &IFilter::done, &m_view, &ImageView::updateImage);
         auto* action = new QAction(filter);
+        action->setIcon(QIcon(icon_path[filter->type()]));
+
         action->setText(filter->name());
         connect(action, &QAction::triggered, this, &MainWindow::filterApplyed);
         menus[filter->type()]->addAction(action);
         m_ui->quickWidget->rootContext()->setContextProperty(
             filter->name(), QVariant::fromValue(filter));
     }
+    m_ui->toolBar->addActions(m_ui->menuBasics->actions());
+    m_ui->toolBar->addActions(m_ui->menuPixel->actions());
+    m_ui->toolBar->addActions(m_ui->menuMatrix->actions());
 }
 
 void MainWindow::filterApplyed() {
@@ -154,5 +169,8 @@ void MainWindow::filterApplyed() {
     qDebug() << filter->name();
     m_ui->quickWidget->setSource(QUrl(filter->qml_path()));
     m_current_filter = filter;
-    // m_im->applyFilter(filter);
+}
+
+void MainWindow::hideToolbar() {
+    m_ui->toolBar->setHidden(!m_ui->actionShowToolbar->isChecked());
 }

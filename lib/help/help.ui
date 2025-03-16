@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>338</width>
-    <height>300</height>
+    <width>500</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,8 +21,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>338</width>
-    <height>300</height>
+    <width>500</width>
+    <height>600</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -41,36 +41,29 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+    <widget class="QWebEngineView" name="webEngineView">
      <property name="minimumSize">
       <size>
-       <width>64</width>
+       <width>0</width>
        <height>0</height>
       </size>
      </property>
-     <property name="text">
-      <string>Select a color and a tool on the toolbar and start drawing with the mouse on the canvas.
-Use the File menu to open and save files.
-Use the Tools menu to select tools.
-Use the View menu to resize the image or clear the image.
-Use the Help menu to open additional information.</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+     <property name="url">
+      <url>
+       <string>https://github.com/BigCubeCat/icg_filter/blob/main/README.md</string>
+      </url>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>

@@ -14,6 +14,8 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
     Qml
     Quick
     QuickWidgets
+    QuickControls2
+    WebEngineWidgets
 )
 
 find_package(OpenCV REQUIRED)
@@ -40,7 +42,7 @@ target_link_libraries(icg_filter
         Qt6::Qml
         Qt6::Quick
         Qt6::QuickWidgets
-
+        Qt6::QuickControls2
         about
         help_lib
         imageview

@@ -2,17 +2,24 @@
 #include "../lib/signalcontroller/signalcontroller.hpp"
 #include "filters.hpp"
 #include "imageprocessor.hpp"
+/// Фильтры
+#include "procs/alpha/alpha.hpp"
+#include "procs/mirror/mirror.hpp"
+#include "procs/rotate/rotate.hpp"
 #include "procs/sepia/sepia_filter.hpp"
+#include "procs/blur/blur.hpp"
 #include "procs/black_white/black_white_filter.hpp"
+#include "procs/inversion/inversion.hpp"
+#include "procs/sharp/sharpness.hpp"
+///
+
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QWidget>
 #include <memory>
 
 #include "WeightMatrix.hpp"
-#include "procs/blur/blur.hpp"
-#include "procs/inversion/inversion.hpp"
-#include "procs/sharp/sharpness.hpp"
+
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
@@ -21,8 +28,18 @@ int main(int argc, char* argv[]) {
     qmlRegisterType<WeightMatrix>("weightMatrixModel", 1, 0,"WeightMatrixModel");
     FiltersFactory factory{};
 
+    factory.register_filter("sepia", std::make_shared<SepiaFilter>());
+    factory.register_filter("mirror", std::make_shared<MirrorFilter>());
+    factory.register_filter("rotate", std::make_shared<RotateFilter>());
+    factory.register_filter("alpha", std::make_shared<AlphaFilter>());
     auto sepia_ptr = std::make_shared<SepiaFilter>();
     factory.register_filter(sepia_ptr->name().toStdString(), sepia_ptr );
+    auto mirror_ptr = std::make_shared<SepiaFilter>();
+    factory.register_filter(mirror_ptr->name().toStdString(), mirror_ptr );
+    auto rotate_ptr = std::make_shared<SepiaFilter>();
+    factory.register_filter(rotate_ptr->name().toStdString(), rotate_ptr );
+    auto alpha_ptr = std::make_shared<SepiaFilter>();
+    factory.register_filter(alpha_ptr->name().toStdString(), alpha_ptr );
     auto bw_ptr = std::make_shared<BlackWhiteFilter>();
     factory.register_filter(bw_ptr->name().toStdString(), bw_ptr);
     auto inv_ptr = std::make_shared<InversionFilter>();
