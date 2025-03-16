@@ -1,8 +1,8 @@
 # Важно: включаем .ui файл в список исходников.
 qt_add_library(mainwindow STATIC
-    mainwindow.cpp
-    mainwindow.hpp
-    mainwindow.ui
+        mainwindow.cpp
+        mainwindow.hpp
+        mainwindow.ui
 )
 
 target_link_libraries(mainwindow PUBLIC
@@ -14,6 +14,7 @@ target_link_libraries(mainwindow PUBLIC
     Qt6::QuickWidgets
     Qt6::QuickControls2
     PRIVATE
+    component_models
     filters
     imageview
     common_lib

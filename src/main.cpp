@@ -16,11 +16,13 @@
 #include <QWidget>
 #include <memory>
 
+#include "WeightMatrix.hpp"
+
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
     QQmlApplicationEngine engine;
     engine.addImportPath("qrc:qml/components");
-
+    qmlRegisterType<WeightMatrix>("weightMatrixModel", 1, 0,"WeightMatrixModel");
     FiltersFactory factory{};
 
     factory.register_filter("sepia", std::make_shared<SepiaFilter>());

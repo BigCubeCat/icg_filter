@@ -47,6 +47,7 @@ target_link_libraries(icg_filter
         mainwindow
         signalcontroller
         filters
+        component_models
     PUBLIC
         common_lib
 )
@@ -73,4 +74,5 @@ add_subdirectory(lib/imageview)
 add_subdirectory(lib/mainwindow)
 add_subdirectory(lib/signalcontroller)
 add_subdirectory(lib/filters)
+add_subdirectory(lib/components)
 

@@ -13,7 +13,7 @@ class SepiaFilter : public IFilter {
     ~SepiaFilter() override = default;
 
     QString qml_path() const override {
-        return QString("qml/filters/sepia.qml");
+        return QString("qrc:/qml/filters/sepia.qml");
     }
 
     QString name() const override { return "sepia"; }
