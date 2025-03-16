@@ -5,6 +5,8 @@
 #include "blur.hpp"
 
 #include <QVariant>
+
+#include "Convolution.hpp"
 BlurFilter::BlurFilter(int cnt, int off) {
     sum_weight = 0;
     for (int i = 0; i < cnt; i++) {
@@ -19,32 +21,11 @@ BlurFilter::BlurFilter(int cnt, int off) {
     }
 }
 void BlurFilter::apply(QImage& image) {
-    QImage save = image;
-    for (int i = 0; i < image.height(); i++) {
-        for (int j = 0; j < image.width(); j++) {
-            int localr = 0, localg = 0, localb = 0; ;
-            QColor cc = save.pixelColor(j, i);
-            for (int k = 0; k < size; k++) {
-                for (int l = 0; l < size; l++) {
-                    int abs_y = i + k - (size / 2);
-                    int abs_x = j + l - (size / 2);
-                    if (abs_y < 0 || abs_y >= image.height() || abs_x < 0 || abs_x >= image.width()) {
-                        localr += cc.red() * m_weights[k][l];
-                        localg += cc.green() * m_weights[k][l];
-                        localb += cc.blue() * m_weights[k][l];
-                    } else {
-                        localr += save.pixelColor(abs_x,abs_y).red() * m_weights[k][l];
-                        localg += save.pixelColor(abs_x,abs_y).green() * m_weights[k][l];
-                        localb += save.pixelColor(abs_x,abs_y).blue() * m_weights[k][l];
-                    }
-                }
-            }
-            image.setPixelColor(j, i, QColor(localr/sum_weight, localg/sum_weight, localb/sum_weight));
-        }
-    }
+    Convolution::convolution(image, m_weights, sum_weight? sum_weight : 1);
 }
 void BlurFilter::onChangedSize(const QVariant& size) {
     int cnt = size.toInt();
+    this->size = cnt;
     int off = 0;
     if (cnt == 5) {
         off = 1;
