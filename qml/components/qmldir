@@ -1,2 +1,5 @@
 module components
 SliderSpinBox 1.0 SliderSpinBox.qml
+SelectBox 1.0 ComboBox.qml
+ImagePicker 1.0 ImagePicker.qml
+WeightMatrix 1.0 WeightMatrix.qml

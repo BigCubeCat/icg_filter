@@ -71,3 +71,12 @@
 /home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/filters/CMakeFiles/install/strip.dir
 /home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/filters/CMakeFiles/filters_autogen_timestamp_deps.dir
 /home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/filters/CMakeFiles/filters_autogen.dir
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/components/CMakeFiles/component_models.dir
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/components/CMakeFiles/edit_cache.dir
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/components/CMakeFiles/rebuild_cache.dir
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/components/CMakeFiles/list_install_components.dir
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/components/CMakeFiles/install.dir
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/components/CMakeFiles/install/local.dir
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/components/CMakeFiles/install/strip.dir
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/components/CMakeFiles/component_models_autogen_timestamp_deps.dir
+/home/anton/Documents/graphics/icg_filter/cmake-build-debug/lib/components/CMakeFiles/component_models_autogen.dir

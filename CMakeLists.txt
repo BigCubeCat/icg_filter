@@ -14,6 +14,8 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
     Qml
     Quick
     QuickWidgets
+    QuickControls2
+    WebEngineWidgets
 )
 
 message(STATUS "Using Qt version: ${Qt6_VERSION}")
@@ -38,13 +40,14 @@ target_link_libraries(icg_filter
         Qt6::Qml
         Qt6::Quick
         Qt6::QuickWidgets
-
+        Qt6::QuickControls2
         about
         help_lib
         imageview
         mainwindow
         signalcontroller
         filters
+        component_models
     PUBLIC
         common_lib
 )
@@ -71,4 +74,5 @@ add_subdirectory(lib/imageview)
 add_subdirectory(lib/mainwindow)
 add_subdirectory(lib/signalcontroller)
 add_subdirectory(lib/filters)
+add_subdirectory(lib/components)
 

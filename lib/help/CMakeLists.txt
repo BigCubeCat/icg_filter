@@ -8,6 +8,7 @@ target_link_libraries(help_lib
 PUBLIC
     Qt6::Core
     Qt6::Widgets
+    Qt6::WebEngineWidgets
 PRIVATE
     common_lib
 )

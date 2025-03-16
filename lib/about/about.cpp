@@ -7,6 +7,8 @@
 AboutDialog::AboutDialog(QWidget* parent)
     : QDialog(parent), m_ui(new Ui::AboutDialog) {
     m_ui->setupUi(this);
+
+    m_ui->quickWidget->setSource(QUrl("qml/forms/about.qml"));
 }
 
 AboutDialog::~AboutDialog() {
