@@ -65,6 +65,8 @@ void MainWindow::connectSlots() {
             &SignalController::openFile);
     connect(m_ui->actionSave, &QAction::triggered, m_controller,
             &SignalController::saveFile);
+    connect(m_ui->actionSave_As, &QAction::triggered, m_controller,
+            &SignalController::saveAsFile);
 
     connect(m_ui->actionZoomIn, &QAction::triggered, m_im,
             &ImageProcessor::zoomIn);
@@ -115,13 +117,9 @@ void MainWindow::helpSlots() {
 }
 
 void MainWindow::updateFilename() {
-    setWindowTitle("ICG_Filter [" + QString::fromStdString(m_fp->name()) + "]");
-}
-
-void MainWindow::toggleSaved(bool saved) {
     auto filename_list = QString::fromStdString(m_fp->filename()).split("/");
     auto filename = filename_list.at(filename_list.size() - 1);
-    if (saved) {
+    if (m_im->is_saved()) {
         filename += " *";
     }
     setWindowTitle("ICG_Filter [" + filename + "]");

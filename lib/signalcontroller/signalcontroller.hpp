@@ -17,6 +17,7 @@ class SignalController : public QObject {
    signals:
     void applyFilterSignal();
     void saveFileSignal();
+    void saveFileNameSignal(const QString& filename, const QString& format);
     void openFileSignal();
     void newImageSignal();
 

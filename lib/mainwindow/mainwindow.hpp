@@ -22,7 +22,6 @@ class MainWindow : public QMainWindow {
     void helpSlots();
     void toggleSideBar(bool visible);
     void updateFilename();
-    void toggleSaved(bool saved);
 
     void applyFilter();
 

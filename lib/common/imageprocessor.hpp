@@ -46,4 +46,5 @@ class ImageProcessor : public QObject {
     void zoomIn();
     void zoomOut();
     void zoomReset();
+    void save(const std::string& filename, const std::string& format);
 };

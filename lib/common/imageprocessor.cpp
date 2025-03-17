@@ -1,4 +1,8 @@
 #include "imageprocessor.hpp"
+#include <qalgorithms.h>
+#include <qdebug.h>
+#include <qlogging.h>
+#include <qmessagebox.h>
 #include <qtmetamacros.h>
 
 #include <algorithm>
@@ -62,4 +66,12 @@ void ImageProcessor::applyFilter(IFilter* filter) {
     m_saved = false;
     m_has_edited = true;
     emit rerender();
+}
+
+void ImageProcessor::save(const std::string& filename,
+                          const std::string& format) {
+    qDebug() << "image processor " << filename << " " << format;
+    if (!m_edited.save(filename.c_str(), format.c_str())) {
+        QMessageBox::critical(nullptr, "Error save", "Some error!");
+    }
 }

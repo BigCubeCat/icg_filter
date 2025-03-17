@@ -15,8 +15,8 @@ class FileProcessor : public QObject {
 
     std::string name() const { return m_name; }
     std::string filename() const { return m_filename; }
-    std::string format() const { return m_filename; }
-    std::string folder() const { return m_filename; }
+    std::string format() const { return m_file_format; }
+    std::string folder() const { return m_folder; }
 
    private:
     std::string m_name;
