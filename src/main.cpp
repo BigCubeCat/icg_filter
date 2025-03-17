@@ -2,13 +2,13 @@
 #include "../lib/signalcontroller/signalcontroller.hpp"
 #include "filters.hpp"
 #include "imageprocessor.hpp"
+#include "procs/emboss/emboss.hpp"
 #include "procs/sepia/sepia_filter.hpp"
 
 /// Фильтры
 #include "procs/alpha/alpha.hpp"
 #include "procs/mirror/mirror.hpp"
 #include "procs/rotate/rotate.hpp"
-#include "procs/sepia/sepia_filter.hpp"
 ///
 
 #include <QApplication>
@@ -22,13 +22,15 @@ int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
     QQmlApplicationEngine engine;
     engine.addImportPath("qrc:qml/components");
-    qmlRegisterType<WeightMatrix>("weightMatrixModel", 1, 0,"WeightMatrixModel");
+    qmlRegisterType<WeightMatrix>("weightMatrixModel", 1, 0,
+                                  "WeightMatrixModel");
     FiltersFactory factory{};
 
     factory.register_filter("sepia", std::make_shared<SepiaFilter>());
     factory.register_filter("mirror", std::make_shared<MirrorFilter>());
     factory.register_filter("rotate", std::make_shared<RotateFilter>());
     factory.register_filter("alpha", std::make_shared<AlphaFilter>());
+    factory.register_filter("emboss", std::make_shared<EmbossFilter>());
 
     ImageProcessor image_processor{};
     FileProcessor file_processor(image_processor);
