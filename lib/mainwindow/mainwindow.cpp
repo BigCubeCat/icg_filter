@@ -86,9 +86,9 @@ void MainWindow::connectSlots() {
             &ImageView::updateImage);
     connect(m_im, &ImageProcessor::rerender, &m_view, &ImageView::updateImage);
 
-    connect(m_ui->actionNext, &QAction::triggered, m_fp,
+    connect(m_ui->actionNextImage, &QAction::triggered, m_fp,
             &FileProcessor::nextImageInFolder);
-    connect(m_ui->actionPrevious, &QAction::triggered, m_fp,
+    connect(m_ui->actionPreviousImage, &QAction::triggered, m_fp,
             &FileProcessor::prevImageInFolder);
 }
 

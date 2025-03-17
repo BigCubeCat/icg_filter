@@ -71,7 +71,5 @@ void ImageProcessor::applyFilter(IFilter* filter) {
 void ImageProcessor::save(const std::string& filename,
                           const std::string& format) {
     qDebug() << "image processor " << filename << " " << format;
-    if (!m_edited.save(filename.c_str(), format.c_str())) {
-        QMessageBox::critical(nullptr, "Error save", "Some error!");
-    }
+    m_edited.save(filename.c_str(), format.c_str());
 }

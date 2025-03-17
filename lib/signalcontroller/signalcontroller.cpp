@@ -40,14 +40,12 @@ void SignalController::saveFile() {
 }
 
 void SignalController::saveAsFile() {
-    qDebug() << "save as";
     auto file_name = QFileDialog::getSaveFileName(
         nullptr, tr("Save Image"), QDir::homePath(),
         tr("png file (*.png);; jpg file (*.jpg);; bmp file (*.bmp)"), nullptr);
     if (file_name.isEmpty()) {
         return;
     }
-    m_fp->setFilename(file_name);
     saveFile();
 }
 

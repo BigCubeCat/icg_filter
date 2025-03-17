@@ -35,6 +35,7 @@ class FileProcessor : public QObject {
 
    public slots:
     void setFilename(const QString& filename);
+    void setSaveFilename(const QString& filename);
     void nextImageInFolder();
     void prevImageInFolder();
 };
