@@ -20,7 +20,7 @@
    <string>ICG Paint</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="QIcon::ThemeIcon::EditCopy">
+   <iconset theme="QIcon::ThemeIcon::EditCopy" resource="../../resources.qrc">
     <normaloff>:/assets/assets/no.png</normaloff>:/assets/assets/no.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -47,8 +47,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>561</width>
-         <height>491</height>
+         <width>573</width>
+         <height>497</height>
         </rect>
        </property>
       </widget>
@@ -120,6 +120,7 @@
     <addaction name="actionZoomIn"/>
     <addaction name="actionZoomOut"/>
     <addaction name="actionResetZoom"/>
+    <addaction name="actionZoomFit"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -445,7 +446,7 @@
   </action>
   <action name="actionResetZoom">
    <property name="text">
-    <string>Reset zoom</string>
+    <string>Zoom reset</string>
    </property>
   </action>
   <action name="actionNext">
@@ -467,6 +468,11 @@
    </property>
    <property name="text">
     <string>Show Toolbar</string>
+   </property>
+  </action>
+  <action name="actionZoomFit">
+   <property name="text">
+    <string>Zoom fit</string>
    </property>
   </action>
  </widget>
