@@ -120,6 +120,7 @@
     <addaction name="actionZoomIn"/>
     <addaction name="actionZoomOut"/>
     <addaction name="actionResetZoom"/>
+    <addaction name="actionZoomFit"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -445,7 +446,7 @@
   </action>
   <action name="actionResetZoom">
    <property name="text">
-    <string>Reset zoom</string>
+    <string>Zoom reset</string>
    </property>
   </action>
   <action name="actionNextImage">
@@ -467,6 +468,11 @@
    </property>
    <property name="text">
     <string>Show Toolbar</string>
+   </property>
+  </action>
+  <action name="actionZoomFit">
+   <property name="text">
+    <string>Zoom fit</string>
    </property>
   </action>
  </widget>

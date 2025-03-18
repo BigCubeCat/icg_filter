@@ -74,6 +74,8 @@ void MainWindow::connectSlots() {
             &ImageProcessor::zoomOut);
     connect(m_ui->actionResetZoom, &QAction::triggered, m_im,
             &ImageProcessor::zoomReset);
+    connect(m_ui->actionZoomFit, &QAction::triggered, this,
+            &MainWindow::zoomFit);
 
     connect(m_controller, &SignalController::saveFileSignal, this,
             &MainWindow::updateFilename);
@@ -171,4 +173,8 @@ void MainWindow::filterApplyed() {
 
 void MainWindow::hideToolbar() {
     m_ui->toolBar->setHidden(!m_ui->actionShowToolbar->isChecked());
+}
+
+void MainWindow::zoomFit() {
+    m_im->zoomFit(m_ui->scrollArea->size());
 }
