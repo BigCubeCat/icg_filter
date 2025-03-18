@@ -18,7 +18,7 @@ class AlphaFilter : public IFilter {
     ~AlphaFilter() override = default;
 
     QString qml_path() const override {
-        return QString("qml/filters/alpha.qml");
+        return QString("qrc:/qml/filters/alpha.qml");
     }
 
     QString name() const override { return "alpha"; }

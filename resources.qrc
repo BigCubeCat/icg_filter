@@ -6,7 +6,9 @@
 
     <file>qml/components/qmldir</file>
     <file>qml/components/SliderSpinBox.qml</file>
+    <file>qml/components/SliderSpinBoxF.qml</file>
     <file>qml/components/WeightMatrix.qml</file>
+    <file>qml/components/ImagePicker.qml</file>
     <file>qml/components/ComboBox.qml</file>
     <file>qml/filters/qmldir</file>
     <file>qml/filters/sepia.qml</file>
@@ -18,6 +20,12 @@
     <file>qml/filters/black_white.qml</file>
     <file>qml/filters/sharp.qml</file>
     <file>qml/filters/inversion.qml</file>
+    <file>qml/filters/anaglyph.qml</file>
+    <file>qml/filters/gamma.qml</file>
+    <file>qml/filters/roberts.qml</file>
+    <file>qml/filters/sobels.qml</file>
+    <file>qml/filters/FloydSteinbergFilter.qml</file>
+    <file>qml/filters/orderedDithering.qml</file>
   </qresource>
   <qresource prefix="assets">
     <file>assets/background.png</file>
