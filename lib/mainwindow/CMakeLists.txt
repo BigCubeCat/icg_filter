@@ -1,8 +1,8 @@
 # Важно: включаем .ui файл в список исходников.
 qt_add_library(mainwindow STATIC
-        mainwindow.cpp
-        mainwindow.hpp
-        mainwindow.ui
+    mainwindow.cpp
+    mainwindow.hpp
+    mainwindow.ui
 )
 
 target_link_libraries(mainwindow PUBLIC

@@ -19,10 +19,10 @@ class WeightMatrix : public QAbstractListModel {
                           QObject* parent = nullptr);
     int rowCount(const QModelIndex& parent) const override;
     int columnCount(const QModelIndex& parent) const override;
-    int getRowCount() const;
-    int getColumnCount() const;
-    void setRowCount(int newValue);
-    void setColumnCount(int newValue);
+    Q_INVOKABLE int getRowCount() const;
+    Q_INVOKABLE int getColumnCount() const;
+    Q_INVOKABLE void setRowCount(int newValue);
+    Q_INVOKABLE void setColumnCount(int newValue);
     QVariant data(const QModelIndex& index, int role) const override;
     QVariant headerData(int section, Qt::Orientation orientation,
                         int role) const override;

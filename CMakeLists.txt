@@ -18,6 +18,8 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
     WebEngineWidgets
 )
 
+find_package(OpenCV REQUIRED)
+
 message(STATUS "Using Qt version: ${Qt6_VERSION}")
 
 qt6_add_resources(RESOURCES 
