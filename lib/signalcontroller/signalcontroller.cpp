@@ -3,6 +3,7 @@
 
 #include <QDir>
 #include <QFileDialog>
+#include <QMessageBox>
 
 void SignalController::applyFilterSlot() {}
 
@@ -17,9 +18,10 @@ void SignalController::openFile() {
 }
 
 void SignalController::saveFile() {
+    qDebug() << "save";
     auto img = m_im->image();
     if (img.width() == 0 || img.height() == 0) {
-        // TODO(bigcubecat): show error
+        QMessageBox::critical(nullptr, "Image is empty", "Open image first!");
         return;
     }
     auto filename = m_fp->filename();
@@ -33,6 +35,7 @@ void SignalController::saveFile() {
         }
         m_fp->setFilename(file_name);
     }
+    m_im->save(filename, m_fp->format());
     emit saveFileSignal();
 }
 
@@ -43,7 +46,6 @@ void SignalController::saveAsFile() {
     if (file_name.isEmpty()) {
         return;
     }
-    m_fp->setFilename(file_name);
     saveFile();
 }
 
