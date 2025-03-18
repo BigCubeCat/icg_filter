@@ -10,6 +10,7 @@
     <file>qml/components/ComboBox.qml</file>
     <file>qml/components/WeightMatrix.qml</file>
     <file>qml/components/ImagePicker.qml</file>
+    <file>qml/components/ColorSelect.qml</file>
 
     <file>qml/filters/qmldir</file>
     <file>qml/filters/sepia.qml</file>
@@ -17,6 +18,7 @@
     <file>qml/filters/mirror.qml</file>
     <file>qml/filters/rotate.qml</file>
     <file>qml/filters/alpha.qml</file>
+    <file>qml/filters/emboss.qml</file>
   </qresource>
   <qresource prefix="assets">
     <file>assets/background.png</file>
