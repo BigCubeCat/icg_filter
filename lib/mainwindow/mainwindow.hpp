@@ -8,6 +8,7 @@
 #include "fileprocessor.hpp"
 #include "i_factory.hpp"
 #include "imageprocessor.hpp"
+#include "processing_worker.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -31,8 +32,8 @@ class MainWindow : public QMainWindow {
 
    public:
     explicit MainWindow(QWidget* parent, SignalController* controller,
-                        ImageProcessor* im, FileProcessor* fp,
-                        IFactory* factory);
+                        ImageProcessor* im, ImageWorker* worker,
+                        FileProcessor* fp, IFactory* factory);
     ~MainWindow() override;
 
    private:
@@ -42,6 +43,7 @@ class MainWindow : public QMainWindow {
     ImageView m_view;
 
     ImageProcessor* m_im;
+    ImageWorker* m_worker;
     FileProcessor* m_fp;
 
     IFilter* m_current_filter = nullptr;

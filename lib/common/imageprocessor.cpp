@@ -9,7 +9,8 @@
 
 #include <algorithm>
 
-ImageProcessor::ImageProcessor() = default;
+ImageProcessor::ImageProcessor(std::mutex* mut, std::condition_variable* cond)
+    : m_mutex_ptr(mut), m_cond_var_ptr(cond) {}
 
 void ImageProcessor::setSaved(bool saved) {
     m_saved = saved;
@@ -75,13 +76,18 @@ void ImageProcessor::zoomFit(const QSize& size) {
 }
 
 void ImageProcessor::applyFilter(IFilter* filter) {
+    m_filter = filter;
     m_edited = m_original;
-    filter->apply(m_edited);
-    m_saved = false;
-    m_has_edited = true;
-    emit rerender();
+    {
+        std::lock_guard lk(*m_mutex_ptr);
+        m_need_process = true;
+    }
+    m_cond_var_ptr->notify_one();
 }
 
+void ImageProcessor::apply() {
+    m_filter->apply(m_edited);
+}
 
 void ImageProcessor::save(const std::string& filename,
                           const std::string& format) {
@@ -95,4 +101,3 @@ void ImageProcessor::done() {
     m_has_edited = true;
     emit rerender();
 }
-

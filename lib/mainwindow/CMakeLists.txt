@@ -20,6 +20,7 @@ target_link_libraries(mainwindow PUBLIC
     common_lib
     about
     help_lib
+    worker
 )
 
 target_include_directories(mainwindow PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

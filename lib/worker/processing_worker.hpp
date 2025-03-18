@@ -10,15 +10,23 @@
 class ImageWorker : public QObject {
     Q_OBJECT
    public:
-    explicit ImageWorker(ImageProcessor* processor, QObject* parent = nullptr)
-        : QObject(parent), m_processor(processor) {}
+    explicit ImageWorker(std::mutex* mut, std::condition_variable* cond,
+                         ImageProcessor* processor, QObject* parent = nullptr)
+        : QObject(parent),
+          m_mutex_ptr(mut),
+          m_cond_var_ptr(cond),
+          m_processor(processor) {}
 
    private:
+    std::mutex* m_mutex_ptr;
+    std::condition_variable* m_cond_var_ptr;
+
     ImageProcessor* m_processor;
+
     bool m_running = true;
 
    public slots:
-    void process(IFilter* filter);
+    void process();
     void stop() { m_running = false; }
 
    signals:

@@ -18,13 +18,15 @@
 #include "../help/help.hpp"
 
 MainWindow::MainWindow(QWidget* parent, SignalController* controller,
-                       ImageProcessor* im, FileProcessor* fp, IFactory* factory)
+                       ImageProcessor* im, ImageWorker* worker,
+                       FileProcessor* fp, IFactory* factory)
     : QMainWindow(parent),
       m_ui(new Ui::MainWindow),
       m_factory(factory),
       m_controller(controller),
       m_view(im, this),
       m_im(im),
+      m_worker(worker),
       m_fp(fp),
       m_tool_group(this) {
     m_ui->setupUi(this);
@@ -48,6 +50,7 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller,
 }
 
 void MainWindow::connectSlots() {
+    connect(m_worker, &ImageWorker::finished, m_im, &ImageProcessor::done);
     /* SETUP UI */
     connect(m_ui->applyButton, &QPushButton::clicked, this,
             &MainWindow::applyFilter);

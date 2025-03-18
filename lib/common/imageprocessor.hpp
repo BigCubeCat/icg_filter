@@ -15,7 +15,7 @@ const float kZoomStep = 0.02F;
 class ImageProcessor : public QObject {
     Q_OBJECT
    public:
-    explicit ImageProcessor();
+    explicit ImageProcessor(std::mutex* mut, std::condition_variable* cond);
 
     void filter(const std::string& name);
 
@@ -28,6 +28,16 @@ class ImageProcessor : public QObject {
     float zoomFacor() const { return m_current_zoom; }
 
     bool ready() const { return m_need_process; }
+    void is_ready() {
+        m_need_process = true;
+        {
+            std::lock_guard lk(*m_mutex_ptr);
+            m_need_process = true;
+        }
+        m_cond_var_ptr->notify_one();
+    }
+
+    void apply();
 
    signals:
     void rerender();
@@ -37,6 +47,11 @@ class ImageProcessor : public QObject {
     void process(IFilter* filter);
 
    private:
+    std::mutex* m_mutex_ptr;
+    std::condition_variable* m_cond_var_ptr;
+
+    IFilter* m_filter;
+
     QImage m_original;
     QImage m_edited;
 
@@ -57,5 +72,4 @@ class ImageProcessor : public QObject {
     void save(const std::string& filename, const std::string& format);
     void done();
     void zoomFit(const QSize& size);
-
 };
