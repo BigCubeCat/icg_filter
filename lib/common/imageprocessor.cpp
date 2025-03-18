@@ -1,6 +1,7 @@
 #include "imageprocessor.hpp"
 
 #include <qalgorithms.h>
+#include <qapplication.h>
 #include <qdebug.h>
 #include <qlogging.h>
 #include <qmessagebox.h>
@@ -78,6 +79,7 @@ void ImageProcessor::zoomFit(const QSize& size) {
 void ImageProcessor::applyFilter(IFilter* filter) {
     m_filter = filter;
     m_edited = m_original;
+    QApplication::setOverrideCursor(Qt::CursorShape::WaitCursor);
     {
         std::lock_guard lk(*m_mutex_ptr);
         m_need_process = true;
@@ -96,6 +98,7 @@ void ImageProcessor::save(const std::string& filename,
 }
 
 void ImageProcessor::done() {
+    QApplication::setOverrideCursor(Qt::CursorShape::ArrowCursor);
     m_need_process = false;
     m_saved = false;
     m_has_edited = true;
