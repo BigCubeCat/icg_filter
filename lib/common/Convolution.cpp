@@ -1,19 +1,17 @@
 #include "Convolution.hpp"
 
-#include <iostream>
-
 void Convolution::convolution(QImage& image,
-                              const QVector<QVector<int>>& kernel, const int &denum) {
+                              const QVector<QVector<int>>& kernel,
+                              const int& denum) {
     const int ks = kernel.size();
-    const int st = -ks/2;
-    const int fn = ks/2;
+    const int st = -ks / 2;
+    const int fn = ks / 2;
     const int iw = image.width();
     const int ih = image.height();
 
-    const uchar *src = image.bits();
-    auto *dst = new short[ih * iw * 3]; //rgb
-    auto *res = new uchar[ih * iw * 4];
-
+    const uchar* src = image.bits();
+    auto* dst = new short[ih * iw * 3];  //rgb
+    auto* res = new uchar[ih * iw * 4];
 
     for (int ki = st; ki <= fn; ++ki) {
         for (int kj = st; kj <= fn; ++kj) {
@@ -28,7 +26,7 @@ void Convolution::convolution(QImage& image,
                         j + kj < iw) {
                         r = src[(4 * ((i + ki) * iw + j + kj)) + 2];
                         g = src[(4 * ((i + ki) * iw + j + kj)) + 1];
-                        b = src[(4 * ((i + ki) * iw + j + kj)) ];
+                        b = src[(4 * ((i + ki) * iw + j + kj))];
                     }
                     if (ki == st && kj == st) {
                         dst[(3 * (i * iw + j))] = r * k_coef;
@@ -40,12 +38,15 @@ void Convolution::convolution(QImage& image,
                         dst[(3 * (i * iw + j)) + 2] += b * k_coef;
                     }
 
-
                     if (ki == fn && kj == fn) {
-                        res[4 * (i * iw + j)] = dst[(3 * (i * iw + j)) + 2] / denum; // blue
-                        res[(4 * (i * iw + j)) + 1] = dst[(3 * (i * iw + j)) + 1] / denum; //green
-                        res[(4 * (i * iw + j)) + 2] = dst[3 * (i * iw + j)] / denum;// red
-                        res[(4 * (i * iw + j)) + 3] = src[4 * ((i + ki) * iw + j)]; //alpha
+                        res[4 * (i * iw + j)] =
+                            dst[(3 * (i * iw + j)) + 2] / denum;  // blue
+                        res[(4 * (i * iw + j)) + 1] =
+                            dst[(3 * (i * iw + j)) + 1] / denum;  //green
+                        res[(4 * (i * iw + j)) + 2] =
+                            dst[3 * (i * iw + j)] / denum;  // red
+                        res[(4 * (i * iw + j)) + 3] =
+                            src[4 * ((i + ki) * iw + j)];  //alpha
                     }
                 }
             }

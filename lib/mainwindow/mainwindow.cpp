@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller,
     m_ui->setupUi(this);
 
     m_ui->scrollArea->viewport()->setStyleSheet(
-        "background-image: url(../assets/background.png);"
+        "background-image: url(assets/background.png);"
         "background-position: center;"
         "background-repeat: no-repeat;");
 
@@ -57,7 +57,7 @@ void MainWindow::connectSlots() {
             &MainWindow::helpSlots);
     connect(m_ui->actionConfig, &QAction::triggered, this,
             &MainWindow::toggleSideBar);
-    connect(m_ui->actionShowToolbar, &QAction::triggered, this,
+    connect(m_ui->actionShowWindowToolbar, &QAction::triggered, this,
             &MainWindow::hideToolbar);
     connect(m_ui->dockWidget, &QDockWidget::visibilityChanged,
             m_ui->actionConfig, &QAction::setChecked);
@@ -172,7 +172,7 @@ void MainWindow::filterApplyed() {
 }
 
 void MainWindow::hideToolbar() {
-    m_ui->toolBar->setHidden(!m_ui->actionShowToolbar->isChecked());
+    m_ui->toolBar->setHidden(!m_ui->actionShowWindowToolbar->isChecked());
 }
 
 void MainWindow::zoomFit() {
