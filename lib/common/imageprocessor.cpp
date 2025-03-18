@@ -73,3 +73,10 @@ void ImageProcessor::save(const std::string& filename,
     qDebug() << "image processor " << filename << " " << format;
     m_edited.save(filename.c_str(), format.c_str());
 }
+
+void ImageProcessor::done() {
+    m_need_process = false;
+    m_saved = false;
+    m_has_edited = true;
+    emit rerender();
+}
