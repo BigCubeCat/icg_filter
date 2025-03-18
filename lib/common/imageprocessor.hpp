@@ -3,6 +3,8 @@
 #include <qimage.h>
 #include <qobject.h>
 #include <qtmetamacros.h>
+#include <condition_variable>
+#include <mutex>
 #include "i_filter.hpp"
 
 const float kZoomStep = 0.02F;
@@ -25,10 +27,14 @@ class ImageProcessor : public QObject {
 
     float zoomFacor() const { return m_current_zoom; }
 
+    bool ready() const { return m_need_process; }
+
    signals:
     void rerender();
     void saved(bool is_saved);
     void zoom(float old_factor, float new_factor);
+
+    void process(IFilter* filter);
 
    private:
     QImage m_original;
@@ -38,6 +44,8 @@ class ImageProcessor : public QObject {
     bool m_saved;
     bool m_has_edited = false;
 
+    bool m_need_process;
+
     void updateImageSize();
     void zoomHandler(int old_zoom);
 
@@ -46,5 +54,8 @@ class ImageProcessor : public QObject {
     void zoomIn();
     void zoomOut();
     void zoomReset();
+    void save(const std::string& filename, const std::string& format);
+    void done();
     void zoomFit(const QSize& size);
+
 };

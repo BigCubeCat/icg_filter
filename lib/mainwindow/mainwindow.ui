@@ -133,8 +133,8 @@
     <property name="title">
      <string>Image</string>
     </property>
-    <addaction name="actionPrevious"/>
-    <addaction name="actionNext"/>
+    <addaction name="actionPreviousImage"/>
+    <addaction name="actionNextImage"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -449,12 +449,12 @@
     <string>Zoom reset</string>
    </property>
   </action>
-  <action name="actionNext">
+  <action name="actionNextImage">
    <property name="text">
     <string>Next</string>
    </property>
   </action>
-  <action name="actionPrevious">
+  <action name="actionPreviousImage">
    <property name="text">
     <string>Previous</string>
    </property>

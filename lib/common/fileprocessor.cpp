@@ -24,6 +24,11 @@ void FileProcessor::open_dir(const std::string& dir) {
 }
 
 void FileProcessor::setFilename(const QString& filename) {
+    setSaveFilename(filename);
+    m_processor.setImage(QImage(filename));
+}
+
+void FileProcessor::setSaveFilename(const QString& filename) {
     QFileInfo file_info(filename);
     m_filename = filename.toStdString();
     m_folder = file_info.absolutePath().toStdString();
@@ -31,8 +36,6 @@ void FileProcessor::setFilename(const QString& filename) {
     m_name = filename.split("/").last().toStdString();
 
     open_dir(m_folder);
-
-    m_processor.setImage(QImage(filename));
 }
 
 void FileProcessor::nextImageInFolder() {
