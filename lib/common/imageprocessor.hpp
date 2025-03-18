@@ -46,4 +46,5 @@ class ImageProcessor : public QObject {
     void zoomIn();
     void zoomOut();
     void zoomReset();
+    void zoomFit(const QSize& size);
 };

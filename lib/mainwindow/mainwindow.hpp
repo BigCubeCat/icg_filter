@@ -28,6 +28,8 @@ class MainWindow : public QMainWindow {
 
     void hideToolbar();
 
+    void zoomFit();
+
    public:
     explicit MainWindow(QWidget* parent, SignalController* controller,
                         ImageProcessor* im, FileProcessor* fp,
