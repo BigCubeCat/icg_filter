@@ -12,7 +12,6 @@ class OrderedDitheringFilter : public IFilter {
                    NOTIFY cntGreenChanged)
     Q_PROPERTY(int blue_quants READ get_blue_quants WRITE set_blue_quants NOTIFY
                    cntBLueChanged)
-
    public:
     QString name() const override { return "odf"; }
     void apply(QImage& image) override;

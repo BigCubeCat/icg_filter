@@ -21,6 +21,7 @@
 #include "WeightMatrix.hpp"
 #include "procs/FloydSteinbergFilter/FloydSteinbergFilter.hpp"
 #include "procs/anglyph/anaglyph.hpp"
+#include "procs/aqua/aquarel.hpp"
 #include "procs/gamma/gamma.hpp"
 #include "procs/ordered_dithering/OrderedDitheringFilter.hpp"
 #include "procs/roberts/RobertsFilter.hpp"
@@ -33,10 +34,7 @@ int main(int argc, char* argv[]) {
     qmlRegisterType<WeightMatrix>("weightMatrixModel", 1, 0,"WeightMatrixModel");
     FiltersFactory factory{};
 
-    factory.register_filter("sepia", std::make_shared<SepiaFilter>());
-    factory.register_filter("mirror", std::make_shared<MirrorFilter>());
-    factory.register_filter("rotate", std::make_shared<RotateFilter>());
-    factory.register_filter("alpha", std::make_shared<AlphaFilter>());
+
     auto sepia_ptr = std::make_shared<SepiaFilter>();
     factory.register_filter(sepia_ptr->name().toStdString(), sepia_ptr );
     auto mirror_ptr = std::make_shared<SepiaFilter>();
@@ -64,7 +62,9 @@ int main(int argc, char* argv[]) {
     auto floyd_steinberg_filter_ptr = std::make_shared<FloydSteinbergFilter>();
     factory.register_filter(floyd_steinberg_filter_ptr->name().toStdString(), floyd_steinberg_filter_ptr);
     auto ordered_dithering_filter_ptr = std::make_shared<OrderedDitheringFilter>();
-    factory.register_filter(floyd_steinberg_filter_ptr->name().toStdString(), ordered_dithering_filter_ptr);
+    factory.register_filter(ordered_dithering_filter_ptr->name().toStdString(), ordered_dithering_filter_ptr);
+    auto aquarel_ptr = std::make_shared<aquarel>();
+    factory.register_filter(aquarel_ptr->name().toStdString(), aquarel_ptr);
 
     ImageProcessor image_processor{};
     FileProcessor file_processor(image_processor);

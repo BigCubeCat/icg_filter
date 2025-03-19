@@ -56,11 +56,11 @@ void Convolution::convolution(QImage& image,
                             src[4 * ((i + ki) * iw + j)];  //alpha
                     } else {
                         res[4 * (i * iw + j)] =
-                           std::min(dst[(3 * (i * iw + j)) + 2] / denum, 255);  // blue
+                           std::max(std::min(dst[(3 * (i * iw + j)) + 2] / denum, 255), 0);  // blue
                         res[(4 * (i * iw + j)) + 1] =
-                            std::min(dst[(3 * (i * iw + j)) + 1] / denum, 255);  //green
+                            std::max(std::min(dst[(3 * (i * iw + j)) + 1] / denum, 255), 0);  //green
                         res[(4 * (i * iw + j)) + 2] =
-                            std::min(dst[3 * (i * iw + j)] / denum, 255);  // red
+                            std::max(std::min(dst[3 * (i * iw + j)] / denum, 255),0);  // red
                         res[(4 * (i * iw + j)) + 3] =
                             src[4 * ((i + ki) * iw + j)];  //alpha
                     }

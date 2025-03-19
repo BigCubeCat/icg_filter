@@ -26,6 +26,7 @@
     <file>qml/filters/sobels.qml</file>
     <file>qml/filters/FloydSteinbergFilter.qml</file>
     <file>qml/filters/orderedDithering.qml</file>
+    <file>qml/filters/aquarel.qml</file>
   </qresource>
   <qresource prefix="assets">
     <file>assets/background.png</file>
