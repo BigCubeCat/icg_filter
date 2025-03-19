@@ -2,6 +2,10 @@
 #include "../lib/signalcontroller/signalcontroller.hpp"
 #include "filters.hpp"
 #include "imageprocessor.hpp"
+#include "procs/emboss/emboss.hpp"
+#include "procs/sepia/sepia_filter.hpp"
+
+
 /// Фильтры
 #include "procs/alpha/alpha.hpp"
 #include "procs/mirror/mirror.hpp"
@@ -11,7 +15,7 @@
 #include "procs/black_white/black_white_filter.hpp"
 #include "procs/inversion/inversion.hpp"
 #include "procs/sharp/sharpness.hpp"
-///
+
 
 #include <QApplication>
 #include <QQmlApplicationEngine>
@@ -27,14 +31,17 @@
 #include "procs/roberts/RobertsFilter.hpp"
 #include "procs/sobel/SobelsFilter.hpp"
 
+
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
     QQmlApplicationEngine engine;
     engine.addImportPath("qrc:qml/components");
-    qmlRegisterType<WeightMatrix>("weightMatrixModel", 1, 0,"WeightMatrixModel");
+    qmlRegisterType<WeightMatrix>("weightMatrixModel", 1, 0,
+                                  "WeightMatrixModel");
     FiltersFactory factory{};
 
-
+    auto emboss_ptr = std::make_shared<EmbossFilter>();
+    factory.register_filter(emboss_ptr->name().toStdString(), emboss_ptr);
     auto sepia_ptr = std::make_shared<SepiaFilter>();
     factory.register_filter(sepia_ptr->name().toStdString(), sepia_ptr );
     auto mirror_ptr = std::make_shared<SepiaFilter>();
@@ -65,6 +72,7 @@ int main(int argc, char* argv[]) {
     factory.register_filter(ordered_dithering_filter_ptr->name().toStdString(), ordered_dithering_filter_ptr);
     auto aquarel_ptr = std::make_shared<aquarel>();
     factory.register_filter(aquarel_ptr->name().toStdString(), aquarel_ptr);
+
 
     ImageProcessor image_processor{};
     FileProcessor file_processor(image_processor);

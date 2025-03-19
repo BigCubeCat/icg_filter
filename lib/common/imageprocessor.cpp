@@ -1,4 +1,10 @@
 #include "imageprocessor.hpp"
+
+#include <qalgorithms.h>
+#include <qdebug.h>
+#include <qlogging.h>
+#include <qmessagebox.h>
+
 #include <qtmetamacros.h>
 
 #include <algorithm>
@@ -53,7 +59,19 @@ void ImageProcessor::zoomOut() {
 void ImageProcessor::zoomReset() {
     m_current_zoom = 1;
     zoomHandler(1);
-    emit rerender();
+}
+
+void ImageProcessor::zoomFit(const QSize& size) {
+    const auto view_width = size.width();
+    const auto view_height = size.height();
+    const auto image_width = m_original.width();
+    const auto image_height = m_original.height();
+
+    m_current_zoom = std::min<float>(
+        static_cast<float>(view_width) / static_cast<float>(image_width),
+
+        static_cast<float>(view_height) / static_cast<float>(image_height));
+    zoomHandler(1);
 }
 
 void ImageProcessor::applyFilter(IFilter* filter) {
@@ -65,3 +83,15 @@ void ImageProcessor::applyFilter(IFilter* filter) {
 }
 
 
+void ImageProcessor::save(const std::string& filename,
+                          const std::string& format) {
+    qDebug() << "image processor " << filename << " " << format;
+    m_edited.save(filename.c_str(), format.c_str());
+}
+
+void ImageProcessor::done() {
+    m_need_process = false;
+    m_saved = false;
+    m_has_edited = true;
+    emit rerender();
+}

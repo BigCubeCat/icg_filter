@@ -10,6 +10,7 @@ void InversionFilter::apply(QImage& image) {
             image.setPixelColor(x, y,
                                 QColor(255 - color.red(), 255 - color.green(),
                                        255 - color.blue()));
+
         }
     }
 }

@@ -21,6 +21,7 @@ BlurFilter::BlurFilter(int cnt, int off) {
     }
 }
 void BlurFilter::apply(QImage& image) {
+
     if (m_weights.size() < 7) {
         Convolution::convolution(image, m_weights, sum_weight? sum_weight : 1);
     }
@@ -54,6 +55,7 @@ void BlurFilter::apply(QImage& image) {
         }
         image = tmp;
     }
+
 }
 void BlurFilter::onChangedSize(const QVariant& size) {
     int cnt = size.toInt();

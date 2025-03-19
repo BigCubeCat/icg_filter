@@ -11,3 +11,4 @@ sobels 1.0 sobels.qml
 fsf 1.0 FloydSteinbergFilter.qml
 odf 1.0 orderedDithering.qml
 aquarel 1.0 aquarel.qml
+

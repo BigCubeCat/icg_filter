@@ -15,8 +15,8 @@ class FileProcessor : public QObject {
 
     std::string name() const { return m_name; }
     std::string filename() const { return m_filename; }
-    std::string format() const { return m_filename; }
-    std::string folder() const { return m_filename; }
+    std::string format() const { return m_file_format; }
+    std::string folder() const { return m_folder; }
 
    private:
     std::string m_name;
@@ -35,6 +35,7 @@ class FileProcessor : public QObject {
 
    public slots:
     void setFilename(const QString& filename);
+    void setSaveFilename(const QString& filename);
     void nextImageInFolder();
     void prevImageInFolder();
 };

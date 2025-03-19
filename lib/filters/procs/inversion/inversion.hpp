@@ -3,7 +3,9 @@
 
 class InversionFilter : public IFilter {
    public:
+
     QString name() const override { return "inversion"; }
+
     void apply(QImage& image) override;
     QString qml_path() const override {
         return "qrc:/qml/filters/inversion.qml";

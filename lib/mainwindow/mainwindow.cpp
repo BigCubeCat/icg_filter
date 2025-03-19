@@ -65,6 +65,8 @@ void MainWindow::connectSlots() {
             &SignalController::openFile);
     connect(m_ui->actionSave, &QAction::triggered, m_controller,
             &SignalController::saveFile);
+    connect(m_ui->actionSave_As, &QAction::triggered, m_controller,
+            &SignalController::saveAsFile);
 
     connect(m_ui->actionZoomIn, &QAction::triggered, m_im,
             &ImageProcessor::zoomIn);
@@ -72,6 +74,8 @@ void MainWindow::connectSlots() {
             &ImageProcessor::zoomOut);
     connect(m_ui->actionResetZoom, &QAction::triggered, m_im,
             &ImageProcessor::zoomReset);
+    connect(m_ui->actionZoomFit, &QAction::triggered, this,
+            &MainWindow::zoomFit);
 
     connect(m_controller, &SignalController::saveFileSignal, this,
             &MainWindow::updateFilename);
@@ -84,9 +88,9 @@ void MainWindow::connectSlots() {
             &ImageView::updateImage);
     connect(m_im, &ImageProcessor::rerender, &m_view, &ImageView::updateImage);
 
-    connect(m_ui->actionNext, &QAction::triggered, m_fp,
+    connect(m_ui->actionNextImage, &QAction::triggered, m_fp,
             &FileProcessor::nextImageInFolder);
-    connect(m_ui->actionPrevious, &QAction::triggered, m_fp,
+    connect(m_ui->actionPreviousImage, &QAction::triggered, m_fp,
             &FileProcessor::prevImageInFolder);
 }
 
@@ -115,13 +119,9 @@ void MainWindow::helpSlots() {
 }
 
 void MainWindow::updateFilename() {
-    setWindowTitle("ICG_Filter [" + QString::fromStdString(m_fp->name()) + "]");
-}
-
-void MainWindow::toggleSaved(bool saved) {
     auto filename_list = QString::fromStdString(m_fp->filename()).split("/");
     auto filename = filename_list.at(filename_list.size() - 1);
-    if (saved) {
+    if (m_im->is_saved()) {
         filename += " *";
     }
     setWindowTitle("ICG_Filter [" + filename + "]");
@@ -173,4 +173,8 @@ void MainWindow::filterApplyed() {
 
 void MainWindow::hideToolbar() {
     m_ui->toolBar->setHidden(!m_ui->actionShowToolbar->isChecked());
+}
+
+void MainWindow::zoomFit() {
+    m_im->zoomFit(m_ui->scrollArea->size());
 }
