@@ -9,5 +9,5 @@
 
 class Convolution {
    public:
-    static void convolution(QImage& image, const QVector<QVector<int>>& kernel, const int &denum);
+    static void convolution(QImage& image, const QVector<QVector<int>>& kernel, const int &denum, bool absolute = false, bool continousBorder = false);
 };

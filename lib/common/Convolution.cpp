@@ -2,18 +2,19 @@
 
 #include <iostream>
 
+
 void Convolution::convolution(QImage& image,
-                              const QVector<QVector<int>>& kernel, const int &denum) {
+                              const QVector<QVector<int>>& kernel,
+                              const int& denum, bool absolute, bool continousBorder) {
     const int ks = kernel.size();
-    const int st = -ks/2;
-    const int fn = ks/2;
+    const int st = -ks / 2;
+    const int fn = (ks - 1) / 2;
     const int iw = image.width();
     const int ih = image.height();
 
-    const uchar *src = image.bits();
-    auto *dst = new short[ih * iw * 3]; //rgb
-    auto *res = new uchar[ih * iw * 4];
-
+    const uchar* src = image.bits();
+    auto dst = std::vector<short>(ih * iw * 3);  //rgb
+    auto res = std::vector<uchar>(ih * iw * 4);
 
     for (int ki = st; ki <= fn; ++ki) {
         for (int kj = st; kj <= fn; ++kj) {
@@ -28,7 +29,11 @@ void Convolution::convolution(QImage& image,
                         j + kj < iw) {
                         r = src[(4 * ((i + ki) * iw + j + kj)) + 2];
                         g = src[(4 * ((i + ki) * iw + j + kj)) + 1];
-                        b = src[(4 * ((i + ki) * iw + j + kj)) ];
+                        b = src[(4 * ((i + ki) * iw + j + kj))];
+                    } else if (continousBorder) {
+                        r = src[(4 * (i * iw + j)) + 2];
+                        g = src[(4 * (i * iw + j)) + 1];
+                        b = src[(4 * (i * iw + j))];
                     }
                     if (ki == st && kj == st) {
                         dst[(3 * (i * iw + j))] = r * k_coef;
@@ -41,18 +46,28 @@ void Convolution::convolution(QImage& image,
                     }
 
 
-                    if (ki == fn && kj == fn) {
-                        res[4 * (i * iw + j)] = dst[(3 * (i * iw + j)) + 2] / denum; // blue
-                        res[(4 * (i * iw + j)) + 1] = dst[(3 * (i * iw + j)) + 1] / denum; //green
-                        res[(4 * (i * iw + j)) + 2] = dst[3 * (i * iw + j)] / denum;// red
-                        res[(4 * (i * iw + j)) + 3] = src[4 * ((i + ki) * iw + j)]; //alpha
+                    if (ki == fn && kj == fn & absolute) {
+                        res[4 * (i * iw + j)] =
+                            std::min(abs(dst[(3 * (i * iw + j)) + 2] / denum), 255);  // blue
+                        res[(4 * (i * iw + j)) + 1] =
+                            std::min(abs(dst[(3 * (i * iw + j)) + 1] / denum), 255);  //green
+                        res[(4 * (i * iw + j)) + 2] =
+                            std::min(abs(dst[3 * (i * iw + j)] / denum), 255);  // red
+                        res[(4 * (i * iw + j)) + 3] =
+                            src[4 * ((i + ki) * iw + j)];  //alpha
+                    } else {
+                        res[4 * (i * iw + j)] =
+                           std::max(std::min(dst[(3 * (i * iw + j)) + 2] / denum, 255), 0);  // blue
+                        res[(4 * (i * iw + j)) + 1] =
+                            std::max(std::min(dst[(3 * (i * iw + j)) + 1] / denum, 255), 0);  //green
+                        res[(4 * (i * iw + j)) + 2] =
+                            std::max(std::min(dst[3 * (i * iw + j)] / denum, 255),0);  // red
+                        res[(4 * (i * iw + j)) + 3] =
+                            src[4 * ((i + ki) * iw + j)];  //alpha
                     }
                 }
             }
         }
     }
-
-    image = QImage(res, iw, ih, QImage::Format_RGB32);
-    delete[] dst;
-    delete[] res;
+    image = QImage(res.data(), iw, ih, QImage::Format_RGB32);
 }

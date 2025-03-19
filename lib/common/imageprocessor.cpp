@@ -95,4 +95,3 @@ void ImageProcessor::done() {
     m_has_edited = true;
     emit rerender();
 }
-

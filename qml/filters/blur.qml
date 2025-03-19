@@ -16,17 +16,11 @@ Column {
     }
     ComboBox {
         id: list
-        model: ["3x3", "5x5"]
+        model: ["3x3", "5x5", "7x7", "9x9", "11x11"]
         onActivated: {
-            if (list.currentIndex == 0) {
-                matrix.innerSetHeight(3);
-                matrix.innerSetWidth(3);
-                blur.onChangedSize(3);
-            } else {
-                matrix.innerSetHeight(5);
-                matrix.innerSetWidth(5);
-                blur.onChangedSize(5);
-            }
+            matrix.innerSetHeight(2 * (list.currentIndex + 1) + 1);
+            matrix.innerSetWidth(2 * (list.currentIndex + 1) + 1);
+            blur.onChangedSize(2 * (list.currentIndex + 1) + 1);
         }
     }
 
