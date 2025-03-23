@@ -54,6 +54,7 @@ class ImageProcessor : public QObject {
 
     QImage m_original;
     QImage m_edited;
+    QImage m_image;
 
     double m_current_zoom = 1.0F;
     bool m_saved;

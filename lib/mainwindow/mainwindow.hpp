@@ -3,7 +3,7 @@
 #include <QActionGroup>
 #include <QMainWindow>
 
-#include "../imageview/imageview.hpp"
+#include "../imagepainter/imagepainter.hpp"
 #include "../signalcontroller/signalcontroller.hpp"
 #include "fileprocessor.hpp"
 #include "i_factory.hpp"
@@ -39,8 +39,8 @@ class MainWindow : public QMainWindow {
    private:
     Ui::MainWindow* m_ui;
     IFactory* m_factory;
+    ImagePainter m_image_painter;
     SignalController* m_controller;
-    ImageView m_view;
 
     ImageProcessor* m_im;
     ImageWorker* m_worker;

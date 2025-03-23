@@ -23,27 +23,24 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller,
     : QMainWindow(parent),
       m_ui(new Ui::MainWindow),
       m_factory(factory),
+      m_image_painter(im),
       m_controller(controller),
-      m_view(im, this),
       m_im(im),
       m_worker(worker),
       m_fp(fp),
       m_tool_group(this) {
     m_ui->setupUi(this);
-
-    m_ui->scrollArea->viewport()->setStyleSheet(
-        "background-image: url(assets/background.png);"
-        "background-position: center;"
-        "background-repeat: no-repeat;");
-
     m_ui->quickWidget->engine()->addImportPath("qrc:/qml");
 
-    m_ui->scrollArea->setWidget(&m_view);
     m_ui->toolBar->addActions(m_ui->menuFile->actions());
     m_ui->toolBar->addSeparator();
     m_ui->toolBar->addActions(m_ui->menuZoom->actions());
     m_ui->toolBar->addSeparator();
     m_ui->toolBar->addActions(m_ui->menuImage->actions());
+
+    m_ui->canvasWidget->engine()->rootContext()->setContextProperty(
+        "img", &m_image_painter);
+    m_ui->canvasWidget->setSource(QUrl("qrc:/qml/forms/ImagePreview.qml"));
 
     connectSlots();
     registerFilters();
@@ -79,17 +76,17 @@ void MainWindow::connectSlots() {
             &ImageProcessor::zoomReset);
     connect(m_ui->actionZoomFit, &QAction::triggered, this,
             &MainWindow::zoomFit);
-
     connect(m_controller, &SignalController::saveFileSignal, this,
             &MainWindow::updateFilename);
     connect(m_controller, &SignalController::openFileSignal, this,
             &MainWindow::updateFilename);
-    connect(m_controller, &SignalController::openFileSignal, &m_view,
-            &ImageView::updateImage);
 
-    connect(m_controller, &SignalController::newImageSignal, &m_view,
-            &ImageView::updateImage);
-    connect(m_im, &ImageProcessor::rerender, &m_view, &ImageView::updateImage);
+    connect(m_controller, &SignalController::openFileSignal, &m_image_painter,
+            &ImagePainter::updateImage);
+    connect(m_controller, &SignalController::newImageSignal, &m_image_painter,
+            &ImagePainter::updateImage);
+    connect(m_im, &ImageProcessor::rerender, &m_image_painter,
+            &ImagePainter::updateImage);
 
     connect(m_ui->actionNextImage, &QAction::triggered, m_fp,
             &FileProcessor::nextImageInFolder);
@@ -132,10 +129,12 @@ void MainWindow::updateFilename() {
 
 void MainWindow::applyFilter() {
     if (!m_current_filter) {
-        // TODO: show error
+        QMessageBox::critical(nullptr, "No filter",
+                              "Please, choose filter first!");
         return;
     }
-    m_im->applyFilter(m_current_filter);
+    if (!m_im->ready())
+        m_im->applyFilter(m_current_filter);
 }
 
 void MainWindow::registerFilters() {
@@ -151,7 +150,8 @@ void MainWindow::registerFilters() {
     };
     auto all_filters = m_factory->all_filters();
     for (auto& filter : all_filters) {
-        connect(filter, &IFilter::done, &m_view, &ImageView::updateImage);
+        connect(filter, &IFilter::done, &m_image_painter,
+                &ImagePainter::updateImage);
         auto* action = new QAction(filter);
         action->setIcon(QIcon(icon_path[filter->type()]));
 
@@ -179,5 +179,5 @@ void MainWindow::hideToolbar() {
 }
 
 void MainWindow::zoomFit() {
-    m_im->zoomFit(m_ui->scrollArea->size());
+    // m_im->zoomFit(m_ui->scrollArea->size());
 }

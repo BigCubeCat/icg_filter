@@ -26,32 +26,10 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QScrollArea" name="scrollArea">
-      <property name="layoutDirection">
-       <enum>Qt::LayoutDirection::LeftToRight</enum>
+     <widget class="QQuickWidget" name="canvasWidget">
+      <property name="resizeMode">
+       <enum>QQuickWidget::ResizeMode::SizeRootObjectToView</enum>
       </property>
-      <property name="autoFillBackground">
-       <bool>true</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>573</width>
-         <height>497</height>
-        </rect>
-       </property>
-      </widget>
      </widget>
     </item>
    </layout>
@@ -194,10 +172,29 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="applyButton">
-         <property name="text">
-          <string>APPLY</string>
+        <widget class="QWidget" name="horizontalWidget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QCheckBox" name="isOriginBox">
+            <property name="text">
+             <string>original</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="applyButton">
+            <property name="text">
+             <string>APPLY</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>

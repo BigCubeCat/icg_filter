@@ -24,6 +24,8 @@
     <file>qml/filters/inversion.qml</file>
     <file>qml/filters/emboss.qml</file>
 
+    <file>qml/forms/ImagePreview.qml</file>
+
   </qresource>
   <qresource prefix="assets">
     <file>assets/background.png</file>

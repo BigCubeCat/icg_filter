@@ -16,7 +16,7 @@ target_link_libraries(mainwindow PUBLIC
     PRIVATE
     component_models
     filters
-    imageview
+    imagepainter
     common_lib
     about
     help_lib

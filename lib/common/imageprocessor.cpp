@@ -17,7 +17,7 @@ void ImageProcessor::setSaved(bool saved) {
     m_saved = saved;
     if (m_has_edited) {
         m_has_edited = false;
-        m_original = m_edited;
+        m_original = QImage(m_edited);
     }
 }
 
@@ -26,14 +26,12 @@ bool ImageProcessor::is_saved() const {
 }
 
 QImage ImageProcessor::image() const {
-    if (m_saved || !m_has_edited) {
-        return m_original;
-    }
     return m_edited;
 }
 
 void ImageProcessor::setImage(QImage new_image) {
     m_original = std::move(new_image);
+    m_edited = QImage(m_original);
     m_saved = true;
     m_has_edited = false;
     emit rerender();
@@ -78,7 +76,8 @@ void ImageProcessor::zoomFit(const QSize& size) {
 
 void ImageProcessor::applyFilter(IFilter* filter) {
     m_filter = filter;
-    m_edited = m_original;
+    m_edited = QImage(m_original);
+    m_image = QImage(m_original);
     QApplication::setOverrideCursor(Qt::CursorShape::WaitCursor);
     {
         std::lock_guard lk(*m_mutex_ptr);
@@ -88,13 +87,16 @@ void ImageProcessor::applyFilter(IFilter* filter) {
 }
 
 void ImageProcessor::apply() {
-    m_filter->apply(m_edited);
+    qDebug() << "applying filter";
+    m_filter->apply(m_image);
+    qDebug() << "done";
 }
 
 void ImageProcessor::save(const std::string& filename,
                           const std::string& format) {
     qDebug() << "image processor " << filename << " " << format;
     m_edited.save(filename.c_str(), format.c_str());
+    m_original = m_edited;
 }
 
 void ImageProcessor::done() {
@@ -102,5 +104,8 @@ void ImageProcessor::done() {
     m_need_process = false;
     m_saved = false;
     m_has_edited = true;
+    m_edited = m_image;
+    m_image.fill(QColor(0, 0, 255));
+    qDebug() << "done()";
     emit rerender();
 }
