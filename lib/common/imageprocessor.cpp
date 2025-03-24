@@ -11,7 +11,10 @@
 #include <qtmetamacros.h>
 
 ImageProcessor::ImageProcessor(std::mutex* mut, std::condition_variable* cond)
-    : m_mutex_ptr(mut), m_cond_var_ptr(cond) {}
+    : m_mutex_ptr(mut), m_cond_var_ptr(cond) {
+    connect(&m_watcher, &QFutureWatcher<QImage>::finished, this,
+            &ImageProcessor::onImageProcessed);
+}
 
 void ImageProcessor::setSaved(bool saved) {
     m_saved = saved;
@@ -63,13 +66,10 @@ void ImageProcessor::done() {
     m_need_process = false;
     m_saved = false;
     m_has_edited = true;
-    m_edited = m_image;
-    m_image.fill(QColor(0, 0, 255));
     emit rerender();
 }
 
 void ImageProcessor::onImageProcessed() {
-    done();
     m_edited = m_watcher.result();
-    emit rerender();
+    done();
 }

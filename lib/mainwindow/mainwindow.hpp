@@ -50,7 +50,7 @@ class MainWindow : public QMainWindow {
     std::vector<QAction> m_filter_actions;
 
     std::string m_filename;
-    std::string m_format = "PNG";
+    std::string m_format = "png";
 
     void connectSlots();
     void registerFilters();
