@@ -21,6 +21,7 @@
     <file>qml/filters/sharp.qml</file>
     <file>qml/filters/inversion.qml</file>
     <file>qml/filters/emboss.qml</file>
+    <file>qml/filters/ordered_dithering.qml</file>
     <file>qml/forms/about.qml</file>
     <file>qml/forms/qmldir</file>
     <file>qml/forms/ImageViewer.qml</file>

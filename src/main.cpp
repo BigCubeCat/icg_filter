@@ -8,6 +8,7 @@
 #include "filters.hpp"
 #include "imageprocessor.hpp"
 #include "mainwindow.hpp"
+#include "procs/bw_ordered_dithering/bw_od.hpp"
 #include "signalcontroller.hpp"
 
 /// Фильтры
@@ -47,6 +48,10 @@ int main(int argc, char* argv[]) {
     factory.register_filter(blur_ptr->name().toStdString(), blur_ptr);
     auto sharp_ptr = std::make_shared<SharpnessFilter>();
     factory.register_filter(sharp_ptr->name().toStdString(), sharp_ptr);
+    auto ordered_dithering_filter_ptr =
+        std::make_shared<BWOrderedDitheringFilter>();
+    factory.register_filter(ordered_dithering_filter_ptr->name().toStdString(),
+                            ordered_dithering_filter_ptr);
 
     std::mutex mutex;
     std::condition_variable condition_variable;
