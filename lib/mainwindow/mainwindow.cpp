@@ -35,9 +35,11 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller,
 
     m_ui->toolBar->addActions(m_ui->menuFile->actions());
     m_ui->toolBar->addSeparator();
-    m_ui->toolBar->addActions(m_ui->menuZoom->actions());
-    m_ui->toolBar->addSeparator();
     m_ui->toolBar->addActions(m_ui->menuImage->actions());
+
+    m_ui->toolBar->addSeparator();
+    m_ui->toolBar->addSeparator();
+    m_ui->toolBar->addSeparator();
 
     connectSlots();
     registerFilters();
