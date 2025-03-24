@@ -21,8 +21,8 @@ class FileProcessor : public QObject {
    private:
     std::string m_name;
     std::string m_filename;
-    std::string m_file_format;
-    std::string m_folder;
+    std::string m_file_format = "png";
+    std::string m_folder = "/";
 
     QDir m_current_dir;
     std::vector<QString> m_image_files;

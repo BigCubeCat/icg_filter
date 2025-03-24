@@ -45,7 +45,6 @@ void Convolution::convolution(QImage& image,
                         dst[(3 * (i * iw + j)) + 2] += b * k_coef;
                     }
 
-
                     if (ki == fn && kj == fn & absolute) {
                         res[4 * (i * iw + j)] =
                             std::min(abs(dst[(3 * (i * iw + j)) + 2] / denum), 255);  // blue

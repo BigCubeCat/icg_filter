@@ -2,9 +2,6 @@
 
 #include <QImage>
 
-#include <QImage>
-#include <opencv2/core.hpp>
-#include <opencv2/imgproc.hpp>
 #include "omp.h"
 
 class Convolution {

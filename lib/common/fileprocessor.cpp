@@ -19,7 +19,6 @@ void FileProcessor::open_dir(const std::string& dir) {
         if (m_image_files[i] == m_filename) {
             m_cursor = i;
         }
-        qDebug() << "file: " << m_image_files[i] << "\n";
     }
 }
 
@@ -49,11 +48,9 @@ void FileProcessor::prevImageInFolder() {
 }
 
 void FileProcessor::move_in_folder() {
-    qDebug() << "cursor = " << m_cursor;
     m_filename = m_image_files[m_cursor].toStdString();
     m_file_format =
         QFileInfo(m_image_files[m_cursor]).completeSuffix().toStdString();
     m_name = m_image_files[m_cursor].split("/").last().toStdString();
-    qDebug() << m_image_files[m_cursor];
     m_processor.setImage(QImage(m_image_files[m_cursor]));
 }

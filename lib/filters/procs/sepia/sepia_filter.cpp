@@ -1,7 +1,6 @@
 #include "sepia_filter.hpp"
 
 void SepiaFilter::apply([[maybe_unused]] QImage& image) {
-    qDebug() << m_percent;
     for (int y = 0; y < image.height(); ++y) {
         QRgb* row = reinterpret_cast<QRgb*>(image.scanLine(y));
 

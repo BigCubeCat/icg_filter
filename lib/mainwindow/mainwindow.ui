@@ -26,33 +26,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QScrollArea" name="scrollArea">
-      <property name="layoutDirection">
-       <enum>Qt::LayoutDirection::LeftToRight</enum>
-      </property>
-      <property name="autoFillBackground">
-       <bool>true</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>573</width>
-         <height>497</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
+     <layout class="QHBoxLayout" name="mainLayout"/>
     </item>
    </layout>
   </widget>
@@ -127,7 +101,7 @@
      <string>View</string>
     </property>
     <addaction name="actionConfig"/>
-    <addaction name="actionShowToolbar"/>
+    <addaction name="actionShowWindowToolbar"/>
    </widget>
    <widget class="QMenu" name="menuImage">
     <property name="title">
@@ -194,10 +168,39 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="applyButton">
-         <property name="text">
-          <string>APPLY</string>
+        <widget class="QWidget" name="horizontalWidget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QCheckBox" name="isOriginBox">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normalon>:/icons/assets/icons/svg/solid/eye.svg</normalon>
+              <disabledoff>:/icons/assets/icons/svg/solid/eye-off.svg</disabledoff>
+              <disabledon>:/icons/assets/icons/svg/solid/eye-off.svg</disabledon>
+             </iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="applyButton">
+            <property name="text">
+             <string>APPLY</string>
+            </property>
+            <property name="icon">
+             <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -208,7 +211,7 @@
   <action name="actionOpen">
    <property name="icon">
     <iconset>
-     <normalon>:/icons/assets/icons/open-folder.png</normalon>
+     <normalon>:/icons/assets/icons/svg/solid/folder-open.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -224,7 +227,7 @@
   <action name="actionSave">
    <property name="icon">
     <iconset>
-     <normalon>:/icons/assets/icons/save.png</normalon>
+     <normalon>:/icons/assets/icons/svg/solid/document-download.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -240,7 +243,7 @@
   <action name="actionSave_As">
    <property name="icon">
     <iconset>
-     <normalon>:/icons/assets/icons/save.png</normalon>
+     <normalon>:/icons/assets/icons/svg/solid/folder-download.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -316,7 +319,7 @@
   <action name="actionAbout">
    <property name="icon">
     <iconset>
-     <normalon>:/icons/assets/icons/pixel.png</normalon>
+     <normalon>:/icons/assets/icons/svg/solid/alert-circle.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -329,7 +332,7 @@
   <action name="actionHelp">
    <property name="icon">
     <iconset>
-     <normalon>:/icons/assets/icons/pixel.png</normalon>
+     <normalon>:/icons/assets/icons/svg/solid/github-circle.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -342,7 +345,7 @@
   <action name="actionZoomIn">
    <property name="icon">
     <iconset>
-     <normalon>:/icons/assets/icons/add.png</normalon>
+     <normalon>:/icons/assets/icons/svg/solid/plus-circle.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -358,7 +361,7 @@
   <action name="actionZoomOut">
    <property name="icon">
     <iconset>
-     <normalon>:/icons/assets/icons/subtract.png</normalon>
+     <normalon>:/icons/assets/icons/svg/solid/minus-circle.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -380,6 +383,11 @@
    <property name="checked">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/assets/icons/svg/solid/adjustments-horizontal.svg</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Config Sidebar</string>
    </property>
@@ -387,7 +395,7 @@
   <action name="actionApply">
    <property name="icon">
     <iconset>
-     <normalon>:/icons/assets/icons/pixel(1).png</normalon>
+     <normalon>:/icons/assets/icons/svg/solid/feather.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -445,32 +453,57 @@
    </property>
   </action>
   <action name="actionResetZoom">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/assets/icons/svg/solid/maximaize-circle.svg</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Zoom reset</string>
    </property>
   </action>
   <action name="actionNextImage">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/assets/icons/svg/solid/arrow-right-circle.svg</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Next</string>
    </property>
   </action>
   <action name="actionPreviousImage">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/assets/icons/svg/solid/arrow-left-circle.svg</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Previous</string>
    </property>
   </action>
-  <action name="actionShowToolbar">
+  <action name="actionShowWindowToolbar">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="checked">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/assets/icons/svg/solid/adjustments.svg</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Show Toolbar</string>
    </property>
   </action>
   <action name="actionZoomFit">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/assets/icons/svg/solid/minimaize-circle.svg</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Zoom fit</string>
    </property>

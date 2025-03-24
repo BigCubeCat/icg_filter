@@ -39,7 +39,6 @@ class AlphaFilter : public IFilter {
     int variant() const { return m_variant; }
 
     void setVariant(int variant) {
-        qDebug() << "variant = " << variant;
         if (m_variant != variant) {
             m_variant = variant;
             emit variantChanged(variant);

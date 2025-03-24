@@ -3,7 +3,7 @@
 #include <QActionGroup>
 #include <QMainWindow>
 
-#include "../imageview/imageview.hpp"
+#include "../imagepainter/imagepainter.hpp"
 #include "../signalcontroller/signalcontroller.hpp"
 #include "fileprocessor.hpp"
 #include "i_factory.hpp"
@@ -27,7 +27,7 @@ class MainWindow : public QMainWindow {
 
     void hideToolbar();
 
-    void zoomFit();
+    void updateView();
 
    public:
     explicit MainWindow(QWidget* parent, SignalController* controller,
@@ -38,8 +38,8 @@ class MainWindow : public QMainWindow {
    private:
     Ui::MainWindow* m_ui;
     IFactory* m_factory;
+    ImagePainter m_image_painter;
     SignalController* m_controller;
-    ImageView m_view;
 
     ImageProcessor* m_im;
     FileProcessor* m_fp;
@@ -50,7 +50,7 @@ class MainWindow : public QMainWindow {
     std::vector<QAction> m_filter_actions;
 
     std::string m_filename;
-    std::string m_format = "PNG";
+    std::string m_format = "png";
 
     void connectSlots();
     void registerFilters();

@@ -18,8 +18,6 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
     WebEngineWidgets
 )
 
-find_package(OpenCV REQUIRED)
-
 message(STATUS "Using Qt version: ${Qt6_VERSION}")
 
 qt6_add_resources(RESOURCES 
@@ -45,7 +43,8 @@ target_link_libraries(icg_filter
         Qt6::QuickControls2
         about
         help_lib
-        imageview
+        imagepainter
+
         mainwindow
         signalcontroller
         filters
@@ -72,7 +71,7 @@ install(SCRIPT ${deploy_script})
 add_subdirectory(lib/about)
 add_subdirectory(lib/common)
 add_subdirectory(lib/help)
-add_subdirectory(lib/imageview)
+add_subdirectory(lib/imagepainter)
 add_subdirectory(lib/mainwindow)
 add_subdirectory(lib/signalcontroller)
 add_subdirectory(lib/filters)

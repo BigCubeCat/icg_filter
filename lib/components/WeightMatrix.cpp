@@ -88,14 +88,9 @@ void WeightMatrix::setData(const QVariant& index, const QVariant& value) {
     int r = index.toInt() % cnt_rows;
     int c = index.toInt() / cnt_rows;
     table[r][c] = value.toString().toInt();
-    qDebug() << r;
-    qDebug() << c;
-    qDebug() << table[r][c];
     emit dataChanged(this->index(r, c), this->index(r, c));
     emit updated(cnt_rows, index, value);
 }
 QVariant WeightMatrix::get_display_data(const QModelIndex& index) {
     return data(index, kTableDataRole);
 }
-
-

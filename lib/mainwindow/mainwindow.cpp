@@ -22,26 +22,24 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller,
     : QMainWindow(parent),
       m_ui(new Ui::MainWindow),
       m_factory(factory),
+      m_image_painter(im, this),
       m_controller(controller),
-      m_view(im, this),
       m_im(im),
       m_fp(fp),
       m_tool_group(this) {
     m_ui->setupUi(this);
 
-    m_ui->scrollArea->viewport()->setStyleSheet(
-        "background-image: url(../assets/background.png);"
-        "background-position: center;"
-        "background-repeat: no-repeat;");
+    m_ui->mainLayout->addWidget(&m_image_painter);
 
     m_ui->quickWidget->engine()->addImportPath("qrc:/qml");
 
-    m_ui->scrollArea->setWidget(&m_view);
     m_ui->toolBar->addActions(m_ui->menuFile->actions());
     m_ui->toolBar->addSeparator();
-    m_ui->toolBar->addActions(m_ui->menuZoom->actions());
-    m_ui->toolBar->addSeparator();
     m_ui->toolBar->addActions(m_ui->menuImage->actions());
+
+    m_ui->toolBar->addSeparator();
+    m_ui->toolBar->addSeparator();
+    m_ui->toolBar->addSeparator();
 
     connectSlots();
     registerFilters();
@@ -57,7 +55,7 @@ void MainWindow::connectSlots() {
             &MainWindow::helpSlots);
     connect(m_ui->actionConfig, &QAction::triggered, this,
             &MainWindow::toggleSideBar);
-    connect(m_ui->actionShowToolbar, &QAction::triggered, this,
+    connect(m_ui->actionShowWindowToolbar, &QAction::triggered, this,
             &MainWindow::hideToolbar);
     connect(m_ui->dockWidget, &QDockWidget::visibilityChanged,
             m_ui->actionConfig, &QAction::setChecked);
@@ -68,25 +66,25 @@ void MainWindow::connectSlots() {
     connect(m_ui->actionSave_As, &QAction::triggered, m_controller,
             &SignalController::saveAsFile);
 
-    connect(m_ui->actionZoomIn, &QAction::triggered, m_im,
-            &ImageProcessor::zoomIn);
-    connect(m_ui->actionZoomOut, &QAction::triggered, m_im,
-            &ImageProcessor::zoomOut);
-    connect(m_ui->actionResetZoom, &QAction::triggered, m_im,
-            &ImageProcessor::zoomReset);
-    connect(m_ui->actionZoomFit, &QAction::triggered, this,
-            &MainWindow::zoomFit);
+    connect(m_ui->actionZoomIn, &QAction::triggered, &m_image_painter,
+            &ImagePainter::zoomIn);
+    connect(m_ui->actionZoomOut, &QAction::triggered, &m_image_painter,
+            &ImagePainter::zoomOut);
+    connect(m_ui->actionResetZoom, &QAction::triggered, &m_image_painter,
+            &ImagePainter::zoomReset);
+    connect(m_ui->actionZoomFit, &QAction::triggered, &m_image_painter,
+            &ImagePainter::zoomFit);
 
     connect(m_controller, &SignalController::saveFileSignal, this,
             &MainWindow::updateFilename);
     connect(m_controller, &SignalController::openFileSignal, this,
             &MainWindow::updateFilename);
-    connect(m_controller, &SignalController::openFileSignal, &m_view,
-            &ImageView::updateImage);
 
-    connect(m_controller, &SignalController::newImageSignal, &m_view,
-            &ImageView::updateImage);
-    connect(m_im, &ImageProcessor::rerender, &m_view, &ImageView::updateImage);
+    connect(m_controller, &SignalController::openFileSignal, this,
+            &MainWindow::updateView);
+    connect(m_controller, &SignalController::newImageSignal, this,
+            &MainWindow::updateView);
+    connect(m_im, &ImageProcessor::rerender, this, &MainWindow::updateView);
 
     connect(m_ui->actionNextImage, &QAction::triggered, m_fp,
             &FileProcessor::nextImageInFolder);
@@ -129,10 +127,12 @@ void MainWindow::updateFilename() {
 
 void MainWindow::applyFilter() {
     if (!m_current_filter) {
-        // TODO: show error
+        QMessageBox::critical(nullptr, "No filter",
+                              "Please, choose filter first!");
         return;
     }
-    m_im->applyFilter(m_current_filter);
+    if (!m_im->ready())
+        m_im->applyFilter(m_current_filter);
 }
 
 void MainWindow::registerFilters() {
@@ -142,13 +142,13 @@ void MainWindow::registerFilters() {
         {kMatrix, m_ui->menuMatrix},
     };
     static std::map<EFilterType, QString> icon_path = {
-        {kPixel, "assets/icons/pixel.png"},
-        {kBasic, "assets/icons/edit.png"},
-        {kMatrix, "assets/icons/ice-cube.png"},
+        {kPixel, "assets/icons/svg/solid/atom.svg"},
+        {kBasic, "assets/icons/svg/solid/eye.svg"},
+        {kMatrix, "assets/icons/svg/solid/square.svg"},
     };
     auto all_filters = m_factory->all_filters();
     for (auto& filter : all_filters) {
-        connect(filter, &IFilter::done, &m_view, &ImageView::updateImage);
+        connect(filter, &IFilter::done, this, &MainWindow::updateView);
         auto* action = new QAction(filter);
         action->setIcon(QIcon(icon_path[filter->type()]));
 
@@ -166,15 +166,14 @@ void MainWindow::registerFilters() {
 void MainWindow::filterApplyed() {
     auto* filter_action = qobject_cast<QAction*>(sender());
     auto* filter = qobject_cast<IFilter*>(filter_action->parent());
-    qDebug() << filter->name();
     m_ui->quickWidget->setSource(QUrl(filter->qml_path()));
     m_current_filter = filter;
 }
 
 void MainWindow::hideToolbar() {
-    m_ui->toolBar->setHidden(!m_ui->actionShowToolbar->isChecked());
+    m_ui->toolBar->setHidden(!m_ui->actionShowWindowToolbar->isChecked());
 }
 
-void MainWindow::zoomFit() {
-    m_im->zoomFit(m_ui->scrollArea->size());
+void MainWindow::updateView() {
+    m_image_painter.setView(m_im->image());
 }
