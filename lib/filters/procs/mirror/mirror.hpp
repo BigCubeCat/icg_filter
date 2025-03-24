@@ -13,7 +13,7 @@ class MirrorFilter : public IFilter {
     ~MirrorFilter() override = default;
 
     QString qml_path() const override {
-        return QString("qml/filters/mirror.qml");
+        return QString("qrc:/qml/filters/mirror.qml");
     }
 
     QString name() const override { return "mirror"; }

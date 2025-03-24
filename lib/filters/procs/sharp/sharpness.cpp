@@ -24,7 +24,7 @@ SharpnessFilter::SharpnessFilter() {
     }
 }
 void SharpnessFilter::apply(QImage& image) {
-    Convolution::convolution(image, m_weights, sum_weight? sum_weight : 4);
+    Convolution::convolution(image, m_weights, sum_weight? sum_weight : 1,false, true);
 }
 
 void SharpnessFilter::onReset() {
