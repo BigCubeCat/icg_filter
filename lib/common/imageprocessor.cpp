@@ -16,26 +16,19 @@ ImageProcessor::ImageProcessor() {
 }
 
 void ImageProcessor::setSaved(bool saved) {
-    m_saved = saved;
-    if (m_has_edited) {
-        m_has_edited = false;
-        m_original = QImage(m_edited);
-    }
-}
-
-bool ImageProcessor::is_saved() const {
-    return m_saved;
+    m_original = QImage(m_edited);
 }
 
 QImage ImageProcessor::image() const {
-    return m_edited;
+    if (m_show_edited) {
+        return m_edited;
+    }
+    return m_original;
 }
 
 void ImageProcessor::setImage(QImage new_image) {
     m_original = std::move(new_image);
     m_edited = QImage(m_original);
-    m_saved = true;
-    m_has_edited = false;
     emit rerender();
 }
 
@@ -62,13 +55,15 @@ void ImageProcessor::save(const std::string& filename,
 
 void ImageProcessor::done() {
     QApplication::setOverrideCursor(Qt::CursorShape::ArrowCursor);
-    m_need_process = false;
-    m_saved = false;
-    m_has_edited = true;
     emit rerender();
 }
 
 void ImageProcessor::onImageProcessed() {
     m_edited = m_watcher.result();
     done();
+}
+
+void ImageProcessor::toggleView() {
+    m_show_edited = !m_show_edited;
+    emit rerender();
 }

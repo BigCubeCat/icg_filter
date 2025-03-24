@@ -11,6 +11,7 @@
 #include <QFormLayout>
 #include <QMessageBox>
 #include <QSpinBox>
+#include <QToolButton>
 #include <QWidget>
 #include <map>
 
@@ -90,6 +91,9 @@ void MainWindow::connectSlots() {
             &FileProcessor::nextImageInFolder);
     connect(m_ui->actionPreviousImage, &QAction::triggered, m_fp,
             &FileProcessor::prevImageInFolder);
+
+    connect(m_ui->toolButton, &QToolButton::clicked, this,
+            &MainWindow::toggleView);
 }
 
 MainWindow::~MainWindow() {
@@ -118,10 +122,7 @@ void MainWindow::helpSlots() {
 
 void MainWindow::updateFilename() {
     auto filename_list = QString::fromStdString(m_fp->filename()).split("/");
-    auto filename = filename_list.at(filename_list.size() - 1);
-    if (m_im->is_saved()) {
-        filename += " *";
-    }
+    const auto& filename = filename_list.at(filename_list.size() - 1);
     setWindowTitle("ICG_Filter [" + filename + "]");
 }
 
@@ -131,8 +132,7 @@ void MainWindow::applyFilter() {
                               "Please, choose filter first!");
         return;
     }
-    if (!m_im->ready())
-        m_im->applyFilter(m_current_filter);
+    m_im->applyFilter(m_current_filter);
 }
 
 void MainWindow::registerFilters() {
@@ -176,4 +176,12 @@ void MainWindow::hideToolbar() {
 
 void MainWindow::updateView() {
     m_image_painter.setView(m_im->image());
+}
+
+void MainWindow::toggleView() {
+    static QIcon checked = QIcon("assets/icons/svg/solid/eye.svg");
+    static QIcon not_checked = QIcon("assets/icons/svg/solid/eye-off.svg");
+    m_ui->toolButton->setIcon(m_ui->toolButton->isChecked() ? not_checked
+                                                            : checked);
+    m_im->toggleView();
 }

@@ -22,10 +22,6 @@ class ImageProcessor : public QObject {
     QImage image() const;
     void setImage(QImage new_image);
 
-    bool ready() const { return m_need_process; }
-
-    void is_ready() { m_need_process = true; }
-
     void apply();
 
    signals:
@@ -43,16 +39,14 @@ class ImageProcessor : public QObject {
     QImage m_edited;
     QImage m_image;
 
-    bool m_saved;
-    bool m_has_edited = false;
-
-    bool m_need_process;
+    bool m_show_edited = true;
 
     void done();
 
    public slots:
     void applyFilter(IFilter* filter);
     void save(const std::string& filename, const std::string& format);
+    void toggleView();
 
    private slots:
     void onImageProcessed();
