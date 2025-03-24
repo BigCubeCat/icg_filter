@@ -1,5 +1,6 @@
 #pragma once
 
+#include <qfuturewatcher.h>
 #include <qimage.h>
 #include <qobject.h>
 #include <qtmetamacros.h>
@@ -25,14 +26,7 @@ class ImageProcessor : public QObject {
 
     bool ready() const { return m_need_process; }
 
-    void is_ready() {
-        m_need_process = true;
-        {
-            std::lock_guard lk(*m_mutex_ptr);
-            m_need_process = true;
-        }
-        m_cond_var_ptr->notify_one();
-    }
+    void is_ready() { m_need_process = true; }
 
     void apply();
 
@@ -45,6 +39,7 @@ class ImageProcessor : public QObject {
    private:
     std::mutex* m_mutex_ptr;
     std::condition_variable* m_cond_var_ptr;
+    QFutureWatcher<QImage> m_watcher;
 
     IFilter* m_filter;
 
@@ -57,10 +52,12 @@ class ImageProcessor : public QObject {
 
     bool m_need_process;
 
-    void updateImageSize();
+    void done();
 
    public slots:
     void applyFilter(IFilter* filter);
     void save(const std::string& filename, const std::string& format);
-    void done();
+
+   private slots:
+    void onImageProcessed();
 };

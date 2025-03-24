@@ -8,7 +8,6 @@
 #include "filters.hpp"
 #include "imageprocessor.hpp"
 #include "mainwindow.hpp"
-#include "processing_worker.hpp"
 #include "signalcontroller.hpp"
 
 /// Фильтры
@@ -21,12 +20,6 @@
 #include "procs/rotate/rotate.hpp"
 #include "procs/sepia/sepia_filter.hpp"
 #include "procs/sharp/sharpness.hpp"
-
-namespace {
-void func(ImageWorker* wrk) {
-    wrk->process();
-}
-};  // namespace
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
@@ -59,23 +52,17 @@ int main(int argc, char* argv[]) {
     std::condition_variable condition_variable;
 
     ImageProcessor image_processor(&mutex, &condition_variable);
-    ImageWorker worker(&mutex, &condition_variable, &image_processor);
-
-    std::thread thread(func, &worker);
 
     FileProcessor file_processor(image_processor);
     SignalController controller{&file_processor, &image_processor};
 
-    MainWindow view(nullptr, &controller, &image_processor, &worker,
-                    &file_processor, &factory);
+    MainWindow view(nullptr, &controller, &image_processor, &file_processor,
+                    &factory);
 
     view.show();
     QApplication::exec();
     condition_variable.notify_one();
     image_processor.is_ready();
-    worker.stop();
-
-    thread.join();
 
     return 0;
 }

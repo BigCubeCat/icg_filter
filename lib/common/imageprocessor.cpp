@@ -1,10 +1,12 @@
 #include "imageprocessor.hpp"
 
-#include <qalgorithms.h>
-#include <qapplication.h>
-#include <qdebug.h>
-#include <qlogging.h>
-#include <qmessagebox.h>
+#include <QApplication>
+#include <QDebug>
+#include <QMessageBox>
+#include <QtAlgorithms>
+
+#include <QFuture>
+#include <QtConcurrent/QtConcurrent>
 
 #include <qtmetamacros.h>
 
@@ -38,18 +40,17 @@ void ImageProcessor::setImage(QImage new_image) {
 void ImageProcessor::applyFilter(IFilter* filter) {
     m_filter = filter;
     m_edited = QImage(m_original);
-    m_image = QImage(m_original);
     QApplication::setOverrideCursor(Qt::CursorShape::WaitCursor);
-    {
-        std::lock_guard lk(*m_mutex_ptr);
-        m_need_process = true;
-    }
-    m_cond_var_ptr->notify_one();
+    QFuture<QImage> future = QtConcurrent::run([this]() mutable {
+        m_image = m_edited;
+        m_filter->apply(m_image);
+        return m_image;
+    });
+
+    m_watcher.setFuture(future);
 }
 
-void ImageProcessor::apply() {
-    m_filter->apply(m_image);
-}
+void ImageProcessor::apply() {}
 
 void ImageProcessor::save(const std::string& filename,
                           const std::string& format) {
@@ -64,5 +65,11 @@ void ImageProcessor::done() {
     m_has_edited = true;
     m_edited = m_image;
     m_image.fill(QColor(0, 0, 255));
+    emit rerender();
+}
+
+void ImageProcessor::onImageProcessed() {
+    done();
+    m_edited = m_watcher.result();
     emit rerender();
 }
