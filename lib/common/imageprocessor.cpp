@@ -10,8 +10,7 @@
 
 #include <qtmetamacros.h>
 
-ImageProcessor::ImageProcessor(std::mutex* mut, std::condition_variable* cond)
-    : m_mutex_ptr(mut), m_cond_var_ptr(cond) {
+ImageProcessor::ImageProcessor() {
     connect(&m_watcher, &QFutureWatcher<QImage>::finished, this,
             &ImageProcessor::onImageProcessed);
 }

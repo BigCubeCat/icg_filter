@@ -4,8 +4,6 @@
 #include <qimage.h>
 #include <qobject.h>
 #include <qtmetamacros.h>
-#include <condition_variable>
-#include <mutex>
 #include "i_filter.hpp"
 
 /*!
@@ -14,7 +12,7 @@
 class ImageProcessor : public QObject {
     Q_OBJECT
    public:
-    explicit ImageProcessor(std::mutex* mut, std::condition_variable* cond);
+    explicit ImageProcessor();
 
     void filter(const std::string& name);
 
@@ -37,8 +35,6 @@ class ImageProcessor : public QObject {
     void process(IFilter* filter);
 
    private:
-    std::mutex* m_mutex_ptr;
-    std::condition_variable* m_cond_var_ptr;
     QFutureWatcher<QImage> m_watcher;
 
     IFilter* m_filter;

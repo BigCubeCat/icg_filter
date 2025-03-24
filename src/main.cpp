@@ -11,7 +11,6 @@
 #include "procs/bw_ordered_dithering/bw_od.hpp"
 #include "signalcontroller.hpp"
 
-
 /// Фильтры
 #include "procs/alpha/alpha.hpp"
 #include "procs/black_white/black_white_filter.hpp"
@@ -62,8 +61,9 @@ int main(int argc, char* argv[]) {
     factory.register_filter(sharp_ptr->name().toStdString(), sharp_ptr);
     auto bw_ordered_dithering_filter_ptr =
         std::make_shared<BWOrderedDitheringFilter>();
-    factory.register_filter(bw_ordered_dithering_filter_ptr->name().toStdString(),
-                            bw_ordered_dithering_filter_ptr);
+    factory.register_filter(
+        bw_ordered_dithering_filter_ptr->name().toStdString(),
+        bw_ordered_dithering_filter_ptr);
     auto anaglyph_ptr = std::make_shared<AnaglyphFilter>();
     factory.register_filter(anaglyph_ptr->name().toStdString(), anaglyph_ptr);
     auto gamma_ptr = std::make_shared<GammaCorrectionFiter>();
@@ -73,24 +73,23 @@ int main(int argc, char* argv[]) {
     auto sobels_ptr = std::make_shared<SobelsFilter>();
     factory.register_filter(sobels_ptr->name().toStdString(), sobels_ptr);
     auto floyd_steinberg_filter_ptr = std::make_shared<FloydSteinbergFilter>();
-    factory.register_filter(floyd_steinberg_filter_ptr->name().toStdString(), floyd_steinberg_filter_ptr);
-    auto ordered_dithering_filter_ptr = std::make_shared<OrderedDitheringFilter>();
-    factory.register_filter(ordered_dithering_filter_ptr->name().toStdString(), ordered_dithering_filter_ptr);
+    factory.register_filter(floyd_steinberg_filter_ptr->name().toStdString(),
+                            floyd_steinberg_filter_ptr);
+    auto ordered_dithering_filter_ptr =
+        std::make_shared<OrderedDitheringFilter>();
+    factory.register_filter(ordered_dithering_filter_ptr->name().toStdString(),
+                            ordered_dithering_filter_ptr);
     auto aquarel_ptr = std::make_shared<aquarel>();
     factory.register_filter(aquarel_ptr->name().toStdString(), aquarel_ptr);
 
-    ImageProcessor image_processor(&mutex, &condition_variable);
-
+    ImageProcessor image_processor;
     FileProcessor file_processor(image_processor);
     SignalController controller{&file_processor, &image_processor};
-
     MainWindow view(nullptr, &controller, &image_processor, &file_processor,
                     &factory);
 
     view.show();
     QApplication::exec();
-    condition_variable.notify_one();
-    image_processor.is_ready();
 
     return 0;
 }
