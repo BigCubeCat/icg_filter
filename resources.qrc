@@ -27,6 +27,7 @@
     <file>qml/filters/gamma.qml</file>
     <file>qml/filters/roberts.qml</file>
     <file>qml/filters/sobels.qml</file>
+    <file>qml/filters/BWFloydSteinbergFilter.qml</file>
     <file>qml/filters/FloydSteinbergFilter.qml</file>
     <file>qml/filters/orderedDithering.qml</file>
     <file>qml/filters/aquarel.qml</file>

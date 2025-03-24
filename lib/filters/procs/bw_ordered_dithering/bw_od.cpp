@@ -15,7 +15,7 @@ double bayer(int i, int j, int n) {
 };  // namespace
 
 void BWOrderedDitheringFilter::apply(QImage& image) {
-    int step = 255 / (m_cnt_quants);
+    int step = 255 / (m_cnt_quants - 1);
 
     const int height = image.height();
     const int width = image.width();

@@ -1,8 +1,5 @@
-//
-// Created by anton on 3/18/25.
-//
-
 #include "FloydSteinbergFilter.hpp"
+
 void FloydSteinbergFilter::apply(QImage& image) {
     int r_step = 255 / (m_cnt_red_quants - 1);
     int g_step = 255 / (m_cnt_green_quants - 1);

@@ -8,27 +8,26 @@
 #include "filters.hpp"
 #include "imageprocessor.hpp"
 #include "mainwindow.hpp"
+#include "procs/bw_floyd/floyd.hpp"
 #include "procs/bw_ordered_dithering/bw_od.hpp"
 #include "signalcontroller.hpp"
 
 /// Фильтры
+#include "procs/FloydSteinbergFilter/FloydSteinbergFilter.hpp"
 #include "procs/alpha/alpha.hpp"
+#include "procs/anglyph/anaglyph.hpp"
+#include "procs/aqua/aquarel.hpp"
 #include "procs/black_white/black_white_filter.hpp"
 #include "procs/blur/blur.hpp"
 #include "procs/emboss/emboss.hpp"
+#include "procs/gamma/gamma.hpp"
 #include "procs/inversion/inversion.hpp"
 #include "procs/mirror/mirror.hpp"
+#include "procs/ordered_dithering/OrderedDitheringFilter.hpp"
+#include "procs/roberts/RobertsFilter.hpp"
 #include "procs/rotate/rotate.hpp"
 #include "procs/sepia/sepia_filter.hpp"
 #include "procs/sharp/sharpness.hpp"
-
-#include "WeightMatrix.hpp"
-#include "procs/FloydSteinbergFilter/FloydSteinbergFilter.hpp"
-#include "procs/anglyph/anaglyph.hpp"
-#include "procs/aqua/aquarel.hpp"
-#include "procs/gamma/gamma.hpp"
-#include "procs/ordered_dithering/OrderedDitheringFilter.hpp"
-#include "procs/roberts/RobertsFilter.hpp"
 #include "procs/sobel/SobelsFilter.hpp"
 
 int main(int argc, char* argv[]) {
@@ -49,8 +48,6 @@ int main(int argc, char* argv[]) {
     factory.register_filter(rotate_ptr->name().toStdString(), rotate_ptr);
     auto alpha_ptr = std::make_shared<AlphaFilter>();
     factory.register_filter(alpha_ptr->name().toStdString(), alpha_ptr);
-    auto emb_ptr = std::make_shared<EmbossFilter>();
-    factory.register_filter(emb_ptr->name().toStdString(), emb_ptr);
     auto bw_ptr = std::make_shared<BlackWhiteFilter>();
     factory.register_filter(bw_ptr->name().toStdString(), bw_ptr);
     auto inv_ptr = std::make_shared<InversionFilter>();
@@ -75,6 +72,10 @@ int main(int argc, char* argv[]) {
     auto floyd_steinberg_filter_ptr = std::make_shared<FloydSteinbergFilter>();
     factory.register_filter(floyd_steinberg_filter_ptr->name().toStdString(),
                             floyd_steinberg_filter_ptr);
+    auto bw_floyd_steinberg_filter_ptr =
+        std::make_shared<BlackWhiteFloydSteinbergFilter>();
+    factory.register_filter(bw_floyd_steinberg_filter_ptr->name().toStdString(),
+                            bw_floyd_steinberg_filter_ptr);
     auto ordered_dithering_filter_ptr =
         std::make_shared<OrderedDitheringFilter>();
     factory.register_filter(ordered_dithering_filter_ptr->name().toStdString(),
