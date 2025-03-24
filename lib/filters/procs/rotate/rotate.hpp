@@ -13,7 +13,7 @@ class RotateFilter : public IFilter {
     ~RotateFilter() override = default;
 
     QString qml_path() const override {
-        return QString("qml/filters/rotate.qml");
+        return QString("qrc:/qml/filters/rotate.qml");
     }
 
     QString name() const override { return "rotate"; }

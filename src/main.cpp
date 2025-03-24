@@ -5,6 +5,7 @@
 #include "procs/emboss/emboss.hpp"
 #include "procs/sepia/sepia_filter.hpp"
 
+
 /// Фильтры
 #include "procs/alpha/alpha.hpp"
 #include "procs/mirror/mirror.hpp"
@@ -15,7 +16,6 @@
 #include "procs/inversion/inversion.hpp"
 #include "procs/sharp/sharpness.hpp"
 
-///
 
 #include <QApplication>
 #include <QQmlApplicationEngine>
@@ -23,6 +23,13 @@
 #include <memory>
 
 #include "WeightMatrix.hpp"
+#include "procs/FloydSteinbergFilter/FloydSteinbergFilter.hpp"
+#include "procs/anglyph/anaglyph.hpp"
+#include "procs/aqua/aquarel.hpp"
+#include "procs/gamma/gamma.hpp"
+#include "procs/ordered_dithering/OrderedDitheringFilter.hpp"
+#include "procs/roberts/RobertsFilter.hpp"
+#include "procs/sobel/SobelsFilter.hpp"
 
 
 int main(int argc, char* argv[]) {
@@ -33,12 +40,8 @@ int main(int argc, char* argv[]) {
                                   "WeightMatrixModel");
     FiltersFactory factory{};
 
-    factory.register_filter("sepia", std::make_shared<SepiaFilter>());
-    factory.register_filter("mirror", std::make_shared<MirrorFilter>());
-    factory.register_filter("rotate", std::make_shared<RotateFilter>());
-    factory.register_filter("alpha", std::make_shared<AlphaFilter>());
-    factory.register_filter("emboss", std::make_shared<EmbossFilter>());
-  
+    auto emboss_ptr = std::make_shared<EmbossFilter>();
+    factory.register_filter(emboss_ptr->name().toStdString(), emboss_ptr);
     auto sepia_ptr = std::make_shared<SepiaFilter>();
     factory.register_filter(sepia_ptr->name().toStdString(), sepia_ptr );
     auto mirror_ptr = std::make_shared<SepiaFilter>();
@@ -55,7 +58,20 @@ int main(int argc, char* argv[]) {
     factory.register_filter(blur_ptr->name().toStdString(), blur_ptr);
     auto sharp_ptr = std::make_shared<SharpnessFilter>();
     factory.register_filter(sharp_ptr->name().toStdString(), sharp_ptr);
-    
+    auto anaglyph_ptr = std::make_shared<AnaglyphFilter>();
+    factory.register_filter(anaglyph_ptr->name().toStdString(), anaglyph_ptr);
+    auto gamma_ptr = std::make_shared<GammaCorrectionFiter>();
+    factory.register_filter(gamma_ptr->name().toStdString(), gamma_ptr);
+    auto roberts_ptr = std::make_shared<RobertsFilter>();
+    factory.register_filter(roberts_ptr->name().toStdString(), roberts_ptr);
+    auto sobels_ptr = std::make_shared<SobelsFilter>();
+    factory.register_filter(sobels_ptr->name().toStdString(), sobels_ptr);
+    auto floyd_steinberg_filter_ptr = std::make_shared<FloydSteinbergFilter>();
+    factory.register_filter(floyd_steinberg_filter_ptr->name().toStdString(), floyd_steinberg_filter_ptr);
+    auto ordered_dithering_filter_ptr = std::make_shared<OrderedDitheringFilter>();
+    factory.register_filter(ordered_dithering_filter_ptr->name().toStdString(), ordered_dithering_filter_ptr);
+    auto aquarel_ptr = std::make_shared<aquarel>();
+    factory.register_filter(aquarel_ptr->name().toStdString(), aquarel_ptr);
 
 
     ImageProcessor image_processor{};

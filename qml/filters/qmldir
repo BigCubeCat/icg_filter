@@ -4,4 +4,11 @@ black_white 1.0 black_white.qml
 inversion 1.0 inversion.qml
 sharp 1.0 sharp.qml
 blur 1.0 blur.qml
+anaglyph 1.0 anaglyph.qml
+gamma 1.0 gamma.qml
+roberts 1.0 roberts.qml
+sobels 1.0 sobels.qml
+fsf 1.0 FloydSteinbergFilter.qml
+odf 1.0 orderedDithering.qml
+aquarel 1.0 aquarel.qml
 
