@@ -8,8 +8,6 @@
 
 #include <qtmetamacros.h>
 
-#include <algorithm>
-
 ImageProcessor::ImageProcessor(std::mutex* mut, std::condition_variable* cond)
     : m_mutex_ptr(mut), m_cond_var_ptr(cond) {}
 
@@ -37,43 +35,6 @@ void ImageProcessor::setImage(QImage new_image) {
     emit rerender();
 }
 
-void ImageProcessor::zoomHandler(int old_zoom) {
-    emit zoom(old_zoom, m_current_zoom);
-    emit rerender();
-}
-
-void ImageProcessor::zoomIn() {
-    int old_zoom = m_current_zoom;
-    m_current_zoom += kZoomStep;
-    m_current_zoom = std::min<double>(m_current_zoom, 3.0F);
-    zoomHandler(old_zoom);
-}
-
-void ImageProcessor::zoomOut() {
-    int old_zoom = m_current_zoom;
-    m_current_zoom -= kZoomStep;
-    m_current_zoom = std::max<double>(m_current_zoom, 0.1F);
-    zoomHandler(old_zoom);
-}
-
-void ImageProcessor::zoomReset() {
-    m_current_zoom = 1;
-    zoomHandler(1);
-}
-
-void ImageProcessor::zoomFit(const QSize& size) {
-    const auto view_width = size.width();
-    const auto view_height = size.height();
-    const auto image_width = m_original.width();
-    const auto image_height = m_original.height();
-
-    m_current_zoom = std::min<float>(
-        static_cast<float>(view_width) / static_cast<float>(image_width),
-
-        static_cast<float>(view_height) / static_cast<float>(image_height));
-    zoomHandler(1);
-}
-
 void ImageProcessor::applyFilter(IFilter* filter) {
     m_filter = filter;
     m_edited = QImage(m_original);
@@ -87,14 +48,11 @@ void ImageProcessor::applyFilter(IFilter* filter) {
 }
 
 void ImageProcessor::apply() {
-    qDebug() << "applying filter";
     m_filter->apply(m_image);
-    qDebug() << "done";
 }
 
 void ImageProcessor::save(const std::string& filename,
                           const std::string& format) {
-    qDebug() << "image processor " << filename << " " << format;
     m_edited.save(filename.c_str(), format.c_str());
     m_original = m_edited;
 }
@@ -106,6 +64,5 @@ void ImageProcessor::done() {
     m_has_edited = true;
     m_edited = m_image;
     m_image.fill(QColor(0, 0, 255));
-    qDebug() << "done()";
     emit rerender();
 }

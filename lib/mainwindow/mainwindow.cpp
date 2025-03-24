@@ -67,14 +67,15 @@ void MainWindow::connectSlots() {
     connect(m_ui->actionSave_As, &QAction::triggered, m_controller,
             &SignalController::saveAsFile);
 
-    connect(m_ui->actionZoomIn, &QAction::triggered, m_im,
-            &ImageProcessor::zoomIn);
-    connect(m_ui->actionZoomOut, &QAction::triggered, m_im,
-            &ImageProcessor::zoomOut);
-    connect(m_ui->actionResetZoom, &QAction::triggered, m_im,
-            &ImageProcessor::zoomReset);
-    connect(m_ui->actionZoomFit, &QAction::triggered, this,
-            &MainWindow::zoomFit);
+    connect(m_ui->actionZoomIn, &QAction::triggered, &m_image_painter,
+            &ImagePainter::zoomIn);
+    connect(m_ui->actionZoomOut, &QAction::triggered, &m_image_painter,
+            &ImagePainter::zoomOut);
+    connect(m_ui->actionResetZoom, &QAction::triggered, &m_image_painter,
+            &ImagePainter::zoomReset);
+    connect(m_ui->actionZoomFit, &QAction::triggered, &m_image_painter,
+            &ImagePainter::zoomFit);
+
     connect(m_controller, &SignalController::saveFileSignal, this,
             &MainWindow::updateFilename);
     connect(m_controller, &SignalController::openFileSignal, this,
@@ -173,8 +174,6 @@ void MainWindow::filterApplyed() {
 void MainWindow::hideToolbar() {
     m_ui->toolBar->setHidden(!m_ui->actionShowWindowToolbar->isChecked());
 }
-
-void MainWindow::zoomFit() {}
 
 void MainWindow::updateView() {
     m_image_painter.setView(m_im->image());

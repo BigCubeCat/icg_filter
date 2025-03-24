@@ -3,6 +3,9 @@
 #include <qgraphicsview.h>
 #include <qlogging.h>
 
+const float kScaleIn = 1.01;
+const float kScaleOut = 0.99;
+
 ImagePainter::ImagePainter(ImageProcessor* processor, QWidget* parent)
     : QGraphicsView(parent), m_processor(processor) {
     setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
@@ -12,15 +15,16 @@ void ImagePainter::setView(const QImage& image) {
     m_pixmap_item =
         std::make_unique<QGraphicsPixmapItem>(QPixmap::fromImage(image));
     m_scene.addItem(m_pixmap_item.get());
-    m_scene.setSceneRect(image.rect());
+    m_rect = image.rect();
+    m_scene.setSceneRect(m_rect);
     this->setScene(&m_scene);
 }
 
 void ImagePainter::wheelEvent(QWheelEvent* event) {
     if (event->angleDelta().y() > 0)
-        scale(1.1, 1.1);
+        scale(kScaleIn, kScaleIn);
     else
-        scale(0.9, 0.9);
+        scale(kScaleOut, kScaleOut);
 }
 
 void ImagePainter::mousePressEvent(QMouseEvent* event) {
@@ -36,4 +40,28 @@ void ImagePainter::mouseMoveEvent(QMouseEvent* event) {
                                         delta.x());
         verticalScrollBar()->setValue(verticalScrollBar()->value() - delta.y());
     }
+}
+
+void ImagePainter::zoomIn() {
+    scale(kScaleIn, kScaleIn);
+}
+
+void ImagePainter::zoomOut() {
+    scale(kScaleOut, kScaleOut);
+}
+
+void ImagePainter::zoomFit() {
+    zoomReset();
+    auto size = this->size();
+    const auto rect_width = static_cast<float>(size.width());
+    const auto rect_height = static_cast<float>(size.height());
+    const auto img_width = static_cast<float>(m_rect.width());
+    const auto img_height = static_cast<float>(m_rect.height());
+    auto k = (img_width > img_height) ? (rect_width / img_width)
+                                      : (rect_height / img_height);
+    scale(k, k);
+}
+
+void ImagePainter::zoomReset() {
+    setTransform(QTransform());
 }

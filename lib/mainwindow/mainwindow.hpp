@@ -28,8 +28,6 @@ class MainWindow : public QMainWindow {
 
     void hideToolbar();
 
-    void zoomFit();
-
     void updateView();
 
    public:

@@ -24,8 +24,16 @@ class ImagePainter : public QGraphicsView {
     QGraphicsScene m_scene;
     std::unique_ptr<QGraphicsPixmapItem> m_pixmap_item;
 
+    QRect m_rect;
+
    protected:
     void wheelEvent(QWheelEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
+
+   public slots:
+    void zoomIn();
+    void zoomOut();
+    void zoomFit();
+    void zoomReset();
 };
