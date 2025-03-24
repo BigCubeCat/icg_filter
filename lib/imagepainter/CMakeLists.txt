@@ -1,6 +1,7 @@
 qt_add_library(imagepainter STATIC
     imagepainter.cpp
     imagepainter.hpp
+    imagepainter.ui
 )
 
 target_link_libraries(imagepainter

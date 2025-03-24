@@ -1,25 +1,31 @@
 #pragma once
 
+#include <qgraphicsscene.h>
 #include <qobject.h>
+#include <qwidget.h>
+#include <QGraphicsPixmapItem>
 #include <QImage>
+
 #include "imageprocessor.hpp"
 
-class ImagePainter : public QObject {
+QT_BEGIN_NAMESPACE
+namespace Ui {
+class ImagePainter;
+}
+QT_END_NAMESPACE
+
+class ImagePainter : public QWidget {
     Q_OBJECT
-    Q_PROPERTY(QImage image READ image WRITE setImage NOTIFY imageChanged)
    public:
-    explicit ImagePainter(ImageProcessor* processor);
+    explicit ImagePainter(ImageProcessor* processor, QWidget* parent = nullptr);
 
-    QImage image() const;
-    void setImage(const QImage& newImage);
+    ~ImagePainter() override { delete m_ui; }
 
-   signals:
-    void imageChanged();
-
-   public slots:
-    void updateImage();
+    void setView(const QImage& image);
 
    private:
     ImageProcessor* m_processor;
-    QImage m_image;
+    Ui::ImagePainter* m_ui;
+
+    QGraphicsScene m_scene;
 };

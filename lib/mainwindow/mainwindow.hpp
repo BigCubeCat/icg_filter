@@ -30,6 +30,8 @@ class MainWindow : public QMainWindow {
 
     void zoomFit();
 
+    void updateView();
+
    public:
     explicit MainWindow(QWidget* parent, SignalController* controller,
                         ImageProcessor* im, ImageWorker* worker,

@@ -28,6 +28,7 @@ class ImageProcessor : public QObject {
     float zoomFacor() const { return m_current_zoom; }
 
     bool ready() const { return m_need_process; }
+
     void is_ready() {
         m_need_process = true;
         {

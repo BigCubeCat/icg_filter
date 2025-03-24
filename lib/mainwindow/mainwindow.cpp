@@ -23,13 +23,16 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller,
     : QMainWindow(parent),
       m_ui(new Ui::MainWindow),
       m_factory(factory),
-      m_image_painter(im),
+      m_image_painter(im, this),
       m_controller(controller),
       m_im(im),
       m_worker(worker),
       m_fp(fp),
       m_tool_group(this) {
     m_ui->setupUi(this);
+
+    m_ui->mainLayout->addWidget(&m_image_painter);
+
     m_ui->quickWidget->engine()->addImportPath("qrc:/qml");
 
     m_ui->toolBar->addActions(m_ui->menuFile->actions());
@@ -37,10 +40,6 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller,
     m_ui->toolBar->addActions(m_ui->menuZoom->actions());
     m_ui->toolBar->addSeparator();
     m_ui->toolBar->addActions(m_ui->menuImage->actions());
-
-    m_ui->canvasWidget->engine()->rootContext()->setContextProperty(
-        "img", &m_image_painter);
-    m_ui->canvasWidget->setSource(QUrl("qrc:/qml/forms/ImagePreview.qml"));
 
     connectSlots();
     registerFilters();
@@ -81,12 +80,11 @@ void MainWindow::connectSlots() {
     connect(m_controller, &SignalController::openFileSignal, this,
             &MainWindow::updateFilename);
 
-    connect(m_controller, &SignalController::openFileSignal, &m_image_painter,
-            &ImagePainter::updateImage);
-    connect(m_controller, &SignalController::newImageSignal, &m_image_painter,
-            &ImagePainter::updateImage);
-    connect(m_im, &ImageProcessor::rerender, &m_image_painter,
-            &ImagePainter::updateImage);
+    connect(m_controller, &SignalController::openFileSignal, this,
+            &MainWindow::updateView);
+    connect(m_controller, &SignalController::newImageSignal, this,
+            &MainWindow::updateView);
+    connect(m_im, &ImageProcessor::rerender, this, &MainWindow::updateView);
 
     connect(m_ui->actionNextImage, &QAction::triggered, m_fp,
             &FileProcessor::nextImageInFolder);
@@ -144,14 +142,13 @@ void MainWindow::registerFilters() {
         {kMatrix, m_ui->menuMatrix},
     };
     static std::map<EFilterType, QString> icon_path = {
-        {kPixel, "assets/icons/pixel.png"},
-        {kBasic, "assets/icons/edit.png"},
-        {kMatrix, "assets/icons/ice-cube.png"},
+        {kPixel, "assets/icons/svg/solid/atom.svg"},
+        {kBasic, "assets/icons/svg/solid/eye.svg"},
+        {kMatrix, "assets/icons/svg/solid/square.svg"},
     };
     auto all_filters = m_factory->all_filters();
     for (auto& filter : all_filters) {
-        connect(filter, &IFilter::done, &m_image_painter,
-                &ImagePainter::updateImage);
+        connect(filter, &IFilter::done, this, &MainWindow::updateView);
         auto* action = new QAction(filter);
         action->setIcon(QIcon(icon_path[filter->type()]));
 
@@ -169,7 +166,6 @@ void MainWindow::registerFilters() {
 void MainWindow::filterApplyed() {
     auto* filter_action = qobject_cast<QAction*>(sender());
     auto* filter = qobject_cast<IFilter*>(filter_action->parent());
-    qDebug() << filter->name();
     m_ui->quickWidget->setSource(QUrl(filter->qml_path()));
     m_current_filter = filter;
 }
@@ -178,6 +174,8 @@ void MainWindow::hideToolbar() {
     m_ui->toolBar->setHidden(!m_ui->actionShowWindowToolbar->isChecked());
 }
 
-void MainWindow::zoomFit() {
-    // m_im->zoomFit(m_ui->scrollArea->size());
+void MainWindow::zoomFit() {}
+
+void MainWindow::updateView() {
+    m_image_painter.setView(m_im->image());
 }
