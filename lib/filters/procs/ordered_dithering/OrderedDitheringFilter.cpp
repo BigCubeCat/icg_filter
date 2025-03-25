@@ -26,6 +26,7 @@ void OrderedDitheringFilter::apply(QImage& image) {
     auto out = QImage(width, height, QImage::Format_RGB32);
     image.convertTo(QImage::Format_RGB32);
 
+#pragma omp parallel for
     for (int y = 0; y < height; ++y) {
         const auto* inpt_line =
             reinterpret_cast<const QRgb*>(image.constScanLine(y));
