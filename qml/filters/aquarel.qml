@@ -1,5 +1,6 @@
 import QtQuick 2.15
-Item {
+Column {
+    spacing: 10
     Text {
         text: "Aquarel"
         font.family: "Helvetica"

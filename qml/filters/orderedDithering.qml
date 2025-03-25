@@ -6,7 +6,9 @@ Column {
     anchors.fill: parent
     anchors.margins: 20
     spacing: 10
-
+    Text {
+        text: "ordered-dithering"
+    }
     SliderSpinBox {
         minValue: 2
         maxValue: 128

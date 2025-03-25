@@ -7,6 +7,9 @@ Column {
   anchors.fill: parent
   anchors.margins: 20
   spacing: 10
+  Text {
+      text: "alpha filter"
+  }
 
   SliderSpinBox {
     minValue: 1

@@ -4,6 +4,10 @@ import components
 
 Column {
     spacing: 10
+    Text {
+        text: "Sharp"
+    }
+
     WeightMatrix {
         id: matrix
         title: "Sharpness"

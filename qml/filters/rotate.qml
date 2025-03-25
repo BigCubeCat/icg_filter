@@ -7,6 +7,10 @@ Column {
     anchors.fill: parent
     anchors.margins: 20
     spacing: 10
+    Text {
+        text: "Rotate"
+    }
+
     SliderSpinBox {
         minValue: -180
         maxValue: 180

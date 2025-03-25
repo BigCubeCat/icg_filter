@@ -4,6 +4,10 @@ import components
 
 Column {
     spacing: 10
+
+    Text {
+        text: "blur"
+    }
     WeightMatrix {
         id: matrix
         title: "Gaussian blur"

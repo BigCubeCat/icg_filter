@@ -7,6 +7,10 @@ Column {
     anchors.margins: 20
     spacing: 10
 
+    Text {
+        text: "Sobel"
+    }
+
     SliderSpinBox {
         minValue: 0
         maxValue: 610
