@@ -5,8 +5,7 @@
 
 class BlackWhiteFloydSteinbergFilter : public IFilter {
     Q_OBJECT
-    Q_PROPERTY(
-        int red_quants READ get_quants WRITE set_quants NOTIFY cntChanged)
+    Q_PROPERTY(int quants READ get_quants WRITE set_quants NOTIFY cntChanged)
 
    public:
     QString name() const override { return "bwfsf"; }

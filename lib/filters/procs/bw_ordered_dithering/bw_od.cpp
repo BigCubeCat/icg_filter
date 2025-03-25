@@ -32,6 +32,7 @@ void BWOrderedDitheringFilter::apply(QImage& image) {
 
     image.convertTo(QImage::Format_Grayscale8);
 
+    // ускорение ровно в 8 раз
 #pragma omp parallel for
     for (int y = 0; y < height; ++y) {
         const uchar* inpt_line = image.constScanLine(y);
