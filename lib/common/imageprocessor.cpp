@@ -8,6 +8,7 @@
 #include <QFuture>
 #include <QtConcurrent/QtConcurrent>
 
+#include <qlogging.h>
 #include <qtmetamacros.h>
 
 ImageProcessor::ImageProcessor() {
@@ -61,6 +62,7 @@ void ImageProcessor::applyFilter(IFilter* filter) {
 
 void ImageProcessor::save(const std::string& filename,
                           const std::string& format) {
+    qDebug() << filename << "." << format << "\n";
     m_edited.save(filename.c_str(), format.c_str());
     m_original = m_edited;
 }
