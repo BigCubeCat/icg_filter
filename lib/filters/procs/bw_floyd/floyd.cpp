@@ -1,12 +1,6 @@
 #include "floyd.hpp"
 
-namespace {
-double round(int color, int step) {
-    return std::round(color / step) * step;
-}
-}  // namespace
-
-#define stepify(x, step) static_cast<uchar>(std::round((x) / (step)) * (step));
+#include "dithering_utils.hpp"
 
 void BlackWhiteFloydSteinbergFilter::apply(QImage& image) {
     const int step = 255 / (m_cnt_quants - 1);
