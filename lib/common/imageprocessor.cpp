@@ -15,7 +15,7 @@ ImageProcessor::ImageProcessor() {
             &ImageProcessor::onImageProcessed);
 }
 
-void ImageProcessor::setSaved(bool saved) {
+void ImageProcessor::setSaved(bool /* saved */) {
     m_original = QImage(m_edited);
 }
 
@@ -33,6 +33,10 @@ void ImageProcessor::setImage(QImage new_image) {
 }
 
 void ImageProcessor::applyFilter(IFilter* filter) {
+    if (!m_done) {
+        return;
+    }
+    m_done = false;
     m_filter = filter;
     m_edited = QImage(m_original);
     QApplication::setOverrideCursor(Qt::CursorShape::WaitCursor);
@@ -67,6 +71,7 @@ void ImageProcessor::done() {
 }
 
 void ImageProcessor::onImageProcessed() {
+    m_done = true;
     m_edited = m_watcher.result();
     done();
 }

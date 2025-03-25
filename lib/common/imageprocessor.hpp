@@ -29,6 +29,7 @@ class ImageProcessor : public QObject {
     void process(IFilter* filter);
 
    private:
+    bool m_done = true;
     QFutureWatcher<QImage> m_watcher;
 
     IFilter* m_filter;
