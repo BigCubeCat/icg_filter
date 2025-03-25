@@ -1,6 +1,8 @@
 #include "FloydSteinbergFilter.hpp"
 
 void FloydSteinbergFilter::apply(QImage& image) {
+    const int width = image.width();
+    const int height = image.height();
     int r_step = 255 / (m_cnt_red_quants - 1);
     int g_step = 255 / (m_cnt_green_quants - 1);
     int b_step = 255 / (m_cnt_blue_quants - 1);
@@ -13,8 +15,8 @@ void FloydSteinbergFilter::apply(QImage& image) {
         }
     }
 
-    for (int y = 0; y < image.height(); y++) {
-        for (int x = 0; x < image.width(); x++) {
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
             QColor color = image.pixelColor(x, y);
             int new_red =
                 std::round(static_cast<double>(color.red() + errors[0][y][x]) /
