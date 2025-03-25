@@ -37,15 +37,23 @@ void ImageProcessor::applyFilter(IFilter* filter) {
     m_edited = QImage(m_original);
     QApplication::setOverrideCursor(Qt::CursorShape::WaitCursor);
     QFuture<QImage> future = QtConcurrent::run([this]() mutable {
+        const auto p1 = std::chrono::system_clock::now();
+        const auto begin =
+            std::chrono::duration_cast<std::chrono::milliseconds>(
+                p1.time_since_epoch())
+                .count();
         m_image = m_edited;
         m_filter->apply(m_image);
+        const auto p2 = std::chrono::system_clock::now();
+        const auto end = std::chrono::duration_cast<std::chrono::milliseconds>(
+                             p2.time_since_epoch())
+                             .count();
+        qDebug() << "time spent: " << end - begin << "\n";
         return m_image;
     });
 
     m_watcher.setFuture(future);
 }
-
-void ImageProcessor::apply() {}
 
 void ImageProcessor::save(const std::string& filename,
                           const std::string& format) {

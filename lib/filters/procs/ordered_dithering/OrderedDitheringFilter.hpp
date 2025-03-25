@@ -18,7 +18,7 @@ class OrderedDitheringFilter : public IFilter {
     QString qml_path() const override {
         return "qrc:/qml/filters/orderedDithering.qml";
     }
-    EFilterType type() const override { return kPixel; }
+    EFilterType type() const override { return kDithering; }
 
     Q_INVOKABLE int get_red_quants() const { return m_cnt_red_quants; }
     Q_INVOKABLE int get_green_quants() const { return m_cnt_green_quants; }

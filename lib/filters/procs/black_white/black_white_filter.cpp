@@ -1,6 +1,8 @@
 #include "black_white_filter.hpp"
 
 void BlackWhiteFilter::apply(QImage& image) {
+    image = image.convertToFormat(QImage::Format_Grayscale8);
+    /*
     const int height = image.height();
     const int width = image.width();
     for (int y = 0; y < height; y++) {
@@ -11,4 +13,5 @@ void BlackWhiteFilter::apply(QImage& image) {
             image.setPixelColor(x, y, QColor(grey_lvl, grey_lvl, grey_lvl));
         }
     }
+*/
 }

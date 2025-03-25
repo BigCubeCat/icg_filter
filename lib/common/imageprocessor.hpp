@@ -22,8 +22,6 @@ class ImageProcessor : public QObject {
     QImage image() const;
     void setImage(QImage new_image);
 
-    void apply();
-
    signals:
     void rerender();
     void saved(bool is_saved);

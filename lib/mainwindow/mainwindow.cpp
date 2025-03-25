@@ -140,11 +140,13 @@ void MainWindow::registerFilters() {
         {kPixel, m_ui->menuPixel},
         {kBasic, m_ui->menuBasics},
         {kMatrix, m_ui->menuMatrix},
+        {kDithering, m_ui->menuDithering},
     };
     static std::map<EFilterType, QString> icon_path = {
         {kPixel, "assets/icons/svg/solid/atom.svg"},
         {kBasic, "assets/icons/svg/solid/eye.svg"},
         {kMatrix, "assets/icons/svg/solid/square.svg"},
+        {kDithering, "assets/icons/svg/solid/doge-square.svg"},
     };
     auto all_filters = m_factory->all_filters();
     for (auto& filter : all_filters) {
@@ -161,6 +163,7 @@ void MainWindow::registerFilters() {
     m_ui->toolBar->addActions(m_ui->menuBasics->actions());
     m_ui->toolBar->addActions(m_ui->menuPixel->actions());
     m_ui->toolBar->addActions(m_ui->menuMatrix->actions());
+    m_ui->toolBar->addActions(m_ui->menuDithering->actions());
 }
 
 void MainWindow::filterApplyed() {

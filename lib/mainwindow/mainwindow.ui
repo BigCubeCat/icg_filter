@@ -74,11 +74,18 @@
      </property>
      <addaction name="separator"/>
     </widget>
+    <widget class="QMenu" name="menuDithering">
+     <property name="title">
+      <string>Dithering</string>
+     </property>
+     <addaction name="separator"/>
+    </widget>
     <addaction name="actionApply"/>
     <addaction name="separator"/>
     <addaction name="menuBasics"/>
     <addaction name="menuPixel"/>
     <addaction name="menuMatrix"/>
+    <addaction name="menuDithering"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">

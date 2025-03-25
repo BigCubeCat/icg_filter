@@ -14,8 +14,10 @@ double bayer(int i, int j, int n) {
 }
 };  // namespace
 
+#define stepify(x, step) static_cast<uchar>(std::round((x) / (step)) * (step));
+
 void BWOrderedDitheringFilter::apply(QImage& image) {
-    int step = 255 / (m_cnt_quants - 1);
+    const int step = 255 / (m_cnt_quants - 1);
 
     const int height = image.height();
     const int width = image.width();
@@ -26,15 +28,18 @@ void BWOrderedDitheringFilter::apply(QImage& image) {
             bayer_matrix[i][j] = step * bayer(i, j, kN);
         }
     }
-#pragma omp parallel for collapse(2)
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            auto color = image.pixelColor(x, y);
-            double pixel = (0.299 * color.red()) + (0.587 * color.green()) +
-                           (0.114 * color.black()) +
-                           bayer_matrix[y % kN][x % kN];
-            pixel = std::round(pixel / step) * step;
-            image.setPixelColor(x, y, qRgb(pixel, pixel, pixel));
+    auto out = QImage(width, height, QImage::Format_Grayscale8);
+
+    image.convertTo(QImage::Format_Grayscale8);
+
+#pragma omp parallel for
+    for (int y = 0; y < height; ++y) {
+        const uchar* inpt_line = image.constScanLine(y);
+        uchar* otp_line = out.scanLine(y);
+        for (int x = 0; x < width; ++x) {
+            otp_line[x] =
+                stepify(inpt_line[x] + bayer_matrix[y % kN][x % kN], step);
         }
     }
+    image = out;
 }

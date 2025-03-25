@@ -13,7 +13,7 @@ class BWOrderedDitheringFilter : public IFilter {
     QString qml_path() const override {
         return "qrc:/qml/filters/ordered_dithering.qml";
     }
-    EFilterType type() const override { return kPixel; }
+    EFilterType type() const override { return kDithering; }
 
     Q_INVOKABLE int get_quants() const { return m_cnt_quants; }
     Q_INVOKABLE void set_quants(const QVariant& value) {
