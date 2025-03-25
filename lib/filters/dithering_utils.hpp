@@ -8,4 +8,4 @@ inline double bayer(int i, int j, int n) {
     return static_cast<double>(b) / (n * n);
 }
 
-#define stepify(x, step) static_cast<uchar>(std::round((x) / (step)) * (step));
+#define stepify(x, step) static_cast<uchar>(std::round((x) / (step)) * (step))
