@@ -12,6 +12,7 @@ class AnaglyphFilter : public IFilter {
 
     Q_PROPERTY(QString imagePath READ imagePath WRITE setImagePath NOTIFY
                    imagePathChanged)
+    Q_PROPERTY(int offset READ getOffset WRITE setOffset NOTIFY offsetChanged())
    public:
     ~AnaglyphFilter() override = default;
 
@@ -37,12 +38,19 @@ class AnaglyphFilter : public IFilter {
         // Здесь можно работать с файлом
         qDebug() << "Selected image path:" << clean_path;
     }
+    int getOffset() const { return m_offset; }
+
+    void setOffset(int offset) {
+        m_offset = offset;
+    }
 
    signals:
     void imagePathChanged(const QString& path);
+    void offsetChanged();
 
    private:
-    QString m_imagePath;
+    QString m_imagePath = "";
+    int m_offset = 0;
 
    public:
     void apply([[maybe_unused]] QImage& image) override;
