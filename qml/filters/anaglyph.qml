@@ -44,6 +44,7 @@ Column {
         id: imagePicker
         imageSource: anaglyph.imagePath
         onImageSourceChanged: anaglyph.imagePath = imageSource
+        visible: false
     }
 
     Text {
