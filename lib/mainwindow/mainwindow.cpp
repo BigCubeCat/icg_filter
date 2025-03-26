@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller,
     m_ui->mainLayout->addWidget(&m_image_painter);
 
     m_ui->quickWidget->engine()->addImportPath("qrc:/qml");
+    m_ui->quickWidget->engine()->addImportPath("qrc:/assets/icons");
 
     m_ui->toolBar->addActions(m_ui->menuFile->actions());
     m_ui->toolBar->addSeparator();

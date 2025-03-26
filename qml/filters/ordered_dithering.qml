@@ -4,17 +4,29 @@ import components 1.0
 
 Column {
     anchors.fill: parent
-    anchors.margins: 20
     spacing: 10
 
     Text {
-        text: "black-white dithering"
+        text: "Black White Ordered dithering"
+        font.family: "Helvetica"
+        font.pointSize: 16
+        font.bold: true
+        width: parent.width
+        wrapMode: Text.WordWrap
+    }
+
+    Text {
+        width: parent.width
+        text: "Данный фильтр переводит изображение в чёрно белое и уменьшает количество цветов в палитре для каждого цвета, сохраняя общую композицию изображения."
+        font.family: "Helvetica"
+        font.pointSize: 10
+        wrapMode: Text.WordWrap
     }
 
     SliderSpinBox {
         minValue: 2
         maxValue: 255
-        title: "count colors"
+        title: "Число цветов\n в палитре:"
         value: bw_odf.quants
         onValueChanged: bw_odf.quants = value
     }

@@ -13,9 +13,9 @@ SharpnessFilter::SharpnessFilter() {
         for (int j = 0; j < cnt; j++) {
             int offi = std::min(i, cnt - 1 - i);
             int offj = std::min(j, cnt - 1 - j);
-            m_weights[i][j] = -offi -offj;
+            m_weights[i][j] = -1;
             if (i == 1 && j == 1) {
-                m_weights[i][j] = 5;
+                m_weights[i][j] = 9;
             }
             sum_weight += m_weights[i][j];
 
@@ -35,9 +35,9 @@ void SharpnessFilter::onReset() {
         for (int j = 0; j < cnt; j++) {
             int offi = std::min(i, cnt - 1 - i);
             int offj = std::min(j, cnt - 1 - j);
-            m_weights[i][j] = -(offi + offj);
+            m_weights[i][j] = -1;
             if (i == 1 && j == 1) {
-                m_weights[i][j] = 5;
+                m_weights[i][j] = 9;
             }
             sum_weight += m_weights[i][j];
             emit set_weight(QVariant(j * cnt + i), QVariant(m_weights[i][j]));
