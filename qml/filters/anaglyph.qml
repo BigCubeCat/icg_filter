@@ -69,6 +69,7 @@ Column {
         onValueChanged: anaglyph.offset = value
     }
 
+
     Text {
         MouseArea {
             id: _mouseArea

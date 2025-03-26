@@ -37,6 +37,7 @@ Column {
         wrapMode: Text.WordWrap
         ToolTip.visible: _mouseArea.containsMouse
         ToolTip.text: "Матрица весов - это ядро свёртки из-за которой происходит размытие"
+
     }
     WeightMatrix {
         id: matrix

@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls
 Column {
     anchors.fill: parent
+
     spacing: 10
     Text {
         text: "Aquarel"
