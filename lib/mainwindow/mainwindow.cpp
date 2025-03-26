@@ -143,10 +143,10 @@ void MainWindow::registerFilters() {
         {kDithering, m_ui->menuDithering},
     };
     static std::map<EFilterType, QString> icon_path = {
-        {kPixel, "assets/icons/svg/solid/atom.svg"},
-        {kBasic, "assets/icons/svg/solid/eye.svg"},
-        {kMatrix, "assets/icons/svg/solid/square.svg"},
-        {kDithering, "assets/icons/svg/solid/doge-square.svg"},
+        {kPixel, ":/icons/assets/icons/svg/solid/atom.svg"},
+        {kBasic, ":/icons/assets/icons/svg/solid/eye.svg"},
+        {kMatrix, ":/icons/assets/icons/svg/solid/square.svg"},
+        {kDithering, ":/icons/assets/icons/svg/solid/doge-square.svg"},
     };
     auto all_filters = m_factory->all_filters();
     for (auto& filter : all_filters) {
@@ -182,8 +182,9 @@ void MainWindow::updateView() {
 }
 
 void MainWindow::toggleView() {
-    static QIcon checked = QIcon("assets/icons/svg/solid/eye.svg");
-    static QIcon not_checked = QIcon("assets/icons/svg/solid/eye-off.svg");
+    static QIcon checked = QIcon(":/icons/assets/icons/svg/solid/eye.svg");
+    static QIcon not_checked =
+        QIcon(":/icons/assets/icons/svg/solid/eye-off.svg");
     m_ui->toolButton->setIcon(m_ui->toolButton->isChecked() ? not_checked
                                                             : checked);
     m_im->toggleView();
