@@ -1,46 +1,104 @@
-# Filter
+# ICG Filter
 
-# TODO
-написать красивый README.md
-- [x] previous \ next в папке
-- [ ] второй тред для редактирования
-- [x] повороты
-- [x] отзеркальивание
-- [x] альф канал 
-- [x] тиснение
-- [x] help
-- [x] about
-- [x] дизеринг
-- [x] zoom fit
-- [ ] пофиксить сохранение (не переоткрывается)
+Simple application for editing your photos
+
+![main screen](assets/readme/window.png)
 
 
-# Как добавить новый фильтр?
+## sepia
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/sepia.png" width="300"/>
+</div>
 
-0. Фильтр должен удвлетворять интерфейсу IFilter
-- Имя фильтра
+## mirror
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/mirror.png" width="300"/>
+</div>
 
-уникальный идентификатор фильтра. используется в контексте, в UI и для поиска фильтра в unordered_map
+## rotate
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/rotate.png" width="300"/>
+</div>
 
-- тип фильтра
+## black-white
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/bw.png" width="300"/>
+</div>
 
-определяет, в каком меню будет находится фильтр
+## inversion
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/inversion.png" width="300"/>
+</div>
 
-- qml path
+## gamma
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/gamma.png" width="300"/>
+</div>
 
-путь до QML-разметки виджета
+## sobel
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/sobel.png" width="300"/>
+</div>
 
-1. Создайте QML разметку 
+## overlay with alpha channel
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/alpha.png" width="300"/>
+</div>
 
-- в директории qml/filters создайте свой виджет
+## anaglyph
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/anaglyph.png" width="300"/>
+</div>
 
-- добавте его в qml/filters/qmldir
+## emboss
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/emboss.png" width="300"/>
+</div>
 
-- добавте виджет в ресурсы
+## blur
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/blur.png" width="300"/>
+</div>
 
-2. Создайте реализацию в подпапке lib/filters/procs/
+## sharp
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/sharp.png" width="300"/>
+</div>
 
-- qmp_path() должен возращать путь до qml
+## linear-dithering
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/dithering.png" width="300"/>
+</div>
 
-3. Зарегистровать виджет в фабрике (main.cpp)
+## black-white linear-dithering
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/bw_dithering.png" width="300"/>
+</div>
+
+## floyd-dithering
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/floyd.png" width="300"/>
+</div>
+
+## black-white linear-dithering
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/bw_floyd.png" width="300"/>
+</div>
+
 
