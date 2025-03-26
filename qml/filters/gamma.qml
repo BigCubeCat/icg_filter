@@ -24,6 +24,7 @@ Column {
 
     SliderSpinBoxF {
         title: "Показатель"
+        realValue: 1
         onRealValueChanged: gamma.gamma = realValue
     }
 }
