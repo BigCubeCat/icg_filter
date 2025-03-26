@@ -1,7 +1,3 @@
-//
-// Created by anton on 3/18/25.
-//
-
 #include "SobelsFilter.hpp"
 
 #include <QVariant>
@@ -20,7 +16,6 @@ void SobelsFilter::apply(QImage& image) {
     QImage first = image.copy();
     QImage second = image.copy();
 
-
     Convolution::convolution(first, first_step, 1, true, true);
     Convolution::convolution(second, second_step, 1, true, true);
     for (int y = 0; y < first.height(); ++y) {
@@ -31,7 +26,7 @@ void SobelsFilter::apply(QImage& image) {
             uchar g = (color.green() + color2.green() <= m_threshold) ? 0 : 255;
             uchar b = (color.blue() + color2.blue() <= m_threshold) ? 0 : 255;
 
-            image.setPixelColor(x, y, QColor(r,g,b));
+            image.setPixelColor(x, y, QColor(r, g, b));
         }
     }
 }

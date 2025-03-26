@@ -6,6 +6,9 @@ Column {
     anchors.fill: parent
     anchors.margins: 20
     spacing: 10
+    Text {
+        text: "floyd dithering"
+    }
 
     SliderSpinBox {
         minValue: 2

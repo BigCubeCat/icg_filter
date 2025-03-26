@@ -4,52 +4,68 @@
 
 #include "aquarel.hpp"
 
+#include <QVariant>
+
 #include "Convolution.hpp"
+
 void aquarel::apply(QImage& image) {
-    QImage tmp = image;
-    const int ks = 7;
+    QImage tmp = image.copy();
+    const int ks = m_size;
+    const int ks2 = ks * ks;
     const int st = -ks / 2;
     const int fn = (ks - 1) / 2;
     const int iw = image.width();
     const int ih = image.height();
     for (int y = 0; y < ih; y++) {
-        for (int x = 0; x < iw; x++) {
-            std::vector<int> reds;
-            std::vector<int> greens;
-            std::vector<int> blues;
-            for (int ki = st; ki <= fn; ++ki) {
-                for (int kj = st; kj <= fn; ++kj) {
-                    if (y + ki >= 0 && y + ki < ih && x + kj >= 0 &&
-                        x + kj < iw) {
-                        QColor color = image.pixel(x + kj, y + ki);
-                        reds.push_back(color.red());
-                        greens.push_back(color.green());
-                        blues.push_back(color.blue());
-                    }
+
+        MedianFinder reds{ks2};
+        MedianFinder greens{ks2};
+        MedianFinder blues{ks2};
+
+        QColor ccolor = image.pixelColor(0, y);
+        for (int k = 0; k < ks; k++) {
+            for (int l = st; l <= fn; l++) {
+                if (k <= ks / 2 || y + l < 0 || y + l >= ih) {
+                    reds.push(ccolor.red());
+                    greens.push(ccolor.green());
+                    blues.push(ccolor.blue());
+                } else {
+                    QColor color = image.pixelColor(-1 + k + st, y + l);
+                    reds.push(color.red());
+                    greens.push(color.green());
+                    blues.push(color.blue());
                 }
             }
-            std::sort(reds.begin(), reds.end());
-            std::sort(greens.begin(), greens.end());
-            std::sort(blues.begin(), blues.end());
-            tmp.setPixelColor(
-                x, y,
-                QColor(reds[reds.size() / 2], greens[greens.size() / 2],
-                       blues[blues.size() / 2]));
+        }
+
+        for (int x = 0; x < iw; x++) {
+            ccolor = image.pixelColor(x, y);
+            for (int k = st; k <= fn; k++) {
+                reds.pop();
+                greens.pop();
+                blues.pop();
+
+                if (x + fn >= iw || y + k < 0 || y + k >= ih) {
+                    reds.push(ccolor.red());
+                    greens.push(ccolor.green());
+                    blues.push(ccolor.blue());
+                } else {
+                    QColor color = image.pixelColor(x + fn, y + k);
+                    reds.push(color.red());
+                    greens.push(color.green());
+                    blues.push(color.blue());
+                }
+            }
+            tmp.setPixelColor(x, y, QColor(reds.median(), greens.median(), blues.median()));
         }
     }
 
-    QVector<QVector<int>> m_weights;
-    int cnt = 3;
-    for (int i = 0; i < cnt; i++) {
-        m_weights.push_back(QVector<int>(cnt));
-        for (int j = 0; j < cnt; j++) {
-            if (i != j || j != 1) {
-                m_weights[i][j] = -1;
-            } else {
-                m_weights[i][j] = 9;
-            }
-        }
-    }
-    Convolution::convolution(tmp, m_weights, 1, false, true);
+    m_sharp.apply(tmp);
     image = tmp;
+}
+double aquarel::getSize() const {
+    return m_size;
+}
+void aquarel::setSize(const QVariant& size) {
+    m_size = size.toInt();
 }

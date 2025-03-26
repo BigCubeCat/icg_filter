@@ -5,6 +5,7 @@
 #include "blur.hpp"
 
 #include <QVariant>
+#include <queue>
 
 #include "Convolution.hpp"
 BlurFilter::BlurFilter(int cnt, int off) {
@@ -21,36 +22,79 @@ BlurFilter::BlurFilter(int cnt, int off) {
     }
 }
 void BlurFilter::apply(QImage& image) {
-
+    QImage im = image.copy();
+    qDebug() << "Blur weights size is :" << m_weights.size();
     if (m_weights.size() < 7) {
-        Convolution::convolution(image, m_weights, sum_weight? sum_weight : 1);
+        Convolution::convolution(im, m_weights, sum_weight? sum_weight : 1);
+        image = im.copy();
     }
     else {
-        QImage tmp = image;
+        QImage tmp = image.copy();
         const int ks = m_weights.size();
+        const int ks2 = ks * ks;
         const int st = -ks / 2;
         const int fn = (ks - 1) / 2;
         const int iw = image.width();
         const int ih = image.height();
         for (int y = 0; y < ih; y++) {
-            for (int x = 0; x < iw; x++) {
-                std::vector<int>reds;
-                std::vector<int>greens;
-                std::vector<int>blues;
-                for (int ki = st; ki <= fn; ++ki) {
-                    for (int kj = st; kj <= fn; ++kj) {
-                        if (y + ki >= 0 && y + ki < ih && x  + kj >= 0 && x + kj < iw ) {
-                            QColor color = image.pixel(x + kj, y + ki);
-                            reds.push_back(color.red());
-                            greens.push_back(color.green());
-                            blues.push_back(color.blue());
-                        }
+            std::queue<int> reds;
+            std::queue<int>greens;
+            std::queue<int>blues;
+            long long int sumr = 0;
+            long long int sumg = 0;
+            long long int sumb = 0;
+
+            QColor ccolor = image.pixelColor(0,y);
+            for (int k = 0; k < ks; k++) {
+                for (int l = st; l <= fn; l++) {
+                    if (k <= ks/2 || y+l < 0 || y+l >= ih) {
+                        reds.push(ccolor.red());
+                        sumr += ccolor.red();
+                        greens.push(ccolor.green());
+                        sumg += ccolor.green();
+                        blues.push(ccolor.blue());
+                        sumb += ccolor.blue();
+                    } else {
+                        QColor color = image.pixelColor(-1 + k + st,y + l);
+                        reds.push(color.red());
+                        sumr += color.red();
+                        greens.push(color.green());
+                        sumg += color.green();
+                        blues.push(color.blue());
+                        sumb += color.blue();
                     }
                 }
-                std::sort(reds.begin(), reds.end());
-                std::sort(greens.begin(), greens.end());
-                std::sort(blues.begin(), blues.end());
-                tmp.setPixelColor(x, y, QColor(reds[reds.size()/2], greens[greens.size()/2], blues[blues.size()/2]));
+            }
+
+            for (int x = 0; x < iw; x++) {
+                ccolor = image.pixelColor(x, y);
+                for (int k = st; k <= fn; k++) {
+                    sumr -= reds.front();
+                    sumg -= greens.front();
+                    sumb -= blues.front();
+                    reds.pop();
+                    greens.pop();
+                    blues.pop();
+
+                    if (x + fn >= iw || y+k< 0 || y+k >= ih) {
+                        sumr += ccolor.red();
+                        sumg += ccolor.green();
+                        sumb += ccolor.blue();
+                        reds.push(ccolor.red());
+                        greens.push(ccolor.green());
+                        blues.push(ccolor.blue());
+                    } else {
+                        QColor color = image.pixelColor(x + fn, y + k);
+                        sumr += color.red();
+                        sumg += color.green();
+                        sumb += color.blue();
+                        reds.push(color.red());
+                        greens.push(color.green());
+                        blues.push(color.blue());
+                    }
+
+                }
+                tmp.setPixelColor(x, y, QColor(sumr/ks2, sumg/ks2, sumb/ks2));
             }
         }
         image = tmp;

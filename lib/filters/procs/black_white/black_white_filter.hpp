@@ -10,6 +10,5 @@ class BlackWhiteFilter : public IFilter {
     QString qml_path() const override {
         return QString("qrc:/qml/filters/black_white.qml");
     }
-    EFilterType type() const override { return kPixel; }
-
+    EFilterType type() const override { return kBasic; }
 };

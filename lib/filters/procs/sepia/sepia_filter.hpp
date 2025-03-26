@@ -18,7 +18,7 @@ class SepiaFilter : public IFilter {
 
     QString name() const override { return "sepia"; }
 
-    EFilterType type() const override { return kPixel; }
+    EFilterType type() const override { return kBasic; }
 
     double percent() const { return m_percent; }
     void setPercent(int value) {

@@ -7,7 +7,8 @@
 enum EFilterType {
     kBasic = 0,  // поворот, зеркало и тп
     kPixel = 1,
-    kMatrix = 2
+    kMatrix = 2,
+    kDithering = 3
 };
 
 /*!

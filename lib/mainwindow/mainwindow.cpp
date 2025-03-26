@@ -11,6 +11,7 @@
 #include <QFormLayout>
 #include <QMessageBox>
 #include <QSpinBox>
+#include <QToolButton>
 #include <QWidget>
 #include <map>
 
@@ -90,6 +91,9 @@ void MainWindow::connectSlots() {
             &FileProcessor::nextImageInFolder);
     connect(m_ui->actionPreviousImage, &QAction::triggered, m_fp,
             &FileProcessor::prevImageInFolder);
+
+    connect(m_ui->toolButton, &QToolButton::clicked, this,
+            &MainWindow::toggleView);
 }
 
 MainWindow::~MainWindow() {
@@ -118,10 +122,7 @@ void MainWindow::helpSlots() {
 
 void MainWindow::updateFilename() {
     auto filename_list = QString::fromStdString(m_fp->filename()).split("/");
-    auto filename = filename_list.at(filename_list.size() - 1);
-    if (m_im->is_saved()) {
-        filename += " *";
-    }
+    const auto& filename = filename_list.at(filename_list.size() - 1);
     setWindowTitle("ICG_Filter [" + filename + "]");
 }
 
@@ -131,8 +132,7 @@ void MainWindow::applyFilter() {
                               "Please, choose filter first!");
         return;
     }
-    if (!m_im->ready())
-        m_im->applyFilter(m_current_filter);
+    m_im->applyFilter(m_current_filter);
 }
 
 void MainWindow::registerFilters() {
@@ -140,11 +140,13 @@ void MainWindow::registerFilters() {
         {kPixel, m_ui->menuPixel},
         {kBasic, m_ui->menuBasics},
         {kMatrix, m_ui->menuMatrix},
+        {kDithering, m_ui->menuDithering},
     };
     static std::map<EFilterType, QString> icon_path = {
         {kPixel, "assets/icons/svg/solid/atom.svg"},
         {kBasic, "assets/icons/svg/solid/eye.svg"},
         {kMatrix, "assets/icons/svg/solid/square.svg"},
+        {kDithering, "assets/icons/svg/solid/doge-square.svg"},
     };
     auto all_filters = m_factory->all_filters();
     for (auto& filter : all_filters) {
@@ -161,6 +163,7 @@ void MainWindow::registerFilters() {
     m_ui->toolBar->addActions(m_ui->menuBasics->actions());
     m_ui->toolBar->addActions(m_ui->menuPixel->actions());
     m_ui->toolBar->addActions(m_ui->menuMatrix->actions());
+    m_ui->toolBar->addActions(m_ui->menuDithering->actions());
 }
 
 void MainWindow::filterApplyed() {
@@ -176,4 +179,12 @@ void MainWindow::hideToolbar() {
 
 void MainWindow::updateView() {
     m_image_painter.setView(m_im->image());
+}
+
+void MainWindow::toggleView() {
+    static QIcon checked = QIcon("assets/icons/svg/solid/eye.svg");
+    static QIcon not_checked = QIcon("assets/icons/svg/solid/eye-off.svg");
+    m_ui->toolButton->setIcon(m_ui->toolButton->isChecked() ? not_checked
+                                                            : checked);
+    m_im->toggleView();
 }

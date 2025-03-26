@@ -74,11 +74,18 @@
      </property>
      <addaction name="separator"/>
     </widget>
+    <widget class="QMenu" name="menuDithering">
+     <property name="title">
+      <string>Dithering</string>
+     </property>
+     <addaction name="separator"/>
+    </widget>
     <addaction name="actionApply"/>
     <addaction name="separator"/>
     <addaction name="menuBasics"/>
     <addaction name="menuPixel"/>
     <addaction name="menuMatrix"/>
+    <addaction name="menuDithering"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -177,7 +184,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QCheckBox" name="isOriginBox">
+           <widget class="QToolButton" name="toolButton">
             <property name="text">
              <string/>
             </property>
@@ -187,6 +194,12 @@
               <disabledoff>:/icons/assets/icons/svg/solid/eye-off.svg</disabledoff>
               <disabledon>:/icons/assets/icons/svg/solid/eye-off.svg</disabledon>
              </iconset>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

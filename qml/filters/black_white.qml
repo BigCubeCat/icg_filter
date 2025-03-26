@@ -1,8 +1,9 @@
 import QtQuick 2.15
-Item {
+
+
+Column {
+    spacing: 10
     Text {
         text: "Black & White"
-        font.family: "Helvetica"
-        font.pointSize: 14
     }
 }

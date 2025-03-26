@@ -6,8 +6,11 @@ import components 1.0
 Column {
     anchors.fill: parent
     anchors.margins: 20
-
     spacing: 10
+
+    Text {
+        text: "Sepia"
+    }
     SliderSpinBox {
         minValue: 0
         maxValue: 100

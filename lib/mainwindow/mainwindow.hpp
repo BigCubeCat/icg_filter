@@ -22,12 +22,10 @@ class MainWindow : public QMainWindow {
     void helpSlots();
     void toggleSideBar(bool visible);
     void updateFilename();
-
     void applyFilter();
-
     void hideToolbar();
-
     void updateView();
+    void toggleView();
 
    public:
     explicit MainWindow(QWidget* parent, SignalController* controller,

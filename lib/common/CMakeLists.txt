@@ -12,6 +12,9 @@ qt_add_library(common_lib STATIC
         Convolution.hpp
         Convolution.cpp
 
+        MedianFinder.cpp
+        MedianFinder.h
+
         utils.hpp
 )
 
