@@ -1,46 +1,14 @@
-# Filter
+# ICG Filter
 
-# TODO
-написать красивый README.md
-- [x] previous \ next в папке
-- [ ] второй тред для редактирования
-- [x] повороты
-- [x] отзеркальивание
-- [x] альф канал 
-- [x] тиснение
-- [x] help
-- [x] about
-- [x] дизеринг
-- [x] zoom fit
-- [ ] пофиксить сохранение (не переоткрывается)
+Simple application for editing your photos
+
+![main screen](assets/readme/window.png)
 
 
-# Как добавить новый фильтр?
+## sepia
+<div style="display: flex; gap: 10px;">
+  <img src="assets/readme/original.png" width="300"/>
+  <img src="assets/readme/sepia.png" width="300"/>
+</div>
 
-0. Фильтр должен удвлетворять интерфейсу IFilter
-- Имя фильтра
-
-уникальный идентификатор фильтра. используется в контексте, в UI и для поиска фильтра в unordered_map
-
-- тип фильтра
-
-определяет, в каком меню будет находится фильтр
-
-- qml path
-
-путь до QML-разметки виджета
-
-1. Создайте QML разметку 
-
-- в директории qml/filters создайте свой виджет
-
-- добавте его в qml/filters/qmldir
-
-- добавте виджет в ресурсы
-
-2. Создайте реализацию в подпапке lib/filters/procs/
-
-- qmp_path() должен возращать путь до qml
-
-3. Зарегистровать виджет в фабрике (main.cpp)
 
