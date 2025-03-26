@@ -4,30 +4,87 @@ import components 1.0
 
 Column {
     anchors.fill: parent
-    anchors.margins: 20
     spacing: 10
     Text {
-        text: "floyd dithering"
+        text: "Floyd-Steinberg dithering"
+        font.family: "Helvetica"
+        font.pointSize: 16
+        font.bold: true
+        width: parent.width
+        wrapMode: Text.WordWrap
     }
 
+    Text {
+        width: parent.width
+        text: "Данный фильтр уменьшает количество цветов в палитре для каждого цвета, сохраняя общую композицию изображения."
+        font.family: "Helvetica"
+        font.pointSize: 10
+        wrapMode: Text.WordWrap
+    }
+    Text {
+        MouseArea {
+            id: _mouseArea
+            hoverEnabled: true
+            anchors.fill: parent
+        }
+        width: parent.width
+        topPadding: 20
+        text: "Красный канал"
+        font.family: "Helvetica"
+        font.pointSize: 14
+        font.bold: true
+        wrapMode: Text.WordWrap
+        ToolTip.visible: _mouseArea.containsMouse
+        ToolTip.text: "Количество квантов цвета в красном канале."
+    }
     SliderSpinBox {
         minValue: 2
         maxValue: 128
-        title: "red"
         value: fsf.red_quants
         onValueChanged: fsf.red_quants = value
     }
-    SliderSpinBox {
-        minValue: 2
-        maxValue: 128
-        title: "green"
-        value: fsf.green_quants
-        onValueChanged: fsf.green_quants = value
+    Text {
+        MouseArea {
+            id: _mouseAreaSec
+            hoverEnabled: true
+            anchors.fill: parent
+        }
+        width: parent.width
+        topPadding: 40
+        text: "Зелёный канал"
+        font.family: "Helvetica"
+        font.pointSize: 14
+        font.bold: true
+        wrapMode: Text.WordWrap
+        ToolTip.visible: _mouseAreaSec.containsMouse
+        ToolTip.text: "Количество квантов цвета в зелёном канале."
     }
     SliderSpinBox {
         minValue: 2
         maxValue: 128
-        title: "blue"
+        value: fsf.green_quants
+        onValueChanged: fsf.green_quants = value
+    }
+    Text {
+
+        MouseArea {
+            id: _mouseAreaTh
+            hoverEnabled: true
+            anchors.fill: parent
+        }
+        width: parent.width
+        topPadding: 40
+        text: "Синий канал"
+        font.family: "Helvetica"
+        font.pointSize: 14
+        font.bold: true
+        wrapMode: Text.WordWrap
+        ToolTip.visible: _mouseAreaTh.containsMouse
+        ToolTip.text: "Количество квантов цвета в синем канале."
+    }
+    SliderSpinBox {
+        minValue: 2
+        maxValue: 128
         value: fsf.blue_quants
         onValueChanged: fsf.blue_quants = value
     }

@@ -31,7 +31,6 @@ Item {
     ColumnLayout {
         id: clayout
         anchors.fill: parent
-        spacing: 10
 
         Text {
             id: tablelabel

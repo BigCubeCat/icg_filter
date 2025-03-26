@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget* parent, SignalController* controller,
     m_ui->mainLayout->addWidget(&m_image_painter);
 
     m_ui->quickWidget->engine()->addImportPath("qrc:/qml");
+    m_ui->quickWidget->engine()->addImportPath("qrc:/assets/icons");
 
     m_ui->toolBar->addActions(m_ui->menuFile->actions());
     m_ui->toolBar->addSeparator();
@@ -143,10 +144,10 @@ void MainWindow::registerFilters() {
         {kDithering, m_ui->menuDithering},
     };
     static std::map<EFilterType, QString> icon_path = {
-        {kPixel, "assets/icons/svg/solid/atom.svg"},
-        {kBasic, "assets/icons/svg/solid/eye.svg"},
-        {kMatrix, "assets/icons/svg/solid/square.svg"},
-        {kDithering, "assets/icons/svg/solid/doge-square.svg"},
+        {kPixel, "qrc:/assets/icons/svg/solid/atom.svg"},
+        {kBasic, "qrc:/assets/icons/svg/solid/eye.svg"},
+        {kMatrix, "qrc:/assets/icons/svg/solid/square.svg"},
+        {kDithering, "qrc:/assets/icons/svg/solid/doge-square.svg"},
     };
     auto all_filters = m_factory->all_filters();
     for (auto& filter : all_filters) {
