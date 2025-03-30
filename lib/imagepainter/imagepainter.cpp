@@ -3,8 +3,8 @@
 #include <qgraphicsview.h>
 #include <qlogging.h>
 
-const float kScaleIn = 1.01;
-const float kScaleOut = 0.99;
+const float kScaleIn = 1.05;
+const float kScaleOut = 0.95;
 
 ImagePainter::ImagePainter(ImageProcessor* processor, QWidget* parent)
     : QGraphicsView(parent), m_processor(processor) {
@@ -17,7 +17,14 @@ void ImagePainter::setView(const QImage& image) {
     m_scene.addItem(m_pixmap_item.get());
     m_rect = image.rect();
     m_scene.setSceneRect(m_rect);
+    setRenderHint(m_hint);
     this->setScene(&m_scene);
+}
+
+void ImagePainter::updateRenderHint(const QPainter::RenderHint& hint) {
+    m_hint = hint;
+    setRenderHint(m_hint);
+    update();
 }
 
 void ImagePainter::wheelEvent(QWheelEvent* event) {
@@ -63,5 +70,5 @@ void ImagePainter::zoomFit() {
 }
 
 void ImagePainter::zoomReset() {
-    setTransform(QTransform());
+    m_pixmap_item->setTransform(QTransform().scale(1, 1));
 }

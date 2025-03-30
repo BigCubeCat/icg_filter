@@ -17,9 +17,11 @@ class ImagePainter : public QGraphicsView {
     explicit ImagePainter(ImageProcessor* processor, QWidget* parent = nullptr);
 
     void setView(const QImage& image);
+    void updateRenderHint(const QPainter::RenderHint& hint);
 
    private:
     ImageProcessor* m_processor;
+    QPainter::RenderHint m_hint = QPainter::NonCosmeticBrushPatterns;
     QPointF m_last_drag_pos;
     QGraphicsScene m_scene;
     std::unique_ptr<QGraphicsPixmapItem> m_pixmap_item;
