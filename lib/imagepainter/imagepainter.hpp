@@ -21,6 +21,7 @@ class ImagePainter : public QGraphicsView {
 
    private:
     ImageProcessor* m_processor;
+    QPixmap m_pixmap;
     QPainter::RenderHint m_hint = QPainter::NonCosmeticBrushPatterns;
     QPointF m_last_drag_pos;
     QGraphicsScene m_scene;

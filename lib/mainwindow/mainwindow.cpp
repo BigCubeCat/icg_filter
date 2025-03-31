@@ -72,7 +72,7 @@ void MainWindow::connectSlots() {
             &ImagePainter::zoomIn);
     connect(m_ui->actionZoomOut, &QAction::triggered, &m_image_painter,
             &ImagePainter::zoomOut);
-    connect(m_ui->actionResetZoom, &QAction::triggered, &m_image_painter,
+    connect(m_ui->actionRZ, &QAction::triggered, &m_image_painter,
             &ImagePainter::zoomReset);
     connect(m_ui->actionZoomFit, &QAction::triggered, &m_image_painter,
             &ImagePainter::zoomFit);

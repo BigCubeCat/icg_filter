@@ -12,8 +12,8 @@ ImagePainter::ImagePainter(ImageProcessor* processor, QWidget* parent)
 }
 
 void ImagePainter::setView(const QImage& image) {
-    m_pixmap_item =
-        std::make_unique<QGraphicsPixmapItem>(QPixmap::fromImage(image));
+    m_pixmap = QPixmap::fromImage(image);
+    m_pixmap_item = std::make_unique<QGraphicsPixmapItem>(m_pixmap);
     m_scene.addItem(m_pixmap_item.get());
     m_rect = image.rect();
     m_scene.setSceneRect(m_rect);
@@ -58,17 +58,10 @@ void ImagePainter::zoomOut() {
 }
 
 void ImagePainter::zoomFit() {
-    zoomReset();
-    auto size = this->size();
-    const auto rect_width = static_cast<float>(size.width());
-    const auto rect_height = static_cast<float>(size.height());
-    const auto img_width = static_cast<float>(m_rect.width());
-    const auto img_height = static_cast<float>(m_rect.height());
-    auto k = (img_width > img_height) ? (rect_width / img_width)
-                                      : (rect_height / img_height);
-    scale(k, k);
+    fitInView(sceneRect(), Qt::KeepAspectRatio);
 }
 
 void ImagePainter::zoomReset() {
-    m_pixmap_item->setTransform(QTransform().scale(1, 1));
+    qDebug() << "zoomReset()\n";
+    resetTransform();
 }

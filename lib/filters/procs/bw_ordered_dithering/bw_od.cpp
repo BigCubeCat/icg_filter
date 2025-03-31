@@ -7,29 +7,35 @@
 const int kN = 16;
 
 void BWOrderedDitheringFilter::apply(QImage& image) {
-    const int step = 255 / (m_cnt_quants - 1);
+    if (image.format() != QImage::Format_RGB32) {
+        image = image.convertToFormat(QImage::Format_RGB32);
+    }
+    QImage out(image.size(), QImage::Format_RGB32);
+
+    // Матрица Байера 4x4
+    const static int kBayerMatrix[4][4] = {
+        {15, 7, 13, 5}, {3, 11, 1, 9}, {12, 4, 14, 6}, {0, 8, 2, 10}};
+    const int matrix_size = 4;
 
     const int height = image.height();
     const int width = image.width();
 
-    std::array<std::array<double, kN>, kN> bayer_matrix{};
-    for (int i = 0; i < kN; ++i) {
-        for (int j = 0; j < kN; ++j) {
-            bayer_matrix[i][j] = step * bayer(i, j, kN);
-        }
-    }
-    auto out = QImage(width, height, QImage::Format_Grayscale8);
-
-    image.convertTo(QImage::Format_Grayscale8);
-
-    // ускорение ровно в 8 раз
-#pragma omp parallel for
     for (int y = 0; y < height; ++y) {
-        const uchar* inpt_line = image.constScanLine(y);
-        uchar* otp_line = out.scanLine(y);
         for (int x = 0; x < width; ++x) {
-            otp_line[x] =
-                stepify(inpt_line[x] + bayer_matrix[y % kN][x % kN], step);
+            // Получаем интенсивность пикселя (0-255)
+            QRgb pixel = image.pixel(x, y);
+            int intensity = qGray(pixel);
+
+            // Определяем позицию в матрице Байера
+            int mx = x % matrix_size;
+            int my = y % matrix_size;
+
+            // Рассчитываем пороговое значение
+            float threshold = (kBayerMatrix[my][mx] + 0.5F) /
+                              (matrix_size * matrix_size) * 255.0F;
+            auto value = (intensity >= threshold) ? 255 : 0;
+            // Применяем дизеринг
+            out.setPixel(x, y, qRgb(value, value, value));
         }
     }
     image = out;

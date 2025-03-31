@@ -50,6 +50,11 @@
      <property name="title">
       <string>Render Hint</string>
      </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::EditPaste">
+       <normalon>:/icons/assets/icons/svg/solid/airplay.svg</normalon>
+      </iconset>
+     </property>
      <addaction name="actionAntialiasing"/>
      <addaction name="actionTextAntialiasing"/>
      <addaction name="actionSmoothPixmapTransform"/>
@@ -113,7 +118,7 @@
     </property>
     <addaction name="actionZoomIn"/>
     <addaction name="actionZoomOut"/>
-    <addaction name="actionResetZoom"/>
+    <addaction name="actionRZ"/>
     <addaction name="actionZoomFit"/>
     <addaction name="separator"/>
    </widget>
@@ -479,7 +484,7 @@
     <string>Show Toolbar</string>
    </property>
   </action>
-  <action name="actionResetZoom">
+  <action name="actionRZ">
    <property name="icon">
     <iconset>
      <normalon>:/icons/assets/icons/svg/solid/maximaize-circle.svg</normalon>
