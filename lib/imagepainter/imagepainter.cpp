@@ -40,7 +40,7 @@ void ImagePainter::mousePressEvent(QMouseEvent* event) {
 }
 
 void ImagePainter::mouseMoveEvent(QMouseEvent* event) {
-    if (event->buttons() & Qt::LeftButton) {
+    if ((event->buttons() & Qt::LeftButton) != 0) {
         QPointF delta = event->position() - m_last_drag_pos;
         m_last_drag_pos = event->position();
         horizontalScrollBar()->setValue(horizontalScrollBar()->value() -
