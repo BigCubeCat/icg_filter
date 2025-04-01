@@ -3,8 +3,8 @@
 #include <qgraphicsview.h>
 #include <qlogging.h>
 
-const float kScaleIn = 1.01;
-const float kScaleOut = 0.99;
+const float kScaleIn = 1.05;
+const float kScaleOut = 0.95;
 
 ImagePainter::ImagePainter(ImageProcessor* processor, QWidget* parent)
     : QGraphicsView(parent), m_processor(processor) {
@@ -12,12 +12,19 @@ ImagePainter::ImagePainter(ImageProcessor* processor, QWidget* parent)
 }
 
 void ImagePainter::setView(const QImage& image) {
-    m_pixmap_item =
-        std::make_unique<QGraphicsPixmapItem>(QPixmap::fromImage(image));
+    m_pixmap = QPixmap::fromImage(image);
+    m_pixmap_item = std::make_unique<QGraphicsPixmapItem>(m_pixmap);
     m_scene.addItem(m_pixmap_item.get());
     m_rect = image.rect();
     m_scene.setSceneRect(m_rect);
+    setRenderHint(m_hint);
     this->setScene(&m_scene);
+}
+
+void ImagePainter::updateRenderHint(const QPainter::RenderHint& hint) {
+    m_hint = hint;
+    setRenderHint(m_hint);
+    update();
 }
 
 void ImagePainter::wheelEvent(QWheelEvent* event) {
@@ -33,7 +40,7 @@ void ImagePainter::mousePressEvent(QMouseEvent* event) {
 }
 
 void ImagePainter::mouseMoveEvent(QMouseEvent* event) {
-    if (event->buttons() & Qt::LeftButton) {
+    if ((event->buttons() & Qt::LeftButton) != 0) {
         QPointF delta = event->position() - m_last_drag_pos;
         m_last_drag_pos = event->position();
         horizontalScrollBar()->setValue(horizontalScrollBar()->value() -
@@ -51,17 +58,10 @@ void ImagePainter::zoomOut() {
 }
 
 void ImagePainter::zoomFit() {
-    zoomReset();
-    auto size = this->size();
-    const auto rect_width = static_cast<float>(size.width());
-    const auto rect_height = static_cast<float>(size.height());
-    const auto img_width = static_cast<float>(m_rect.width());
-    const auto img_height = static_cast<float>(m_rect.height());
-    auto k = (img_width > img_height) ? (rect_width / img_width)
-                                      : (rect_height / img_height);
-    scale(k, k);
+    fitInView(sceneRect(), Qt::KeepAspectRatio);
 }
 
 void ImagePainter::zoomReset() {
-    setTransform(QTransform());
+    qDebug() << "zoomReset()\n";
+    resetTransform();
 }
