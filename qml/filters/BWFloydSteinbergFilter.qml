@@ -21,12 +21,23 @@ Column {
         font.pointSize: 10
         wrapMode: Text.WordWrap
     }
-
     SliderSpinBox {
         minValue: 2
-        maxValue: 255
-        title: "Число цветов\n в палитре:"
-        value: bwfsf.quants
-        onValueChanged: bwfsf.quants = value
+        maxValue: 128
+        value: bwfsf.red_quants
+        onValueChanged: bwfsf.red_quants = value
     }
+    SliderSpinBox {
+        minValue: 2
+        maxValue: 128
+        value: bwfsf.green_quants
+        onValueChanged: bwfsf.green_quants = value
+    }
+    SliderSpinBox {
+        minValue: 2
+        maxValue: 128
+        value: bwfsf.blue_quants
+        onValueChanged: bwfsf.blue_quants = value
+    }
+
 }
