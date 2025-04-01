@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import components 1.0
 
+ScrollView {
 Column {
     anchors.fill: parent
     spacing: 10
@@ -88,4 +89,5 @@ Column {
         value: fsf.blue_quants
         onValueChanged: fsf.blue_quants = value
     }
+}
 }
