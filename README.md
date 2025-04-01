@@ -100,10 +100,3 @@ Simple application for editing your photos
   <img src="assets/readme/original.png" width="300"/>
   <img src="assets/readme/bw_floyd.png" width="300"/>
 </div>
-
-# TODO
-- настройки интерполяции
-- ускорить и исправить акварелизацию
-- Zoom Reset
-- дизеринг совсем не работает
-- дизеринг Флойда
