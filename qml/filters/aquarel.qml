@@ -38,9 +38,9 @@ Column {
     ComboBox {
         width: parent.width
         id: list
-        model: ["7x7", "9x9", "11x11"]
+        model: ["5x5","7x7", "9x9", "11x11"]
         onActivated: {
-            aquarel.size = (2 * (list.currentIndex + 1) + 5);
+            aquarel.size = (2 * (list.currentIndex + 1) + 3);
         }
     }
 }

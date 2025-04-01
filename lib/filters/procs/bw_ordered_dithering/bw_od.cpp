@@ -15,7 +15,7 @@ void BWOrderedDitheringFilter::apply(QImage& image) {
     std::array<std::array<double, kN>, kN> bayer_matrix{};
     for (int i = 0; i < kN; ++i) {
         for (int j = 0; j < kN; ++j) {
-            bayer_matrix[i][j] = step * bayer(i, j, kN);
+            bayer_matrix[i][j] = 5;//step * bayer(i, j, kN);
         }
     }
     auto out = QImage(width, height, QImage::Format_Grayscale8);
