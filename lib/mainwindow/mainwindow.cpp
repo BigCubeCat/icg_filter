@@ -72,7 +72,7 @@ void MainWindow::connectSlots() {
             &ImagePainter::zoomIn);
     connect(m_ui->actionZoomOut, &QAction::triggered, &m_image_painter,
             &ImagePainter::zoomOut);
-    connect(m_ui->actionResetZoom, &QAction::triggered, &m_image_painter,
+    connect(m_ui->actionRZ, &QAction::triggered, &m_image_painter,
             &ImagePainter::zoomReset);
     connect(m_ui->actionZoomFit, &QAction::triggered, &m_image_painter,
             &ImagePainter::zoomFit);
@@ -95,6 +95,19 @@ void MainWindow::connectSlots() {
 
     connect(m_ui->toolButton, &QToolButton::clicked, this,
             &MainWindow::toggleView);
+
+    connect(m_ui->actionAntialiasing, &QAction::triggered, this,
+            &MainWindow::setImageRenderHint1);
+    connect(m_ui->actionTextAntialiasing, &QAction::triggered, this,
+            &MainWindow::setImageRenderHint2);
+    connect(m_ui->actionSmoothPixmapTransform, &QAction::triggered, this,
+            &MainWindow::setImageRenderHint3);
+    connect(m_ui->actionVerticalSubpixelPositioning, &QAction::triggered, this,
+            &MainWindow::setImageRenderHint4);
+    connect(m_ui->actionLosslessImageRendering, &QAction::triggered, this,
+            &MainWindow::setImageRenderHint5);
+    connect(m_ui->actionNonCosmeticBrushPatterns, &QAction::triggered, this,
+            &MainWindow::setImageRenderHint6);
 }
 
 MainWindow::~MainWindow() {
@@ -189,4 +202,28 @@ void MainWindow::toggleView() {
     m_ui->toolButton->setIcon(m_ui->toolButton->isChecked() ? not_checked
                                                             : checked);
     m_im->toggleView();
+}
+
+void MainWindow::setImageRenderHint1() {
+    m_image_painter.updateRenderHint(QPainter::Antialiasing);
+}
+
+void MainWindow::setImageRenderHint2() {
+    m_image_painter.updateRenderHint(QPainter::TextAntialiasing);
+}
+
+void MainWindow::setImageRenderHint3() {
+    m_image_painter.updateRenderHint(QPainter::SmoothPixmapTransform);
+}
+
+void MainWindow::setImageRenderHint4() {
+    m_image_painter.updateRenderHint(QPainter::VerticalSubpixelPositioning);
+}
+
+void MainWindow::setImageRenderHint5() {
+    m_image_painter.updateRenderHint(QPainter::LosslessImageRendering);
+}
+
+void MainWindow::setImageRenderHint6() {
+    m_image_painter.updateRenderHint(QPainter::NonCosmeticBrushPatterns);
 }

@@ -27,6 +27,13 @@ class MainWindow : public QMainWindow {
     void updateView();
     void toggleView();
 
+    void setImageRenderHint1();
+    void setImageRenderHint2();
+    void setImageRenderHint3();
+    void setImageRenderHint4();
+    void setImageRenderHint5();
+    void setImageRenderHint6();
+
    public:
     explicit MainWindow(QWidget* parent, SignalController* controller,
                         ImageProcessor* im, FileProcessor* fp,
