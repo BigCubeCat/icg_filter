@@ -3,6 +3,10 @@
 //
 
 #include "MedianFinder.h"
+
+#include <qalgorithms.h>
+
+#include <iostream>
 MedianFinder::MedianFinder(const int& capacity) : size(0), capacity(capacity) {
     queue.resize(capacity);
     for (int i = 0; i < queue.size(); i++) {
@@ -70,6 +74,7 @@ void MedianFinder::pop() {
     --size;
 }
 uchar MedianFinder::median() {
+    std::cout << max_heap_size << " " << min_heap_size << std::endl;
     if (max_heap_size > min_heap_size) {
         return max_heap[0].value;
     }

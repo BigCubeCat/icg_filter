@@ -20,6 +20,7 @@ class aquarel : public IFilter {
     void sizeChanged();
 
    private:
-    int m_size = 7;
+    int m_size = 5;
     SharpnessFilter m_sharp;
+
 };

@@ -47,6 +47,7 @@ QVector<QVector<double>> BWOrderedDitheringFilter::generate_threshold_matrix(
         }
     }
 
+
     for (int y = sub_size; y < size; ++y) {
         for (int x = sub_size; x < size; ++x) {
             matrix[y][x] = 4 * sub_matrix[y % sub_size][x % sub_size] + 1;

@@ -10,11 +10,11 @@ void GammaCorrectionFiter::apply(QImage& image) {
         for (int x = 0; x < image.width(); x++) {
             QColor color = image.pixelColor(x, y);
             int red = static_cast<int>(
-                std::min(std::pow(0.0 + color.red(), m_gamma), 255.0));
+                std::min(255 * std::pow(0.0 + color.red() / 255.0, m_gamma), 255.0));
             int green = static_cast<int>(
-                std::min(std::pow(0.0 + color.green(), m_gamma), 255.0));
+                std::min(255 * std::pow(0.0 + color.green() / 255.0, m_gamma), 255.0));
             int blue = static_cast<int>(
-                std::min(std::pow(0.0 + color.blue(), m_gamma), 255.0));
+                std::min(255 * std::pow(0.0 + color.blue() / 255.0, m_gamma), 255.0));
             image.setPixelColor(x, y, QColor{red, green, blue});
         }
     }
