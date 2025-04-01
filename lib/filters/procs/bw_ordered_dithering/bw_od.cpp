@@ -78,6 +78,7 @@ void BWOrderedDitheringFilter::apply(QImage& image) {
                                           m_cnt_blue_quants);
     m_threshold_map = generate_threshold_matrix(m_matrix_size);
     normalize_matrix();
+#pragma omp parallel for
     for (int y = 0; y < height; ++y) {
         QRgb* scan_line = reinterpret_cast<QRgb*>(out.scanLine(y));
         for (int x = 0; x < width; ++x) {
