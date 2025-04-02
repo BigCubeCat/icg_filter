@@ -1,5 +1,6 @@
 #include "mainwindow.hpp"
 #include <qlogging.h>
+#include <qnamespace.h>
 #include <qqmlengine.h>
 #include <QQmlContext>
 #include <QtQuickWidgets/QQuickWidget>
@@ -96,18 +97,10 @@ void MainWindow::connectSlots() {
     connect(m_ui->toolButton, &QToolButton::clicked, this,
             &MainWindow::toggleView);
 
-    connect(m_ui->actionAntialiasing, &QAction::triggered, this,
-            &MainWindow::setImageRenderHint1);
-    connect(m_ui->actionTextAntialiasing, &QAction::triggered, this,
-            &MainWindow::setImageRenderHint2);
-    connect(m_ui->actionSmoothPixmapTransform, &QAction::triggered, this,
-            &MainWindow::setImageRenderHint3);
-    connect(m_ui->actionVerticalSubpixelPositioning, &QAction::triggered, this,
-            &MainWindow::setImageRenderHint4);
-    connect(m_ui->actionLosslessImageRendering, &QAction::triggered, this,
-            &MainWindow::setImageRenderHint5);
-    connect(m_ui->actionNonCosmeticBrushPatterns, &QAction::triggered, this,
-            &MainWindow::setImageRenderHint6);
+    connect(m_ui->actionSmooth, &QAction::triggered, this,
+            &MainWindow::setImageSmooth);
+    connect(m_ui->actionFast, &QAction::triggered, this,
+            &MainWindow::setImageFast);
 }
 
 MainWindow::~MainWindow() {
@@ -204,26 +197,10 @@ void MainWindow::toggleView() {
     m_im->toggleView();
 }
 
-void MainWindow::setImageRenderHint1() {
-    m_image_painter.updateRenderHint(QPainter::Antialiasing);
+void MainWindow::setImageSmooth() {
+    m_image_painter.updateRender(Qt::SmoothTransformation);
 }
 
-void MainWindow::setImageRenderHint2() {
-    m_image_painter.updateRenderHint(QPainter::TextAntialiasing);
-}
-
-void MainWindow::setImageRenderHint3() {
-    m_image_painter.updateRenderHint(QPainter::SmoothPixmapTransform);
-}
-
-void MainWindow::setImageRenderHint4() {
-    m_image_painter.updateRenderHint(QPainter::VerticalSubpixelPositioning);
-}
-
-void MainWindow::setImageRenderHint5() {
-    m_image_painter.updateRenderHint(QPainter::LosslessImageRendering);
-}
-
-void MainWindow::setImageRenderHint6() {
-    m_image_painter.updateRenderHint(QPainter::NonCosmeticBrushPatterns);
+void MainWindow::setImageFast() {
+    m_image_painter.updateRender(Qt::FastTransformation);
 }

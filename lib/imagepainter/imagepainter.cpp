@@ -14,6 +14,7 @@ ImagePainter::ImagePainter(ImageProcessor* processor, QWidget* parent)
 void ImagePainter::setView(const QImage& image) {
     m_pixmap = QPixmap::fromImage(image);
     m_pixmap_item = std::make_unique<QGraphicsPixmapItem>(m_pixmap);
+    m_pixmap_item->setTransformationMode(Qt::SmoothTransformation);
     m_scene.addItem(m_pixmap_item.get());
     m_rect = image.rect();
     m_scene.setSceneRect(m_rect);
@@ -21,9 +22,8 @@ void ImagePainter::setView(const QImage& image) {
     this->setScene(&m_scene);
 }
 
-void ImagePainter::updateRenderHint(const QPainter::RenderHint& hint) {
-    m_hint = hint;
-    setRenderHint(m_hint);
+void ImagePainter::updateRender(const Qt::TransformationMode& mode) {
+    m_pixmap_item->setTransformationMode(mode);
     update();
 }
 

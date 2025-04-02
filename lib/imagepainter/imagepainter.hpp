@@ -17,7 +17,7 @@ class ImagePainter : public QGraphicsView {
     explicit ImagePainter(ImageProcessor* processor, QWidget* parent = nullptr);
 
     void setView(const QImage& image);
-    void updateRenderHint(const QPainter::RenderHint& hint);
+    void updateRender(const Qt::TransformationMode& mode);
 
    private:
     ImageProcessor* m_processor;

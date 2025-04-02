@@ -48,19 +48,15 @@
     </property>
     <widget class="QMenu" name="menuRender_Hint">
      <property name="title">
-      <string>Render Hint</string>
+      <string>Transformation</string>
      </property>
      <property name="icon">
       <iconset theme="QIcon::ThemeIcon::EditPaste">
        <normalon>:/icons/assets/icons/svg/solid/airplay.svg</normalon>
       </iconset>
      </property>
-     <addaction name="actionAntialiasing"/>
-     <addaction name="actionTextAntialiasing"/>
-     <addaction name="actionSmoothPixmapTransform"/>
-     <addaction name="actionVerticalSubpixelPositioning"/>
-     <addaction name="actionLosslessImageRendering"/>
-     <addaction name="actionNonCosmeticBrushPatterns"/>
+     <addaction name="actionSmooth"/>
+     <addaction name="actionFast"/>
     </widget>
     <addaction name="separator"/>
     <addaction name="actionOpen"/>
@@ -540,14 +536,14 @@
     <string>Zoom fit</string>
    </property>
   </action>
-  <action name="actionAntialiasing">
+  <action name="actionSmooth">
    <property name="text">
-    <string>Antialiasing</string>
+    <string>Smoothing</string>
    </property>
   </action>
-  <action name="actionTextAntialiasing">
+  <action name="actionFast">
    <property name="text">
-    <string>TextAntialiasing</string>
+    <string>Fast</string>
    </property>
   </action>
   <action name="actionSmoothPixmapTransform">
